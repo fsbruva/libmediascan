@@ -51,6 +51,10 @@ test/*_test
 *.sdf
 *.idb
 *.cov
+*.aps
+*.vcxproj.FileListAbsolute.txt
+.vs/*
+win32/.vs/*
 win32/Debug/*
 win32/Release/*
 win32/testDebug/*
@@ -63,8 +67,6 @@ test/video_dlna_testDebug/*
 win32/pthreads_proj/Debug*
 win32/pthreads_proj/x64/*
 win32/Debug_dll/*
-.vs/*
-win32/.vs/*
 
 # Perl
 Scan.xsc
