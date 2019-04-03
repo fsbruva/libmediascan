@@ -15,7 +15,9 @@
       <AdditionalLibraryDirectories>$(ProjectDir)..\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
     <PostBuildEvent>
-      <Command>copy $(TargetPath) $(ProjectDir)..\bindings\perl\win32\lib
+      <Command>mkdir $(ProjectDir)..\bindings\perl\win32\lib
+mkdir $(ProjectDir)..\bindings\perl\win32\include
+copy $(TargetPath) $(ProjectDir)..\bindings\perl\win32\lib
 copy $(ProjectDir)..\include\* $(ProjectDir)..\bindings\perl\win32\include
 copy $(ProjectDir)include\getopt.h $(ProjectDir)..\bindings\perl\win32\include
 copy $(ProjectDir)include\unistd.h $(ProjectDir)..\bindings\perl\win32\include</Command>
