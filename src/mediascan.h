@@ -169,7 +169,7 @@ int parse_lnk(const char *path, LPTSTR szTarget, SIZE_T cchTarget);
 #endif // WIN32
 
 // This declaration conflicts with one that returns a boolean in shlwapi.h
-if ! defined(_MSC_VER)
+#ifndef _MSC_VER
 int PathIsDirectory(const char *dir);
 #endif
 
