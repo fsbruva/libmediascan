@@ -148,8 +148,10 @@ MediaScanThread *thread_create(void *(*func) (void *), thread_data_type *thread_
     LOG_ERROR("Unable to create thread (%s)\n", strerror(err));
     goto fail;
   }
-
+// VS 2017 complains about the cast, but we are cowardly avoiding an actual fix.
+#ifndef _MSC_VER
   LOG_DEBUG("Thread %lu started\n", (unsigned long)t->tid);
+#endif
   goto out;
 
 fail:
@@ -253,9 +255,11 @@ void thread_stop(MediaScanThread *t) {
   if (t->tid.p) {               // XXX needed?
 #endif
 
-    LOG_DEBUG("Waiting for thread %lu to stop...\n", (unsigned long)t->tid);
+// VS 2017 complains about the cast, but we are cowardly avoiding an actual fix.
+#ifndef _MSC_VER
+    LOG_DEBUG("Waiting for thread %llu to stop...\n", (unsigned long long)t->tid);
     pthread_join(t->tid, NULL);
-
+#endif
 #ifndef WIN32
     t->tid = 0;
 #else
