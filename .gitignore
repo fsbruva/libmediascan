@@ -60,10 +60,11 @@ test/Debug/*
 test/Release/*
 test/testDebug/*
 test/video_dlna_testDebug/*
-win32/pthread_proj/Release*
-win32/pthread_proj/Debug*
-win32/pthread_proj/x64/*
+win32/pthreads_proj/Debug*
+win32/pthreads_proj/x64/*
+win32/Debug_dll/*
 .vs/*
+win32/.vs/*
 
 # Perl
 Scan.xsc
