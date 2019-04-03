@@ -66,7 +66,6 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="Debug_32.props" />
     <Import Project="props\msys32.props" />
     <Import Project="props\common.props" />
     <Import Project="props\db.props" />
@@ -74,7 +73,6 @@
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug_dll|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="Debug_32.props" />
     <Import Project="props\msys32.props" />
     <Import Project="props\common.props" />
     <Import Project="props\db.props" />
@@ -89,10 +87,10 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="props\Release.props" />
     <Import Project="props\msys32.props" />
     <Import Project="props\common.props" />
     <Import Project="props\db.props" />
+    <Import Project="props\Release.props" />
     <Import Project="props\pthreads_release.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_dll|Win32'" Label="PropertySheets">
@@ -141,6 +139,9 @@
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
+    <PostBuildEvent>
+      <Command />
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_dll|Win32'">
     <ClCompile>
@@ -165,8 +166,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>$(ProjectDir)\..\lib;c:\msys32\mingw32\lib;c:\msys32\mingw32\include;C:\msys32\mingw32\lib\gcc\i686-w64-mingw32\7.4.0;$(ProjectDir)pthreads\Release</AdditionalLibraryDirectories>
-      <AdditionalDependencies>shlwapi.lib;libmingwex.lib;libpng16.a;libz.a;libjpeg.a;pthreadVC2.lib;libgif.a;libavcodec.dll.a;libavformat.dll.a;libavutil.dll.a;libswscale.dll.a;libexif.a;libintl.lib;$(ProjectDir)..\lib\libdb_small51s.lib;libbz2.a;libtiff.a;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/ignore:4006 /ignore:4221 /ignore:4099 %(AdditionalOptions)</AdditionalOptions>
     </Lib>
     <PreBuildEvent>
@@ -175,29 +174,7 @@
       <Message>
       </Message>
     </PreBuildEvent>
-    <PostBuildEvent>
-      <Command>copy $(TargetPath) $(ProjectDir)..\bindings\perl\win32\lib
-
-copy $(ProjectDir)..\include\libmediascan.h $(ProjectDir)..\bindings\perl\win32\include
-
-copy $(ProjectDir)\include\getopt.h $(ProjectDir)..\bindings\perl\win32\include
-
-copy $(ProjectDir)\include\unistd.h $(ProjectDir)..\bindings\perl\win32\include
-
-copy $(ProjectDir)..\lib\db.h $(ProjectDir)..\bindings\perl\win32\include
-
-copy $(ProjectDir)..\lib\db_config.h $(ProjectDir)..\bindings\perl\win32\include
-
-copy $(ProjectDir)..\lib\db_cxx.h $(ProjectDir)..\bindings\perl\win32\include
-
-copy $(ProjectDir)..\lib\db_int.h $(ProjectDir)..\bindings\perl\win32\include
-
-copy $(ProjectDir)..\lib\dbstl_common.h $(ProjectDir)..\bindings\perl\win32\include
-
-copy $(ProjectDir)..\lib\libintl.h $(ProjectDir)..\bindings\perl\win32\include
-
-</Command>
-    </PostBuildEvent>
+    <PostBuildEvent />
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
@@ -244,22 +221,7 @@ copy $(ProjectDir)..\lib\libintl.h $(ProjectDir)..\bindings\perl\win32\include
       <Message>
       </Message>
     </PreBuildEvent>
-    <PostBuildEvent>
-      <Command>copy $(TargetPath) $(ProjectDir)..\bindings\perl\win32\lib
-copy $(ProjectDir)..\include\libmediascan.h $(ProjectDir)..\bindings\perl\win32\include
-copy $(ProjectDir)\include\getopt.h $(ProjectDir)..\bindings\perl\win32\include
-copy $(ProjectDir)\include\unistd.h $(ProjectDir)..\bindings\perl\win32\include
-copy $(ProjectDir)..\lib\db.h $(ProjectDir)..\bindings\perl\win32\include
-copy $(ProjectDir)..\lib\db_config.h $(ProjectDir)..\bindings\perl\win32\include
-copy $(ProjectDir)..\lib\db_cxx.h $(ProjectDir)..\bindings\perl\win32\include
-copy $(ProjectDir)..\lib\db_int.h $(ProjectDir)..\bindings\perl\win32\include
-copy $(ProjectDir)..\lib\dbstl_common.h $(ProjectDir)..\bindings\perl\win32\include
-copy $(ProjectDir)..\lib\libintl.h $(ProjectDir)..\bindings\perl\win32\include
-copy $(ProjectDir)\pthreads.2\pthread.h $(ProjectDir)..\bindings\perl\win32\include
-copy $(ProjectDir)\pthreads.2\config.h $(ProjectDir)..\bindings\perl\win32\include
-copy $(ProjectDir)\pthreads.2\sched.h $(ProjectDir)..\bindings\perl\win32\include
-</Command>
-    </PostBuildEvent>
+    <PostBuildEvent />
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
@@ -289,39 +251,10 @@ copy $(ProjectDir)\pthreads.2\sched.h $(ProjectDir)..\bindings\perl\win32\includ
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>shlwapi.lib;libpng16.a;libz.a;libjpeg.a;$(ProjectDir)Release\pthreadVC2.lib;libgif.a;libavcodec.dll.a;libavformat.dll.a;libavutil.dll.a;libswscale.dll.a;libexif.a;libintl.lib;$(ProjectDir)..\lib\libdb_small51s.lib;libbz2.a;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)\..\lib;C:\msys32\mingw32\lib</AdditionalLibraryDirectories>
       <LinkTimeCodeGeneration>false</LinkTimeCodeGeneration>
       <IgnoreSpecificDefaultLibraries>MSVCRTD;LIBCMT</IgnoreSpecificDefaultLibraries>
     </Lib>
-    <PostBuildEvent>
-      <Command>copy $(TargetPath) $(ProjectDir)..\bindings\perl\win32\lib
-
-copy $(ProjectDir)..\include\libmediascan.h $(ProjectDir)..\bindings\perl\win32\include
-
-copy $(ProjectDir)\include\getopt.h $(ProjectDir)..\bindings\perl\win32\include
-
-copy $(ProjectDir)\include\unistd.h $(ProjectDir)..\bindings\perl\win32\include
-
-copy $(ProjectDir)..\lib\db.h $(ProjectDir)..\bindings\perl\win32\include
-
-copy $(ProjectDir)..\lib\db_config.h $(ProjectDir)..\bindings\perl\win32\include
-
-copy $(ProjectDir)..\lib\db_cxx.h $(ProjectDir)..\bindings\perl\win32\include
-
-copy $(ProjectDir)..\lib\db_int.h $(ProjectDir)..\bindings\perl\win32\include
-
-copy $(ProjectDir)..\lib\dbstl_common.h $(ProjectDir)..\bindings\perl\win32\include
-
-copy $(ProjectDir)..\lib\libintl.h $(ProjectDir)..\bindings\perl\win32\include
-
-copy $(ProjectDir)\pthreads\pthread.h $(ProjectDir)..\bindings\perl\win32\include
-
-copy $(ProjectDir)\pthreads\config.h $(ProjectDir)..\bindings\perl\win32\include
-
-copy $(ProjectDir)\pthreads\sched.h $(ProjectDir)..\bindings\perl\win32\include
-</Command>
-    </PostBuildEvent>
+    <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_dll|Win32'">
     <ClCompile>
@@ -348,39 +281,10 @@ copy $(ProjectDir)\pthreads\sched.h $(ProjectDir)..\bindings\perl\win32\include
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>shlwapi.lib;libpng16.a;libz.a;libjpeg.a;$(ProjectDir)Release\pthreadVC2.lib;libgif.a;libavcodec.dll.a;libavformat.dll.a;libavutil.dll.a;libswscale.dll.a;libexif.a;libintl.lib;$(ProjectDir)..\lib\libdb_small51s.lib;libbz2.a;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)\..\lib;C:\msys32\mingw32\lib</AdditionalLibraryDirectories>
       <LinkTimeCodeGeneration>false</LinkTimeCodeGeneration>
       <IgnoreSpecificDefaultLibraries>MSVCRTD;LIBCMT</IgnoreSpecificDefaultLibraries>
     </Lib>
-    <PostBuildEvent>
-      <Command>copy $(TargetPath) $(ProjectDir)..\bindings\perl\win32\lib
-
-copy $(ProjectDir)..\include\libmediascan.h $(ProjectDir)..\bindings\perl\win32\include
-
-copy $(ProjectDir)\include\getopt.h $(ProjectDir)..\bindings\perl\win32\include
-
-copy $(ProjectDir)\include\unistd.h $(ProjectDir)..\bindings\perl\win32\include
-
-copy $(ProjectDir)..\lib\db.h $(ProjectDir)..\bindings\perl\win32\include
-
-copy $(ProjectDir)..\lib\db_config.h $(ProjectDir)..\bindings\perl\win32\include
-
-copy $(ProjectDir)..\lib\db_cxx.h $(ProjectDir)..\bindings\perl\win32\include
-
-copy $(ProjectDir)..\lib\db_int.h $(ProjectDir)..\bindings\perl\win32\include
-
-copy $(ProjectDir)..\lib\dbstl_common.h $(ProjectDir)..\bindings\perl\win32\include
-
-copy $(ProjectDir)..\lib\libintl.h $(ProjectDir)..\bindings\perl\win32\include
-
-copy $(ProjectDir)\pthreads\pthread.h $(ProjectDir)..\bindings\perl\win32\include
-
-copy $(ProjectDir)\pthreads\config.h $(ProjectDir)..\bindings\perl\win32\include
-
-copy $(ProjectDir)\pthreads\sched.h $(ProjectDir)..\bindings\perl\win32\include
-</Command>
-    </PostBuildEvent>
+    <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\src\audio.c" />

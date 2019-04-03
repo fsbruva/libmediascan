@@ -8,7 +8,7 @@
       <AdditionalIncludeDirectories>$(ProjectDir)pthreads\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Lib>
-      <AdditionalDependencies>$(ProjectDir)pthreads\Release\pthreadVC2.dll;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(ProjectDir)pthreads_proj\Release\pthreadVC2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup />
