@@ -68,6 +68,7 @@ test/testDebug/*
 test/video_dlna_testDebug/*
 win32/pthreads_proj/Debug*
 win32/pthreads_proj/x64/*
+win32/pthreads_proj/Release/*
 win32/pthreads_proj/Test/*
 win32/Debug_dll/*
 
