@@ -28,7 +28,7 @@
 #endif
 
 // If we are on MSVC, disable some stupid MSVC warnings
-#ifdef _MSC_VER
+#if defined(_MSC_VER) && _MSC_VER < 1900
 #pragma warning( disable: 4996 )
 #define snprintf _snprintf
 #endif
