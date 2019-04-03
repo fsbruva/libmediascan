@@ -191,9 +191,4 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
-  <ItemGroup>
-    <Library Include="tiff-3.8.2\lib\libtiff.lib">
-      <Filter>Library</Filter>
-    </Library>
-  </ItemGroup>
 </Project>
