@@ -7,7 +7,7 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include < time.h >
+#include <time.h>
 #include <Windows.h>
 
 #include "win32config.h"
