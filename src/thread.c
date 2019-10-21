@@ -35,12 +35,12 @@ TAILQ_HEAD(equeue, equeue_entry);
 #ifdef WIN32
 /* socketpair.c
  * Copyright 2007 by Nathan C. Myers <ncm@cantrip.org>; some rights reserved.
- * This code is Free Software.  It may be copied freely, in original or 
+ * This code is Free Software.  It may be copied freely, in original or
  * modified form, subject only to the restrictions that (1) the author is
  * relieved from all responsibilities for any use for any purpose, and (2)
  * this copyright notice must be retained, unchanged, in its entirety.  If
  * for any reason the author might be held responsible for any consequences
- * of copying or use, license is withheld.  
+ * of copying or use, license is withheld.
  */
 static int win32_socketpair(int socks[2]) {
   union {
@@ -249,7 +249,7 @@ void thread_signal_read(int spipe[2]) {
 
 // stop thread, blocks until stopped
 void thread_stop(MediaScanThread *t) {
-#ifndef WIN32
+#ifndef _MSC_VER
   if (t->tid) {
 #else
   if (t->tid.p) {               // XXX needed?
@@ -260,7 +260,7 @@ void thread_stop(MediaScanThread *t) {
     LOG_DEBUG("Waiting for thread %llu to stop...\n", (unsigned long long)t->tid);
     pthread_join(t->tid, NULL);
 #endif
-#ifndef WIN32
+#ifndef _MSC_VER
     t->tid = 0;
 #else
     t->tid.p = 0;               // XXX needed?
