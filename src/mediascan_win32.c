@@ -8,7 +8,11 @@
 #include <tchar.h>
 #include <stdio.h>
 #include <stdlib.h>
+#if defined(_MSC_VER)
 #include <strsafe.h>
+#else
+#include <string.h>
+#endif
 #include <direct.h>
 #include <tchar.h>
 #include <Msi.h>
@@ -151,8 +155,8 @@ void recurse_dir(MediaScan *s, const char *path, int recurse_count) {
 
   // Prepare string for use with FindFile functions.  First, copy the
   // string to a buffer, then append '\*' to the directory name.
-  StringCchCopy(findDir, MAX_PATH_STR_LEN, dir);
-  StringCchCat(findDir, MAX_PATH_STR_LEN, TEXT("\\*"));
+  strcopy_s(findDir, MAX_PATH_STR_LEN, dir);
+  strcat_s(findDir, MAX_PATH_STR_LEN, TEXT("\\*"));
 
 
   // Find the first file in the directory.
@@ -203,10 +207,10 @@ void recurse_dir(MediaScan *s, const char *path, int recurse_count) {
 
         // Check if this file is a shortcut and if so resolve it
         if (type == TYPE_LNK) {
-          char full_name[MAX_PATH_STR_LEN];
-          strcpy(full_name, dir);
-          strcat(full_name, "\\");
-          strcat(full_name, name);
+	  char *full_name = 0;
+          strcat_s(full_name, MAX_PATH_STR_LEN, dir);
+          strcat_s(full_name, MAX_PATH_STR_LEN, "\\");
+          strcat_s(full_name, MAX_PATH_STR_LEN, name);
           parse_lnk(full_name, redirect_dir, MAX_PATH_STR_LEN);
           if (PathIsDirectory(redirect_dir)) {
             struct dirq_entry *subdir_entry = malloc(sizeof(struct dirq_entry));
