@@ -5,7 +5,7 @@
   <PropertyGroup />
   <ItemDefinitionGroup>
     <Lib>
-      <AdditionalDependencies>$(ProjectDir)..\lib\libdb_small51s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libdb.a;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PostBuildEvent />
   </ItemDefinitionGroup>
