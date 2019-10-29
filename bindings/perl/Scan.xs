@@ -52,7 +52,7 @@ s_pipe (int filedes [2])
   SOCKET listener;
   SOCKET sock [2] = { -1, -1 };
 
-  if ((listener = socket (AF_INET, SOCK_STREAM, 0)) == INVALID_SOCKET) 
+  if ((listener = socket (AF_INET, SOCK_STREAM, 0)) == INVALID_SOCKET)
     return -1;
 
   addr.sin_family = AF_INET;
@@ -68,7 +68,7 @@ s_pipe (int filedes [2])
   if (listen (listener, 1))
     goto fail;
 
-  if ((sock [0] = socket (AF_INET, SOCK_STREAM, 0)) == INVALID_SOCKET) 
+  if ((sock [0] = socket (AF_INET, SOCK_STREAM, 0)) == INVALID_SOCKET)
     goto fail;
 
   if (connect (sock [0], (struct sockaddr *)&addr, addr_size))
