@@ -30,7 +30,7 @@
 /*****************************************************************************/
 /* portable pipe/socketpair from schmorp.h */
 
-#ifdef _WIN32
+#ifdef WIN32
 
 #ifdef USE_SOCKETS_AS_HANDLES
 # define S_TO_HANDLE(x) ((HANDLE)win32_get_osfhandle (x))
@@ -377,7 +377,7 @@ CODE:
   async = SvIV(*(my_hv_fetch(selfh, "async")));
   ms_set_async(s, async ? 1 : 0);
   // No empty space here due to XS parser issues
-#ifdef _WIN32
+#ifdef WIN32
   if (async) {
     int respipe[2];
 
@@ -420,7 +420,7 @@ int
 async_fd(MediaScan *s)
 CODE:
 {
-#ifdef _WIN32
+#ifdef WIN32
   RETVAL = win32_open_osfhandle(ms_async_fd(s), 0);
 #else
   RETVAL = ms_async_fd(s);
