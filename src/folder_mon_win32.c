@@ -78,7 +78,7 @@ static BOOL WaitForFile(const char *sz, const DWORD dwWaitSecs) {
       break;
     }
     else if (err != ERROR_SHARING_VIOLATION) {
-      LOG_ERROR("WaitForFile errno:%d on file: %s\n", err, sz);
+      LOG_ERROR("WaitForFile errno:%ld on file: %s\n", err, sz);
       break;
     }
 
@@ -113,12 +113,13 @@ void WatchDirectory(void *thread_data) {
   HANDLE hDir;
   DWORD dwWaitStatus;
   DWORD dwBytesRead;
-  BOOL bResult;
-  WSABUF DataBuf;
-  DWORD RecvBytes, Flags;
+  BOOL bResult;     // Unused variable warning from gcc is erroneous, used at 203
+  WSABUF DataBuf;	// Unused variable warning from gcc is erroneous, used at 154
+  //DWORD RecvBytes;
+  DWORD Flags;	// Unused variable warning from gcc is erroneous, used at 176
   char buffer[DATA_BUFSIZE];
-  int rc = 0;
-  int err = 0;
+  //int rc = 0;
+  //int err = 0;
   char *pBase = 0;
 
   // Thread state variables
