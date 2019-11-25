@@ -120,23 +120,29 @@ for my $incdir ( $lms_inc, @check ) {
         $lms_inc = $incdir;
 
         unshift @INC, '-I' . $lms_inc;
+        # If this is our first run through the loop, it's with the supplied lms_inc. We'll keep looking there.
+        unshift @check , $lms_inc if ( $_ == 0 );
+        # An explicit location for lms has been supplied
         if ($lms_lib) {
             unshift @LIBPATH, '-L' . $lms_lib;
         }
-
+        # Building a static library - we want the lib, but can adapt if we only have the include
         if ($static) {
             if ($lms_lib) {
-                $MYEXTLIB .= $lms_lib . '/' . 'libmediascan$(LIB_EXT) ';
+                $MYEXTLIB .= $lms_lib . '/' . 'libmediascan$(LIB_EXT) ' unless ($jumbo_lib) ;
+                $MYEXTLIB .= $lms_lib . '/' . 'libmediascan.lib ' if ($jumbo_lib) ;
             }
             else {
-                $MYEXTLIB .= $lms_inc . '/../lib/libmediascan$(LIB_EXT) ';
+                $MYEXTLIB .= $lms_inc . '/../lib/libmediascan$(LIB_EXT) ' unless ($jumbo_lib);
+                $MYEXTLIB .= $lms_lib . '/../lib/libmediascan.lib ' if ($jumbo_lib) ;
             }
         }
         else {
+            # We're going to attempt dynamic linking
             unshift @LIBS, '-lmediascan';
         }
 
-        print "Using libmediascan from $lms_inc\n";
+        print "Using libmediascan header from $lms_inc\n";
         last;
     }
 }
@@ -146,8 +152,8 @@ if ( !$LMS ) {
     die "libmediascan not found, please install it and try again. Checked for libmediascan.h in: " . join(", ", $lms_inc, @check) . "\n";
 }
 
-if ( $^O =~ /Win32/i ) {
-    # Win32 has everything in libmediascan.lib and doesn't need other libraries
+if ( ($jumbo_lib) ) {
+    # This build attempt has everything in giant libmediascan.lib and doesn't need other libraries
     goto MAKEFILE;
 }
 
