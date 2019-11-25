@@ -13,10 +13,10 @@ my ($exif_inc, $exif_lib, $ffmpeg_inc, $ffmpeg_lib, $gif_inc, $gif_lib, $jpeg_in
 my ($lms_inc, $lms_lib, $png_inc, $png_lib);
 my $static;
 
-my $DEFINES = '-O2';
-$DEFINES .= ' -Wall' unless $^O =~ /sun|solaris|Win32/i;
-$DEFINES .= ' -Wno-unused-value -Wno-format-security' unless $^O =~ /sun|solaris|Win32/i;
-$DEFINES .= ' /D "PTW32_STATIC_LIB" /D "HAVE_CONFIG_H" /D "WIN32"' if $^O =~ /Win32/i;
+my $DEFINES = '-O2 ';
+$DEFINES .= ' -Wall' unless $^O =~ /sun|solaris/i;
+$DEFINES .= ' -Wno-unused-value -Wno-format-security' unless $^O =~ /sun|solaris/i;
+$DEFINES .= ' -D "HAVE_CONFIG_H"' if $^O =~ /Win32/i;
 
 my $result = GetOptions(
     "help|h"                 => \$help,
@@ -48,40 +48,70 @@ Usage: perl Makefile.PL [options]
 Configure Media::Scan module.
 
 Options:
-    --with-ffmpeg-includes    Path to directory containing libavformat/avformat.h
-    --with-ffmpeg-libs        Path to directory containing libavformat/libavcodec/libavutil/libswscale
-    --with-lms-includes       Path to directory containing libmediascan.h
-    --with-lms-libs           Path to directory containing libmediascan
+    --omit-intl               Do not link the module with the intl library
+    --use-jumbo               Library for libmediascan is one giant archive
+    --use-make                Type of make to be used by perl (make, dmake, nmake, etc)
+    --with-bdb-includes       Path to directory containing BerkeleyDB's db.h
+    --with-bdb-libs           Path to directory containing libdb
+    --with-CC-lib-path        String of lib paths for compiler libraries ("-L/foo/lib -L/bar/lib" )
     --with-exif-includes      Path to directory containing libexif/exif-data.h
     --with-exif-libs          Path to directory containing libexif
-    --omit-intl               Do not link the module with the intl library
-    --with-jpeg-includes      Path to directory containing jpeglib.h
-    --with-jpeg-libs          Path to directory containing libjpeg
-    --with-png-includes       Path to directory containing png.h
-    --with-png-libs           Path to directory containing libpng
+    --with-ffmpeg-includes    Path to directory containing libavformat/avformat.h
+    --with-ffmpeg-libs        Path to directory containing libavformat/libavcodec/libavutil/libswscale
     --with-gif-includes       Path to directory containing gif_lib.h
     --with-gif-libs           Path to directory containing libgif
-    --with-bdb-includes       Path to directory containing BerkeleyDB's db.dh
-    --with-bdb-libs           Path to directory containing libdb
+    --with-jpeg-includes      Path to directory containing jpeglib.h
+    --with-jpeg-libs          Path to directory containing libjpeg
+    --with-lms-includes       Path to directory containing libmediascan.h
+    --with-lms-libs           Path to directory containing libmediascan
+    --with-png-includes       Path to directory containing png.h
+    --with-png-libs           Path to directory containing libpng
     --with-static             Statically link the module with all libraries
+
+Note: The lms-includes variable is checked first, and if successful, will
+be re-used as an option for all subsequent checks. Therefore, any headers
+located in the same location do not require explicit declaration.
 
 END
 
     exit 0;
 }
 
-my @check = qw(/usr/include /usr/local/include /opt/local/include);
+# Specify default include locations
+@check = qw(/usr/include /usr/local/include /opt/local/include) unless $^O =~ /Win32/i;
+
+if ( $^O =~ /Win32/i ) {
+    if (!(defined $ENV{MSYSTEM}) || !($ENV{MSYSTEM} =~ /MINGW/ )){
+        die "Only MinGW builds are supported for Windows.\nPlease read README.win32 for instructions on building on Windows\n";
+    }
+    # The MINGW_PREFIX variable should either be mingw32 or mingw64
+    if ((defined $ENV{MINGW_PREFIX}) || ($ENV{MINGW_PREFIX} =~ /mingw/i )){
+        unshift @check, "$ENV{MINGW_PREFIX}/include";
+        unshift @INC, '-I' . "$ENV{MINGW_PREFIX}/include";
+        unshift @LIBPATH, "-L$ENV{MINGW_PREFIX}/lib";
+        # The MINGW_CHOST variable will either be x86_64-w64-mingw32 or i686-w64-mingw32
+        if ((defined $ENV{MINGW_CHOST}) || ($ENV{MINGW_CHOST} =~ /w64-mingw32/i )) {
+            unshift @check, "$ENV{MINGW_PREFIX}/$ENV{MINGW_CHOST}/include";
+            unshift @INC, '-I' . "$ENV{MINGW_PREFIX}/$ENV{MINGW_CHOST}/include";
+            unshift @LIBPATH, "-L$ENV{MINGW_PREFIX}/$ENV{MINGW_CHOST}/lib";
+        }
+        else {
+            print "WARNING: Could not detect MINGW_CHOST in environment.\nPlease read README.win32 for instructions on building on Windows\n";
+        }
+    }
+    else {
+        print "WARNING: Could not detect MINGW_PREFIX in environment.\nPlease read README.win32 for instructions on building on Windows\n";
+    }
+    $static = 1;    # Only static on Windows (for now)
+}
+
+# Add any additional lib paths necessary for compilation
+if ((defined $cc_lib_path) && ($cc_lib_path ne '' ) ) {
+    unshift @LIBPATH, split / /, $cc_lib_path;
+}
 
 # Check in environment-supplied locations before standard ones
 unshift @check, split /:/, $ENV{INCLUDE};
-
-if ( $^O =~ /Win32/i ) {
-    if ( !-d 'win32' ) {
-        die "Please read README.win32 for instructions on building on Windows\n";
-    }
-    push @check, 'win32/include';
-    $static = 1;
-}
 
 # Look for libmediascan
 for my $incdir ( $lms_inc, @check ) {
@@ -121,6 +151,38 @@ if ( $^O =~ /Win32/i ) {
     goto MAKEFILE;
 }
 
+# Look for libmediascan's .la file to help with dependency management
+for my $incdir ( $lms_inc, @check ) {
+    if ( $incdir && -e catfile($incdir, '/../lib/libmediascan.la') ) {
+        $lms_inc = $incdir;
+
+        open my $fh, '<:encoding(UTF-8)', catfile($incdir, '/../lib/libmediascan.la') or die;
+        while (my $line = <$fh>) {
+            if ($line =~ /dependency_libs=/) {
+                # We found the dependency libs line. We need to know about some of the optional libraries,
+                # particularly bz2, intl, and iconv.
+                $LMSLA = 1;
+                # Trim the dependency_libs=' (17) from the front, and the trailing ' and space (-2)
+                $LMSLIBDEP = substr $line, 17, -2;
+                my @words = split / /, $LMSLIBDEP;
+                foreach  ( @words ) {
+                    if ( $_ eq '-lbz2' ) {
+                        $BZ2 = 1;
+                    }
+                    elsif  ( $_ eq '-lintl' ) {
+                        $INTL = 1;
+                    }
+                    elsif ( $_ eq '-liconv' ) {
+                        $ICONV = 1;
+                    }
+                }
+            }
+        }
+        print "Using libmediascan lib archive from " . catfile($incdir, '/../lib/libmediascan.la') . "\n";
+        last;
+    }
+}
+
 # Look for ffmpeg
 for my $incdir ( $ffmpeg_inc, @check ) {
     if ( $incdir && -e catfile($incdir, 'libavformat', 'avformat.h') ) {
@@ -147,9 +209,12 @@ for my $incdir ( $ffmpeg_inc, @check ) {
             }
 
             push @LIBS, '-lm -lz';
+            push @LIBS, '-lbz2' if ( $BZ2 || (!$LMSLA) ) ;
         }
         else {
             push @LIBS, '-lavformat -lavcodec -lm -lz -lswscale -lavutil';
+            # If we don't have the .la file, assume we need bz2
+            push @LIBS, '-lbz2' if ( $BZ2 || (!$LMSLA) ) ;
         }
 
         print "Using ffmpeg from $ffmpeg_inc\n";
@@ -184,8 +249,10 @@ for my $incdir ( $exif_inc, @check ) {
             push @LIBS, '-lexif';
         }
 
-	if (!$omit_intl) {
-            push @LIBS, '-lintl'; # XXX only if logging is used for exif
+        if (!$omit_intl) {
+            # If we don't have the .la file, assume we need intl
+            push @LIBS, '-lintl' if ( $INTL || (!$LMSLA)); # XXX only if logging is used for exif
+            push @LIBS, '-liconv' if ( $ICONV && $LMSLA ); # Only add -liconv if we know we need it
         }
 
         print "Using libexif from $exif_inc\n";
@@ -332,8 +399,18 @@ if ( $^O =~ /sun|solaris/i ) {
     unshift @LIBS, $extralibs;
 }
 
+if ( $^O =~ /Win32/i ) {
+    # The perl from MinGW has quite a few default libs, but we also need these ones
+    push @LIBS, '-lshlwapi -lwinpthread -lbcrypt -lmingwex -lmingw32 -lmsvcrt -lgcc';
+    # MinGW's Perl for x86_64 automatically includes the static link instruction, but the i686 Perl doesn't.
+    # We'll include just in case, because it will fail final linking if we don't.
+    unshift @LDDLFLAGS, '-dll -nodefaultlibs -fPIC -static-libgcc -static-libstdc++';
+    unshift @CPPFLAGS, '-D__MSVCRT_VERSION__=0x0601';
+ }
+
 push @LDDLFLAGS, $Config{lddlflags};
 unshift @LDDLFLAGS, '-Wl,-Bsymbolic' unless $^O =~ /sun|solaris|Darwin/i;
+
 
 MAKEFILE:
 
@@ -372,8 +449,6 @@ my %opts = (
     LICENSE => 'gpl_2',
 );
 
-if ( $^O =~ /Win32/i ) {
-    $opts{LDDLFLAGS} = '-dll -nologo -nodefaultlib -opt:ref,icf  -libpath:"C:\Perl\lib\CORE" -machine:x86 -manifest -ManifestFile:$@.manifest -shared -Wl,-Bsymbolic';
 }
 
 WriteMakefile(%opts);
