@@ -110,9 +110,13 @@ static void _init(void) {
     return;
 
 #ifdef WIN32
+  // As of pthread 2.9.0 (~2012), these functions are private, and called automatically.
+  // Also, we should be using MinGW, which uses winpthread.
+  // We should make 100% sure we know what version and flavor of thread library we're using.
+ #ifdef __PTW32_VERSION && __PTW32_VERSION_MAJOR == 2 && __PTW32_VERSION_MINOR < 9
   pthread_win32_process_attach_np();
   pthread_win32_thread_attach_np();
-
+#endif
 
   // Initialize Winsock
   iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
