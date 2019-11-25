@@ -4,15 +4,14 @@
 ///  mediascan window 32 class.
 ///-------------------------------------------------------------------------------------------------
 
+#if defined(__MINGW32__) || defined(__MINGW64__)
+#define INITGUID
+#endif
 #include <Windows.h>
 #include <tchar.h>
 #include <stdio.h>
 #include <stdlib.h>
-#if defined(_MSC_VER)
-#include <strsafe.h>
-#else
 #include <string.h>
-#endif
 #include <direct.h>
 #include <tchar.h>
 #include <Msi.h>
@@ -22,6 +21,7 @@
 #include <shlguid.h>
 #include <shlobj.h>             /* For IShellLink */
 #include <Shlwapi.h>
+#include <initguid.h>
 
 #include <libmediascan.h>
 
@@ -38,17 +38,33 @@
 #pragma comment(lib, "Msi.lib")
 #endif
 
-int parse_lnk(const char *path, LPTSTR szTarget, SIZE_T cchTarget) {
-  char szProductCode[39];
-  char szFeatureId[MAX_FEATURE_CHARS + 1];
-  char szComponentCode[39];
+// This is necessary because the _s versions are recommended by the Visual Studio compiler,
+// but not necessary when building with MinGW. Stolen from:
+// https://github.com/opencv/opencv/pull/13032/files
+#if defined(__MINGW32__) || defined(__MINGW64__)
+static inline void mingw_strcpy_s(char *dest, size_t destsz, const char *src){
+    strcpy(dest, src);
+}
+
+static inline void mingw_strcat_s(char *dest, size_t destsz, const char *src){
+    strcat(dest, src);
+}
+
+#define strcopy_s mingw_strcpy_s
+#define strcat_s mingw_strcat_s
+#endif
+
+int parse_lnk(LPCTSTR szShortcutFile, LPTSTR szTarget, SIZE_T cchTarget) {
+//  char szProductCode[39];
+//  char szFeatureId[MAX_FEATURE_CHARS + 1];
+//  char szComponentCode[39];
   IShellLink *psl = NULL;
   IPersistFile *ppf = NULL;
   BOOL bResult = FALSE;
 
 #if !defined(UNICODE)
   WCHAR wsz[MAX_PATH_STR_LEN];
-  if (0 == MultiByteToWideChar(CP_ACP, 0, path, -1, wsz, MAX_PATH_STR_LEN))
+  if (0 == MultiByteToWideChar(CP_ACP, 0, szShortcutFile, -1, wsz, MAX_PATH_STR_LEN))
     goto cleanup;
 #else
   LPCWSTR wsz = szShortcutFile;
@@ -155,7 +171,11 @@ void recurse_dir(MediaScan *s, const char *path, int recurse_count) {
 
   // Prepare string for use with FindFile functions.  First, copy the
   // string to a buffer, then append '\*' to the directory name.
+#if defined (_MSC_VER)
+  strcpy_s(findDir, MAX_PATH_STR_LEN, dir);
+#else
   strcopy_s(findDir, MAX_PATH_STR_LEN, dir);
+#endif
   strcat_s(findDir, MAX_PATH_STR_LEN, TEXT("\\*"));
 
 
@@ -207,7 +227,7 @@ void recurse_dir(MediaScan *s, const char *path, int recurse_count) {
 
         // Check if this file is a shortcut and if so resolve it
         if (type == TYPE_LNK) {
-	  char *full_name = 0;
+          char full_name[MAX_PATH_STR_LEN];
           strcat_s(full_name, MAX_PATH_STR_LEN, dir);
           strcat_s(full_name, MAX_PATH_STR_LEN, "\\");
           strcat_s(full_name, MAX_PATH_STR_LEN, name);

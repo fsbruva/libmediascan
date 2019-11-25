@@ -164,12 +164,12 @@ void WatchDirectory(LPVOID inData);
 
 void RefreshDirectory(MediaScan *s, LPTSTR lpDir);
 
-int parse_lnk(const char *path, LPTSTR szTarget, SIZE_T cchTarget);
+int parse_lnk(LPCTSTR szShortcutFile, LPTSTR szTarget, SIZE_T cchTarget);
 
 #endif // WIN32
 
 // This declaration conflicts with one that returns a boolean in shlwapi.h
-#ifndef _MSC_VER
+#ifndef WIN32
 int PathIsDirectory(const char *dir);
 #endif
 
