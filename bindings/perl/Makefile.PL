@@ -464,6 +464,11 @@ my %opts = (
     LICENSE => 'gpl_2',
 );
 
+# A different make style is required
+if ((defined $make_bin) && ($make_bin ne '')) {
+    $opts{MAKE} = $make_bin;
+}
+
 WriteMakefile1(%opts);
 
 sub WriteMakefile1 {  #Compatibility code for old versions of EU::MM. Written by Alexandr Ciornii, version 2. Added by eumm-upgrade.
