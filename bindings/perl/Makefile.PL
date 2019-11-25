@@ -5,12 +5,12 @@ use ExtUtils::MakeMaker qw(WriteMakefile);
 use File::Spec::Functions;
 use Getopt::Long;
 
-my (@INC, @LDDLFLAGS, @LIBPATH, @LIBS);
-my ($FFMPEG, $LMS, $EXIF, $JPEG, $PNG, $GIF, $BDB, $MYEXTLIB);
+my (@INC, @LDDLFLAGS, @LIBPATH, @LIBS, @CPPFLAGS, @check);
+my ($FFMPEG, $LMS, $EXIF, $JPEG, $PNG, $GIF, $BDB, $MYEXTLIB, $LMSLA, $LMSLIBDEP, $BZ2, $INTL, $ICONV);
 
-my ($help, $ffmpeg_inc, $ffmpeg_lib, $lms_inc, $lms_lib, $exif_inc, $exif_lib);
-my ($omit_intl, $jpeg_inc, $jpeg_lib, $png_inc, $png_lib, $gif_inc, $gif_lib);
-my ($bdb_inc, $bdb_lib);
+my ($help, $omit_intl, $jumbo_lib, $make_bin, $bdb_inc, $bdb_lib, $cc_lib_path);
+my ($exif_inc, $exif_lib, $ffmpeg_inc, $ffmpeg_lib, $gif_inc, $gif_lib, $jpeg_inc, $jpeg_lib);
+my ($lms_inc, $lms_lib, $png_inc, $png_lib);
 my $static;
 
 my $DEFINES = '-O2';
@@ -20,21 +20,24 @@ $DEFINES .= ' /D "PTW32_STATIC_LIB" /D "HAVE_CONFIG_H" /D "WIN32"' if $^O =~ /Wi
 
 my $result = GetOptions(
     "help|h"                 => \$help,
-    "with-ffmpeg-includes=s" => \$ffmpeg_inc,
-    "with-ffmpeg-libs=s"     => \$ffmpeg_lib,
-    "with-lms-includes=s"    => \$lms_inc,
-    "with-lms-libs=s"        => \$lms_lib,
-    "with-exif-includes=s"   => \$exif_inc,
-    "with-exif-libs=s"       => \$exif_lib,
     "omit-intl"              => \$omit_intl,
-    "with-jpeg-includes=s"   => \$jpeg_inc,
-    "with-jpeg-libs=s"       => \$jpeg_lib,
-    "with-png-includes=s"    => \$png_inc,
-    "with-png-libs=s"        => \$png_lib,
-    "with-gif-includes=s"    => \$gif_inc,
-    "with-gif-libs=s"        => \$gif_lib,
+    "use-jumbo"              => \$jumbo_lib,
+    "use-make=s"             => \$make_bin,
     "with-bdb-includes=s"    => \$bdb_inc,
     "with-bdb-libs=s"        => \$bdb_lib,
+    "with-exif-includes=s"   => \$exif_inc,
+    "with-exif-libs=s"       => \$exif_lib,
+    "with-ffmpeg-includes=s" => \$ffmpeg_inc,
+    "with-ffmpeg-libs=s"     => \$ffmpeg_lib,
+    "with-CC-lib-path=s"     => \$cc_lib_path,
+    "with-gif-includes=s"    => \$gif_inc,
+    "with-gif-libs=s"        => \$gif_lib,
+    "with-jpeg-includes=s"   => \$jpeg_inc,
+    "with-jpeg-libs=s"       => \$jpeg_lib,
+    "with-lms-includes=s"    => \$lms_inc,
+    "with-lms-libs=s"        => \$lms_lib,
+    "with-png-includes=s"    => \$png_inc,
+    "with-png-libs=s"        => \$png_lib,
     "with-static"            => \$static,
 );
 
