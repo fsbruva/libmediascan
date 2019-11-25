@@ -84,7 +84,7 @@ static inline fixed_t fixed_mul(fixed_t x, fixed_t y) {
   return (fixed_t)(((int64_t)x * y) >> FRAC_BITS);
 }
 # endif
-#elif defined(_MSC_VER)         // x86 Windows
+#elif defined(_MSC_VER) && !defined(_WIN64)        // x86 Windows
 static inline fixed_t fixed_mul(fixed_t x, fixed_t y) {
   enum {
     fracbits = FRAC_BITS
