@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\msys64\mingw64\include;C:\msys64\mingw64\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;WIN64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Lib>
+      <AdditionalLibraryDirectories>C:\msys64\mingw64\lib;C:\msys64\mingw64\x86_64-w64-mingw32\lib;C:\msys64\mingw64\lib\gcc\x86_64-w64-mingw32\9.2.0;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <TargetMachine />
+    </Lib>
+    <PostBuildEvent />
+    <Link>
+      <AdditionalLibraryDirectories>C:\msys64\mingw64\lib;C:\msys64\mingw64\x86_64-w64-mingw32\lib;C:\msys64\mingw64\lib\gcc\x86_64-w64-mingw32\9.2.0;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup />
+</Project>

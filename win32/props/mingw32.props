@@ -5,11 +5,12 @@
   <PropertyGroup />
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\msys32\mingw32\include;C:\msys32\mingw32\lib;C:\msys32\usr\local\src\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\msys64\mingw32\include;C:\msys64\mingw32\lib;C:\msys64\usr\local\src\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Lib>
-      <AdditionalLibraryDirectories>C:\msys32\mingw32\lib;C:\msys32\usr\local\src\build\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\msys64\mingw32\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <TargetMachine />
     </Lib>
     <PostBuildEvent />
   </ItemDefinitionGroup>

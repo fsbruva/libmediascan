@@ -6,6 +6,7 @@
   <ItemDefinitionGroup>
     <Lib>
       <AdditionalDependencies>libdb.a;%(AdditionalDependencies)</AdditionalDependencies>
+      <TargetMachine />
     </Lib>
     <PostBuildEvent />
   </ItemDefinitionGroup>
