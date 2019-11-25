@@ -16,9 +16,9 @@ libmediascan_la_SOURCES = audio.c buffer.c database.c error.c \
   libdlna/av_mpeg4_part2.c libdlna/av_wmv9.c libdlna/containers.c libdlna/profiles.c \
   jenkins/lookup3.c
 
-libmediascan_la_CFLAGS = -Wall -I$(top_srcdir)/include $(exif_CFLAGS) $(avutil_CFLAGS) $(swscale_CFLAGS) $(avcodec_CFLAGS) $(avformat_CFLAGS)
+libmediascan_la_CFLAGS = -Wall -I$(top_srcdir)/include $(zlib_CFLAGS) $(bzip2_CFLAGS) $(jpeg_CFLAGS) $(png_CFLAGS) $(gif_CFLAGS) $(iconv_CFLAGS) $(intl_CFLAGS) $(exif_CFLAGS) $(avutil_CFLAGS) $(swscale_CFLAGS) $(avcodec_CFLAGS) $(avformat_CFLAGS) $(db_CFLAGS)
 
-libmediascan_la_LDFLAGS = -version-info 0:0:0 $(exif_LIBS) $(avutil_LIBS) $(swscale_LIBS) $(avcodec_LIBS) $(avformat_LIBS)
+libmediascan_la_LDFLAGS = -version-info 0:0:0
 
 if LINUXBSD
 libmediascan_la_SOURCES += mediascan_unix.c mediascan_linux.c
@@ -35,9 +35,9 @@ endif
 
 if MINGW
 #libmediascan_la_SOURCES += mediascan_win32.c win_iconv.c win32_port.c
-libmediascan_la_SOURCES += mediascan_win32.c win32_port.c
-include_HEADERS += win32config.h
-libmediascan_la_LDFLAGS += --whole-archive -no-undefined
+libmediascan_la_SOURCES += mediascan_win32.c win32_port.c folder_mon_win32.c
+include_HEADERS += win32config.h unistd.h mediascan_win32.h
+libmediascan_la_LDFLAGS += -no-undefined
 endif
 
 

@@ -42,7 +42,7 @@ macro_version=2.4.6
 macro_revision=2.4.6
 
 # Whether or not to build shared libraries.
-build_libtool_libs=yes
+build_libtool_libs=no
 
 # Whether or not to build static libraries.
 build_old_libs=yes
@@ -67,12 +67,12 @@ PATH_SEPARATOR=":"
 
 # The host system.
 host_alias=
-host=i686-w64-mingw32
+host=x86_64-w64-mingw32
 host_os=mingw32
 
 # The build system.
-build_alias=i686-w64-mingw32
-build=i686-w64-mingw32
+build_alias=x86_64-w64-mingw32
+build=x86_64-w64-mingw32
 build_os=mingw32
 
 # A sed program that does not truncate output.
@@ -91,7 +91,7 @@ EGREP="/usr/bin/grep -E"
 FGREP="/usr/bin/grep -F"
 
 # A BSD- or MS-compatible name lister.
-NM="/mingw32/bin/nm -B"
+NM="/mingw64/bin/nm -B"
 
 # Whether we need soft or hard links.
 LN_S="cp -pR"
@@ -165,10 +165,10 @@ lock_old_archive_extraction=no
 LTCC="gcc"
 
 # LTCC compiler flags.
-LTCFLAGS="-I/usr/local/src/build/include -I/usr/local/src/build/include -w -fPIC -O3"
+LTCFLAGS="-I/c/home/Raena/build/x86_64-w64-mingw/include -I/c/home/Raena/build/x86_64-w64-mingw/include -DWIN32 -DWIN64 -Wall -fPIC -I/c/msys64/usr/include -I/c/msys64/mingw64/x86_64-w64-mingw32/include -O3 "
 
 # Take the output of nm and produce a listing of raw symbols and C names.
-global_symbol_pipe="sed -n -e 's/^.*[	 ]\\([ABCDGIRSTW][ABCDGIRSTW]*\\)[	 ][	 ]*_\\([_A-Za-z][_A-Za-z0-9]*\\)\\{0,1\\}\$/\\1 _\\2 \\2/p' | sed '/ __gnu_lto/d'"
+global_symbol_pipe="sed -n -e 's/^.*[	 ]\\([ABCDGIRSTW][ABCDGIRSTW]*\\)[	 ][	 ]*\\([_A-Za-z][_A-Za-z0-9]*\\)\\{0,1\\}\$/\\1 \\2 \\2/p' | sed '/ __gnu_lto/d'"
 
 # Transform the output of nm in a proper C declaration.
 global_symbol_to_cdecl="sed -n -e 's/^T .* \\(.*\\)\$/extern int \\1();/p' -e 's/^[ABCDGIRSTW][ABCDGIRSTW]* .* \\(.*\\)\$/extern char \\1;/p'"
@@ -292,7 +292,7 @@ finish_eval=""
 hardcode_into_libs=no
 
 # Compile-time system search path for libraries.
-sys_lib_search_path_spec="C:/msys32/mingw32/lib/gcc/i686-w64-mingw32/7.4.0 C:/msys32/mingw32/lib/gcc C:/msys32/mingw32/i686-w64-mingw32/lib C:/msys32/mingw32/lib "
+sys_lib_search_path_spec="C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/9.2.0 C:/msys64/mingw64/lib/gcc C:/msys64/mingw64/x86_64-w64-mingw32/lib C:/msys64/mingw64/lib "
 
 # Detected run-time system search path for libraries.
 sys_lib_dlsearch_path_spec="/lib /usr/lib"
@@ -315,7 +315,7 @@ striplib="strip --strip-unneeded"
 
 
 # The linker used to build libraries.
-LD="C:/msys32/mingw32/i686-w64-mingw32/bin/ld.exe"
+LD="C:/msys64/mingw64/x86_64-w64-mingw32/bin/ld.exe"
 
 # How to create reloadable object files.
 reload_flag=" -r"
@@ -331,7 +331,7 @@ CC="gcc"
 with_gcc=yes
 
 # Compiler flag to turn off builtin functions.
-no_builtin_flag=" -fno-builtin -fno-rtti -fno-exceptions"
+no_builtin_flag=" -fno-builtin"
 
 # Additional compiler flags for building library objects.
 pic_flag=" -DDLL_EXPORT -DPIC"
@@ -8328,8 +8328,15 @@ func_mode_link ()
 	  fi
 	  case $linkmode in
 	  lib)
-	    # Linking convenience modules into shared libraries is allowed,
-	    # but linking other static libraries is non-portable.
+	    # Linking convenience modules and compiler provided static libraries
+	    # into shared libraries is allowed, but linking other static
+	    # libraries is non-portable.
+	    case $deplib in
+	      */libgcc*.$libext | */libclang_rt*.$libext)
+		deplibs="$deplib $deplibs"
+		continue
+	      ;;
+	    esac
 	    case " $dlpreconveniencelibs " in
 	    *" $deplib "*) ;;
 	    *)
@@ -11728,7 +11735,7 @@ build_old_libs=`case $build_libtool_libs in yes) echo no;; *) echo yes;; esac`
 # ### BEGIN LIBTOOL TAG CONFIG: CXX
 
 # The linker used to build libraries.
-LD="C:/msys32/mingw32/i686-w64-mingw32/bin/ld.exe"
+LD="C:/msys64/mingw64/x86_64-w64-mingw32/bin/ld.exe"
 
 # How to create reloadable object files.
 reload_flag=" -r"
@@ -11865,17 +11872,17 @@ file_list_spec="@"
 hardcode_action=immediate
 
 # The directories searched by this compiler when creating a shared library.
-compiler_lib_search_dirs="C:/msys32/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.4.0 C:/msys32/mingw32/bin/../lib/gcc C:/msys32/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.4.0/../../../../i686-w64-mingw32/lib/../lib C:/msys32/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.4.0/../../../../lib C:/msys32/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.4.0/../../../../i686-w64-mingw32/lib C:/msys32/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.4.0/../../.."
+compiler_lib_search_dirs="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/9.2.0 C:/msys64/mingw64/bin/../lib/gcc C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/9.2.0/../../../../x86_64-w64-mingw32/lib/../lib C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/9.2.0/../../../../lib C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/9.2.0/../../../../x86_64-w64-mingw32/lib C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/9.2.0/../../.."
 
 # Dependencies to place before and after the objects being linked to
 # create a shared library.
-predep_objects="C:/msys32/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.4.0/../../../../i686-w64-mingw32/lib/../lib/dllcrt2.o C:/msys32/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.4.0/crtbegin.o"
-postdep_objects="C:/msys32/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.4.0/crtend.o"
+predep_objects="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/9.2.0/../../../../x86_64-w64-mingw32/lib/../lib/dllcrt2.o C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/9.2.0/crtbegin.o"
+postdep_objects="C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/9.2.0/crtend.o"
 predeps=""
 postdeps="-lstdc++ -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt"
 
 # The library search path used internally by the compiler when linking
 # a shared library.
-compiler_lib_search_path="-LC:/msys32/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.4.0 -LC:/msys32/mingw32/bin/../lib/gcc -LC:/msys32/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.4.0/../../../../i686-w64-mingw32/lib/../lib -LC:/msys32/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.4.0/../../../../lib -LC:/msys32/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.4.0/../../../../i686-w64-mingw32/lib -LC:/msys32/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.4.0/../../.."
+compiler_lib_search_path="-LC:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/9.2.0 -LC:/msys64/mingw64/bin/../lib/gcc -LC:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/9.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/9.2.0/../../../../lib -LC:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/9.2.0/../../../../x86_64-w64-mingw32/lib -LC:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/9.2.0/../../.."
 
 # ### END LIBTOOL TAG CONFIG: CXX

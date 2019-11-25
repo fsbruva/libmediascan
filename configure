@@ -633,6 +633,37 @@ ac_header_list=
 ac_subst_vars='am__EXEEXT_FALSE
 am__EXEEXT_TRUE
 LTLIBOBJS
+db_LIBS
+db_CFLAGS
+swscale_LIBS
+swscale_CFLAGS
+avformat_LIBS
+avformat_CFLAGS
+avcodec_LIBS
+avcodec_CFLAGS
+avutil_LIBS
+avutil_CFLAGS
+exif_LIBS
+exif_CFLAGS
+intl_LIBS
+intl_CFLAGS
+iconv_LIBS
+iconv_CFLAGS
+gif_LIBS
+gif_CFLAGS
+png_LIBS
+png_CFLAGS
+jpeg_LIBS
+jpeg_CFLAGS
+bzip2_LIBS
+bzip2_CFLAGS
+zlib_LIBS
+zlib_CFLAGS
+pthread_LIBS
+pthread_CFLAGS
+PKG_CONFIG_LIBDIR
+PKG_CONFIG_PATH
+PKG_CONFIG
 MINGW_FALSE
 MINGW_TRUE
 LINUXBSD_FALSE
@@ -642,6 +673,7 @@ SUN_TRUE
 DARWIN_FALSE
 DARWIN_TRUE
 LIBOBJS
+have_pkgconfig
 CXXCPP
 am__fastdepCXX_FALSE
 am__fastdepCXX_TRUE
@@ -804,7 +836,38 @@ OBJCFLAGS
 CXX
 CXXFLAGS
 CCC
-CXXCPP'
+CXXCPP
+PKG_CONFIG
+PKG_CONFIG_PATH
+PKG_CONFIG_LIBDIR
+pthread_CFLAGS
+pthread_LIBS
+zlib_CFLAGS
+zlib_LIBS
+bzip2_CFLAGS
+bzip2_LIBS
+jpeg_CFLAGS
+jpeg_LIBS
+png_CFLAGS
+png_LIBS
+gif_CFLAGS
+gif_LIBS
+iconv_CFLAGS
+iconv_LIBS
+intl_CFLAGS
+intl_LIBS
+exif_CFLAGS
+exif_LIBS
+avutil_CFLAGS
+avutil_LIBS
+avcodec_CFLAGS
+avcodec_LIBS
+avformat_CFLAGS
+avformat_LIBS
+swscale_CFLAGS
+swscale_LIBS
+db_CFLAGS
+db_LIBS'
 
 
 # Initialize some variables set by options.
@@ -1467,6 +1530,50 @@ Some influential environment variables:
   CXX         C++ compiler command
   CXXFLAGS    C++ compiler flags
   CXXCPP      C++ preprocessor
+  PKG_CONFIG  path to pkg-config utility
+  PKG_CONFIG_PATH
+              directories to add to pkg-config's search path
+  PKG_CONFIG_LIBDIR
+              path overriding pkg-config's built-in search path
+  pthread_CFLAGS
+              C compiler flags for pthread, overriding pkg-config
+  pthread_LIBS
+              linker flags for pthread, overriding pkg-config
+  zlib_CFLAGS C compiler flags for zlib, overriding pkg-config
+  zlib_LIBS   linker flags for zlib, overriding pkg-config
+  bzip2_CFLAGS
+              C compiler flags for bzip2, overriding pkg-config
+  bzip2_LIBS  linker flags for bzip2, overriding pkg-config
+  jpeg_CFLAGS C compiler flags for jpeg, overriding pkg-config
+  jpeg_LIBS   linker flags for jpeg, overriding pkg-config
+  png_CFLAGS  C compiler flags for png, overriding pkg-config
+  png_LIBS    linker flags for png, overriding pkg-config
+  gif_CFLAGS  C compiler flags for gif, overriding pkg-config
+  gif_LIBS    linker flags for gif, overriding pkg-config
+  iconv_CFLAGS
+              C compiler flags for iconv, overriding pkg-config
+  iconv_LIBS  linker flags for iconv, overriding pkg-config
+  intl_CFLAGS C compiler flags for intl, overriding pkg-config
+  intl_LIBS   linker flags for intl, overriding pkg-config
+  exif_CFLAGS C compiler flags for exif, overriding pkg-config
+  exif_LIBS   linker flags for exif, overriding pkg-config
+  avutil_CFLAGS
+              C compiler flags for avutil, overriding pkg-config
+  avutil_LIBS linker flags for avutil, overriding pkg-config
+  avcodec_CFLAGS
+              C compiler flags for avcodec, overriding pkg-config
+  avcodec_LIBS
+              linker flags for avcodec, overriding pkg-config
+  avformat_CFLAGS
+              C compiler flags for avformat, overriding pkg-config
+  avformat_LIBS
+              linker flags for avformat, overriding pkg-config
+  swscale_CFLAGS
+              C compiler flags for swscale, overriding pkg-config
+  swscale_LIBS
+              linker flags for swscale, overriding pkg-config
+  db_CFLAGS   C compiler flags for db, overriding pkg-config
+  db_LIBS     linker flags for db, overriding pkg-config
 
 Use these variables to override the choices made by `configure' or to help
 it to find libraries and programs with nonstandard names/locations.
@@ -17403,16 +17510,15 @@ $as_echo "no" >&6; }
   SET_MAKE="MAKE=${MAKE-make}"
 fi
 
-if test -n "$ac_tool_prefix"; then
-  # Extract the first word of "${ac_tool_prefix}ranlib", so it can be a program name with args.
-set dummy ${ac_tool_prefix}ranlib; ac_word=$2
+# Extract the first word of "pkg-config", so it can be a program name with args.
+set dummy pkg-config; ac_word=$2
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
 $as_echo_n "checking for $ac_word... " >&6; }
-if ${ac_cv_prog_RANLIB+:} false; then :
+if ${ac_cv_prog_have_pkgconfig+:} false; then :
   $as_echo_n "(cached) " >&6
 else
-  if test -n "$RANLIB"; then
-  ac_cv_prog_RANLIB="$RANLIB" # Let the user override the test.
+  if test -n "$have_pkgconfig"; then
+  ac_cv_prog_have_pkgconfig="$have_pkgconfig" # Let the user override the test.
 else
 as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
 for as_dir in $PATH
@@ -17421,7 +17527,7 @@ do
   test -z "$as_dir" && as_dir=.
     for ac_exec_ext in '' $ac_executable_extensions; do
   if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
-    ac_cv_prog_RANLIB="${ac_tool_prefix}ranlib"
+    ac_cv_prog_have_pkgconfig="yes"
     $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
     break 2
   fi
@@ -17429,71 +17535,18 @@ done
   done
 IFS=$as_save_IFS
 
+  test -z "$ac_cv_prog_have_pkgconfig" && ac_cv_prog_have_pkgconfig="no"
 fi
 fi
-RANLIB=$ac_cv_prog_RANLIB
-if test -n "$RANLIB"; then
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $RANLIB" >&5
-$as_echo "$RANLIB" >&6; }
+have_pkgconfig=$ac_cv_prog_have_pkgconfig
+if test -n "$have_pkgconfig"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $have_pkgconfig" >&5
+$as_echo "$have_pkgconfig" >&6; }
 else
   { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 fi
 
-
-fi
-if test -z "$ac_cv_prog_RANLIB"; then
-  ac_ct_RANLIB=$RANLIB
-  # Extract the first word of "ranlib", so it can be a program name with args.
-set dummy ranlib; ac_word=$2
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
-$as_echo_n "checking for $ac_word... " >&6; }
-if ${ac_cv_prog_ac_ct_RANLIB+:} false; then :
-  $as_echo_n "(cached) " >&6
-else
-  if test -n "$ac_ct_RANLIB"; then
-  ac_cv_prog_ac_ct_RANLIB="$ac_ct_RANLIB" # Let the user override the test.
-else
-as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
-do
-  IFS=$as_save_IFS
-  test -z "$as_dir" && as_dir=.
-    for ac_exec_ext in '' $ac_executable_extensions; do
-  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
-    ac_cv_prog_ac_ct_RANLIB="ranlib"
-    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
-    break 2
-  fi
-done
-  done
-IFS=$as_save_IFS
-
-fi
-fi
-ac_ct_RANLIB=$ac_cv_prog_ac_ct_RANLIB
-if test -n "$ac_ct_RANLIB"; then
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_ct_RANLIB" >&5
-$as_echo "$ac_ct_RANLIB" >&6; }
-else
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-fi
-
-  if test "x$ac_ct_RANLIB" = x; then
-    RANLIB=":"
-  else
-    case $cross_compiling:$ac_tool_warned in
-yes:)
-{ $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: using cross tools not prefixed with host triplet" >&5
-$as_echo "$as_me: WARNING: using cross tools not prefixed with host triplet" >&2;}
-ac_tool_warned=yes ;;
-esac
-    RANLIB=$ac_ct_RANLIB
-  fi
-else
-  RANLIB="$ac_cv_prog_RANLIB"
-fi
 
 
 # 64-bit file size support
@@ -18706,13 +18759,18 @@ fi
 	build_linuxbsd=yes
 	LDFLAGS="-L$bdbdir/lib $LDFLAGS"
 	;;
+    *msys*)
+    as_fn_error $? "Native MSYS builds not supported. Please see the documentation." "$LINENO" 5
+    ;;
     *mingw*)
-	build_mingw=yes
-	LDFLAGS="-L$bdbdir/lib $LDFLAGS"
-        # Need some MINGW libraries. AVUtil uses 'BCryptOpenAlgorithmProvider', needs 'm, user32 and bcrypt'.
-        # AVFormat auto-detects sockets, so we need to add 'ws2_32'.
-        LIBS="-lm -luser32 -lbcrypt -lws2_32"
-        for ac_header in windows.h bcrypt.h
+    # We must use pkg-config with mingw
+    if test "x${have_pkgconfig}" = "xno"; then
+        as_fn_error $? "Builds on mingw require pkgconfig. Please see the documentation." "$LINENO" 5
+    fi
+    build_mingw=yes
+    CPPFLAGS="-D__MSVCRT_VERSION__=0x0601 $CPPFLAGS"
+    LDFLAGS="-L$bdbdir/lib $LDFLAGS -static-libstdc++ -static-libgcc"
+    for ac_header in windows.h bcrypt.h
 do :
   as_ac_Header=`$as_echo "ac_cv_header_$ac_header" | $as_tr_sh`
 ac_fn_c_check_header_compile "$LINENO" "$ac_header" "$as_ac_Header" "#if HAVE_WINDOWS_H
@@ -18729,27 +18787,7 @@ fi
 
 done
 
-#AC_CHECK_LIB([advapi32], [main])
-#AC_CHECK_LIB([comctl32], [main])
-#AC_CHECK_LIB([comdlg32], [main])
-#AC_CHECK_LIB([cunit], [main])
-#AC_CHECK_LIB([gdi32], [main])
-#AC_CHECK_LIB([kernel32], [main])
-#AC_CHECK_LIB([moldname], [main])
-#AC_CHECK_LIB([mpr], [main])
-#AC_CHECK_LIB([netapi32], [main])
-#AC_CHECK_LIB([odbc32], [main])
-#AC_CHECK_LIB([odbccp32], [main])
-#AC_CHECK_LIB([ole32], [main])
-#AC_CHECK_LIB([oleaut32], [main])
-#AC_CHECK_LIB([shell32], [main])
-#AC_CHECK_LIB([user32], [main])
-#AC_CHECK_LIB([uuid], [main])
-#AC_CHECK_LIB([version], [main])
-#AC_CHECK_LIB([winmm], [main])
-#AC_CHECK_LIB([winspool], [main])
-#AC_CHECK_LIB([ws2_32], [main])
-	;;
+    ;;
 esac
 
  if test "$build_darwin" = "yes"; then
@@ -18786,7 +18824,189 @@ fi
 
 
 # Checks for libraries.
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing pthread_create" >&5
+# We should attempt to use pkg-config if we have it.
+if test "x${have_pkgconfig}" = "xyes"; then
+    # Use pkg-config when available, but fall back to old way, just in case.
+
+
+
+
+
+
+
+if test "x$ac_cv_env_PKG_CONFIG_set" != "xset"; then
+	if test -n "$ac_tool_prefix"; then
+  # Extract the first word of "${ac_tool_prefix}pkg-config", so it can be a program name with args.
+set dummy ${ac_tool_prefix}pkg-config; ac_word=$2
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+$as_echo_n "checking for $ac_word... " >&6; }
+if ${ac_cv_path_PKG_CONFIG+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  case $PKG_CONFIG in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path_PKG_CONFIG="$PKG_CONFIG" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
+    ac_cv_path_PKG_CONFIG="$as_dir/$ac_word$ac_exec_ext"
+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+  ;;
+esac
+fi
+PKG_CONFIG=$ac_cv_path_PKG_CONFIG
+if test -n "$PKG_CONFIG"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $PKG_CONFIG" >&5
+$as_echo "$PKG_CONFIG" >&6; }
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+
+fi
+if test -z "$ac_cv_path_PKG_CONFIG"; then
+  ac_pt_PKG_CONFIG=$PKG_CONFIG
+  # Extract the first word of "pkg-config", so it can be a program name with args.
+set dummy pkg-config; ac_word=$2
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+$as_echo_n "checking for $ac_word... " >&6; }
+if ${ac_cv_path_ac_pt_PKG_CONFIG+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  case $ac_pt_PKG_CONFIG in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path_ac_pt_PKG_CONFIG="$ac_pt_PKG_CONFIG" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
+    ac_cv_path_ac_pt_PKG_CONFIG="$as_dir/$ac_word$ac_exec_ext"
+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+  ;;
+esac
+fi
+ac_pt_PKG_CONFIG=$ac_cv_path_ac_pt_PKG_CONFIG
+if test -n "$ac_pt_PKG_CONFIG"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_pt_PKG_CONFIG" >&5
+$as_echo "$ac_pt_PKG_CONFIG" >&6; }
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+  if test "x$ac_pt_PKG_CONFIG" = x; then
+    PKG_CONFIG=""
+  else
+    case $cross_compiling:$ac_tool_warned in
+yes:)
+{ $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: using cross tools not prefixed with host triplet" >&5
+$as_echo "$as_me: WARNING: using cross tools not prefixed with host triplet" >&2;}
+ac_tool_warned=yes ;;
+esac
+    PKG_CONFIG=$ac_pt_PKG_CONFIG
+  fi
+else
+  PKG_CONFIG="$ac_cv_path_PKG_CONFIG"
+fi
+
+fi
+if test -n "$PKG_CONFIG"; then
+	_pkg_min_version=0.9.0
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking pkg-config is at least version $_pkg_min_version" >&5
+$as_echo_n "checking pkg-config is at least version $_pkg_min_version... " >&6; }
+	if $PKG_CONFIG --atleast-pkgconfig-version $_pkg_min_version; then
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+	else
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+		PKG_CONFIG=""
+	fi
+fi
+
+pkg_failed=no
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for pthread" >&5
+$as_echo_n "checking for pthread... " >&6; }
+
+if test -n "$pthread_CFLAGS"; then
+    pkg_cv_pthread_CFLAGS="$pthread_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"pthread\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "pthread") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_pthread_CFLAGS=`$PKG_CONFIG --cflags "pthread" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$pthread_LIBS"; then
+    pkg_cv_pthread_LIBS="$pthread_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"pthread\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "pthread") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_pthread_LIBS=`$PKG_CONFIG --libs "pthread" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        pthread_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "pthread" 2>&1`
+        else
+	        pthread_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "pthread" 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$pthread_PKG_ERRORS" >&5
+
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing pthread_create" >&5
 $as_echo_n "checking for library containing pthread_create... " >&6; }
 if ${ac_cv_search_pthread_create+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -18842,7 +19062,134 @@ if test "$ac_res" != no; then :
 
 fi
 
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing zlibVersion" >&5
+
+elif test $pkg_failed = untried; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing pthread_create" >&5
+$as_echo_n "checking for library containing pthread_create... " >&6; }
+if ${ac_cv_search_pthread_create+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_func_search_save_LIBS=$LIBS
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char pthread_create ();
+int
+main ()
+{
+return pthread_create ();
+  ;
+  return 0;
+}
+_ACEOF
+for ac_lib in '' pthread; do
+  if test -z "$ac_lib"; then
+    ac_res="none required"
+  else
+    ac_res=-l$ac_lib
+    LIBS="-l$ac_lib  $ac_func_search_save_LIBS"
+  fi
+  if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_search_pthread_create=$ac_res
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext
+  if ${ac_cv_search_pthread_create+:} false; then :
+  break
+fi
+done
+if ${ac_cv_search_pthread_create+:} false; then :
+
+else
+  ac_cv_search_pthread_create=no
+fi
+rm conftest.$ac_ext
+LIBS=$ac_func_search_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_pthread_create" >&5
+$as_echo "$ac_cv_search_pthread_create" >&6; }
+ac_res=$ac_cv_search_pthread_create
+if test "$ac_res" != no; then :
+  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
+
+fi
+
+
+else
+	pthread_CFLAGS=$pkg_cv_pthread_CFLAGS
+	pthread_LIBS=$pkg_cv_pthread_LIBS
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+	LIBS="$LIBS $pthhread_LIBS"
+fi
+
+pkg_failed=no
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for zlib" >&5
+$as_echo_n "checking for zlib... " >&6; }
+
+if test -n "$zlib_CFLAGS"; then
+    pkg_cv_zlib_CFLAGS="$zlib_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"zlib\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "zlib") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_zlib_CFLAGS=`$PKG_CONFIG --cflags "zlib" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$zlib_LIBS"; then
+    pkg_cv_zlib_LIBS="$zlib_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"zlib\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "zlib") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_zlib_LIBS=`$PKG_CONFIG --libs "zlib" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        zlib_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "zlib" 2>&1`
+        else
+	        zlib_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "zlib" 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$zlib_PKG_ERRORS" >&5
+
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing zlibVersion" >&5
 $as_echo_n "checking for library containing zlibVersion... " >&6; }
 if ${ac_cv_search_zlibVersion+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -18896,9 +19243,325 @@ ac_res=$ac_cv_search_zlibVersion
 if test "$ac_res" != no; then :
   test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
 
+else
+  as_fn_error $? "unable to find libz" "$LINENO" 5
 fi
 
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing jpeg_read_header" >&5
+
+elif test $pkg_failed = untried; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing zlibVersion" >&5
+$as_echo_n "checking for library containing zlibVersion... " >&6; }
+if ${ac_cv_search_zlibVersion+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_func_search_save_LIBS=$LIBS
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char zlibVersion ();
+int
+main ()
+{
+return zlibVersion ();
+  ;
+  return 0;
+}
+_ACEOF
+for ac_lib in '' z; do
+  if test -z "$ac_lib"; then
+    ac_res="none required"
+  else
+    ac_res=-l$ac_lib
+    LIBS="-l$ac_lib  $ac_func_search_save_LIBS"
+  fi
+  if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_search_zlibVersion=$ac_res
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext
+  if ${ac_cv_search_zlibVersion+:} false; then :
+  break
+fi
+done
+if ${ac_cv_search_zlibVersion+:} false; then :
+
+else
+  ac_cv_search_zlibVersion=no
+fi
+rm conftest.$ac_ext
+LIBS=$ac_func_search_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_zlibVersion" >&5
+$as_echo "$ac_cv_search_zlibVersion" >&6; }
+ac_res=$ac_cv_search_zlibVersion
+if test "$ac_res" != no; then :
+  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
+
+else
+  as_fn_error $? "unable to find libz" "$LINENO" 5
+fi
+
+
+else
+	zlib_CFLAGS=$pkg_cv_zlib_CFLAGS
+	zlib_LIBS=$pkg_cv_zlib_LIBS
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+	LIBS="$LIBS $zlib_LIBS"
+fi
+    # If bz2 is present, we should use it, because we assume FFmpeg did.
+    # However, it should not kill the build.
+
+pkg_failed=no
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for bzip2" >&5
+$as_echo_n "checking for bzip2... " >&6; }
+
+if test -n "$bzip2_CFLAGS"; then
+    pkg_cv_bzip2_CFLAGS="$bzip2_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"bzip2\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "bzip2") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_bzip2_CFLAGS=`$PKG_CONFIG --cflags "bzip2" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$bzip2_LIBS"; then
+    pkg_cv_bzip2_LIBS="$bzip2_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"bzip2\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "bzip2") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_bzip2_LIBS=`$PKG_CONFIG --libs "bzip2" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        bzip2_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "bzip2" 2>&1`
+        else
+	        bzip2_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "bzip2" 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$bzip2_PKG_ERRORS" >&5
+
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing BZ2_bzlibVersion" >&5
+$as_echo_n "checking for library containing BZ2_bzlibVersion... " >&6; }
+if ${ac_cv_search_BZ2_bzlibVersion+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_func_search_save_LIBS=$LIBS
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char BZ2_bzlibVersion ();
+int
+main ()
+{
+return BZ2_bzlibVersion ();
+  ;
+  return 0;
+}
+_ACEOF
+for ac_lib in '' bz2; do
+  if test -z "$ac_lib"; then
+    ac_res="none required"
+  else
+    ac_res=-l$ac_lib
+    LIBS="-l$ac_lib  $ac_func_search_save_LIBS"
+  fi
+  if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_search_BZ2_bzlibVersion=$ac_res
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext
+  if ${ac_cv_search_BZ2_bzlibVersion+:} false; then :
+  break
+fi
+done
+if ${ac_cv_search_BZ2_bzlibVersion+:} false; then :
+
+else
+  ac_cv_search_BZ2_bzlibVersion=no
+fi
+rm conftest.$ac_ext
+LIBS=$ac_func_search_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_BZ2_bzlibVersion" >&5
+$as_echo "$ac_cv_search_BZ2_bzlibVersion" >&6; }
+ac_res=$ac_cv_search_BZ2_bzlibVersion
+if test "$ac_res" != no; then :
+  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
+
+fi
+
+
+elif test $pkg_failed = untried; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing BZ2_bzlibVersion" >&5
+$as_echo_n "checking for library containing BZ2_bzlibVersion... " >&6; }
+if ${ac_cv_search_BZ2_bzlibVersion+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_func_search_save_LIBS=$LIBS
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char BZ2_bzlibVersion ();
+int
+main ()
+{
+return BZ2_bzlibVersion ();
+  ;
+  return 0;
+}
+_ACEOF
+for ac_lib in '' bz2; do
+  if test -z "$ac_lib"; then
+    ac_res="none required"
+  else
+    ac_res=-l$ac_lib
+    LIBS="-l$ac_lib  $ac_func_search_save_LIBS"
+  fi
+  if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_search_BZ2_bzlibVersion=$ac_res
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext
+  if ${ac_cv_search_BZ2_bzlibVersion+:} false; then :
+  break
+fi
+done
+if ${ac_cv_search_BZ2_bzlibVersion+:} false; then :
+
+else
+  ac_cv_search_BZ2_bzlibVersion=no
+fi
+rm conftest.$ac_ext
+LIBS=$ac_func_search_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_BZ2_bzlibVersion" >&5
+$as_echo "$ac_cv_search_BZ2_bzlibVersion" >&6; }
+ac_res=$ac_cv_search_BZ2_bzlibVersion
+if test "$ac_res" != no; then :
+  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
+
+fi
+
+
+else
+	bzip2_CFLAGS=$pkg_cv_bzip2_CFLAGS
+	bzip2_LIBS=$pkg_cv_bzip2_LIBS
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+	LIBS="$LIBS $bzip2_LIBS"
+fi
+
+pkg_failed=no
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for libjpeg" >&5
+$as_echo_n "checking for libjpeg... " >&6; }
+
+if test -n "$jpeg_CFLAGS"; then
+    pkg_cv_jpeg_CFLAGS="$jpeg_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libjpeg\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "libjpeg") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_jpeg_CFLAGS=`$PKG_CONFIG --cflags "libjpeg" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$jpeg_LIBS"; then
+    pkg_cv_jpeg_LIBS="$jpeg_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libjpeg\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "libjpeg") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_jpeg_LIBS=`$PKG_CONFIG --libs "libjpeg" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        jpeg_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "libjpeg" 2>&1`
+        else
+	        jpeg_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "libjpeg" 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$jpeg_PKG_ERRORS" >&5
+
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing jpeg_read_header" >&5
 $as_echo_n "checking for library containing jpeg_read_header... " >&6; }
 if ${ac_cv_search_jpeg_read_header+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -18952,9 +19615,140 @@ ac_res=$ac_cv_search_jpeg_read_header
 if test "$ac_res" != no; then :
   test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
 
+else
+  as_fn_error $? "unable to find libjpeg" "$LINENO" 5
 fi
 
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing png_create_read_struct" >&5
+
+elif test $pkg_failed = untried; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing jpeg_read_header" >&5
+$as_echo_n "checking for library containing jpeg_read_header... " >&6; }
+if ${ac_cv_search_jpeg_read_header+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_func_search_save_LIBS=$LIBS
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char jpeg_read_header ();
+int
+main ()
+{
+return jpeg_read_header ();
+  ;
+  return 0;
+}
+_ACEOF
+for ac_lib in '' jpeg; do
+  if test -z "$ac_lib"; then
+    ac_res="none required"
+  else
+    ac_res=-l$ac_lib
+    LIBS="-l$ac_lib  $ac_func_search_save_LIBS"
+  fi
+  if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_search_jpeg_read_header=$ac_res
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext
+  if ${ac_cv_search_jpeg_read_header+:} false; then :
+  break
+fi
+done
+if ${ac_cv_search_jpeg_read_header+:} false; then :
+
+else
+  ac_cv_search_jpeg_read_header=no
+fi
+rm conftest.$ac_ext
+LIBS=$ac_func_search_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_jpeg_read_header" >&5
+$as_echo "$ac_cv_search_jpeg_read_header" >&6; }
+ac_res=$ac_cv_search_jpeg_read_header
+if test "$ac_res" != no; then :
+  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
+
+else
+  as_fn_error $? "unable to find libjpeg" "$LINENO" 5
+fi
+
+
+else
+	jpeg_CFLAGS=$pkg_cv_jpeg_CFLAGS
+	jpeg_LIBS=$pkg_cv_jpeg_LIBS
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+	LIBS="$LIBS $jpeg_LIBS"
+fi
+
+pkg_failed=no
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for libpng" >&5
+$as_echo_n "checking for libpng... " >&6; }
+
+if test -n "$png_CFLAGS"; then
+    pkg_cv_png_CFLAGS="$png_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libpng\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "libpng") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_png_CFLAGS=`$PKG_CONFIG --cflags "libpng" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$png_LIBS"; then
+    pkg_cv_png_LIBS="$png_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libpng\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "libpng") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_png_LIBS=`$PKG_CONFIG --libs "libpng" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        png_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "libpng" 2>&1`
+        else
+	        png_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "libpng" 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$png_PKG_ERRORS" >&5
+
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing png_create_read_struct" >&5
 $as_echo_n "checking for library containing png_create_read_struct... " >&6; }
 if ${ac_cv_search_png_create_read_struct+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -19008,9 +19802,140 @@ ac_res=$ac_cv_search_png_create_read_struct
 if test "$ac_res" != no; then :
   test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
 
+else
+  as_fn_error $? "unable to find libpng" "$LINENO" 5
 fi
 
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing DGifOpen" >&5
+
+elif test $pkg_failed = untried; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing png_create_read_struct" >&5
+$as_echo_n "checking for library containing png_create_read_struct... " >&6; }
+if ${ac_cv_search_png_create_read_struct+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_func_search_save_LIBS=$LIBS
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char png_create_read_struct ();
+int
+main ()
+{
+return png_create_read_struct ();
+  ;
+  return 0;
+}
+_ACEOF
+for ac_lib in '' png; do
+  if test -z "$ac_lib"; then
+    ac_res="none required"
+  else
+    ac_res=-l$ac_lib
+    LIBS="-l$ac_lib  $ac_func_search_save_LIBS"
+  fi
+  if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_search_png_create_read_struct=$ac_res
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext
+  if ${ac_cv_search_png_create_read_struct+:} false; then :
+  break
+fi
+done
+if ${ac_cv_search_png_create_read_struct+:} false; then :
+
+else
+  ac_cv_search_png_create_read_struct=no
+fi
+rm conftest.$ac_ext
+LIBS=$ac_func_search_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_png_create_read_struct" >&5
+$as_echo "$ac_cv_search_png_create_read_struct" >&6; }
+ac_res=$ac_cv_search_png_create_read_struct
+if test "$ac_res" != no; then :
+  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
+
+else
+  as_fn_error $? "unable to find libpng" "$LINENO" 5
+fi
+
+
+else
+	png_CFLAGS=$pkg_cv_png_CFLAGS
+	png_LIBS=$pkg_cv_png_LIBS
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+	LIBS="$LIBS $png_LIBS"
+fi
+
+pkg_failed=no
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for libgif" >&5
+$as_echo_n "checking for libgif... " >&6; }
+
+if test -n "$gif_CFLAGS"; then
+    pkg_cv_gif_CFLAGS="$gif_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libgif\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "libgif") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_gif_CFLAGS=`$PKG_CONFIG --cflags "libgif" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$gif_LIBS"; then
+    pkg_cv_gif_LIBS="$gif_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libgif\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "libgif") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_gif_LIBS=`$PKG_CONFIG --libs "libgif" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        gif_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "libgif" 2>&1`
+        else
+	        gif_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "libgif" 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$gif_PKG_ERRORS" >&5
+
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing DGifOpen" >&5
 $as_echo_n "checking for library containing DGifOpen... " >&6; }
 if ${ac_cv_search_DGifOpen+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -19064,11 +19989,17 @@ ac_res=$ac_cv_search_DGifOpen
 if test "$ac_res" != no; then :
   test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
 
+else
+  as_fn_error $? "unable to find libgif" "$LINENO" 5
 fi
 
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing libiconv" >&5
-$as_echo_n "checking for library containing libiconv... " >&6; }
-if ${ac_cv_search_libiconv+:} false; then :
+
+elif test $pkg_failed = untried; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing DGifOpen" >&5
+$as_echo_n "checking for library containing DGifOpen... " >&6; }
+if ${ac_cv_search_DGifOpen+:} false; then :
   $as_echo_n "(cached) " >&6
 else
   ac_func_search_save_LIBS=$LIBS
@@ -19081,11 +20012,138 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 #ifdef __cplusplus
 extern "C"
 #endif
-char libiconv ();
+char DGifOpen ();
 int
 main ()
 {
-return libiconv ();
+return DGifOpen ();
+  ;
+  return 0;
+}
+_ACEOF
+for ac_lib in '' gif; do
+  if test -z "$ac_lib"; then
+    ac_res="none required"
+  else
+    ac_res=-l$ac_lib
+    LIBS="-l$ac_lib  $ac_func_search_save_LIBS"
+  fi
+  if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_search_DGifOpen=$ac_res
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext
+  if ${ac_cv_search_DGifOpen+:} false; then :
+  break
+fi
+done
+if ${ac_cv_search_DGifOpen+:} false; then :
+
+else
+  ac_cv_search_DGifOpen=no
+fi
+rm conftest.$ac_ext
+LIBS=$ac_func_search_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_DGifOpen" >&5
+$as_echo "$ac_cv_search_DGifOpen" >&6; }
+ac_res=$ac_cv_search_DGifOpen
+if test "$ac_res" != no; then :
+  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
+
+else
+  as_fn_error $? "unable to find libgif" "$LINENO" 5
+fi
+
+
+else
+	gif_CFLAGS=$pkg_cv_gif_CFLAGS
+	gif_LIBS=$pkg_cv_gif_LIBS
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+	LIBS="$LIBS $gif_LIBS"
+fi
+    # If intl is present, we should use it, because we assume exif did.
+    # However, it should not kill the build.
+
+pkg_failed=no
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for iconv" >&5
+$as_echo_n "checking for iconv... " >&6; }
+
+if test -n "$iconv_CFLAGS"; then
+    pkg_cv_iconv_CFLAGS="$iconv_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"iconv\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "iconv") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_iconv_CFLAGS=`$PKG_CONFIG --cflags "iconv" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$iconv_LIBS"; then
+    pkg_cv_iconv_LIBS="$iconv_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"iconv\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "iconv") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_iconv_LIBS=`$PKG_CONFIG --libs "iconv" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        iconv_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "iconv" 2>&1`
+        else
+	        iconv_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "iconv" 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$iconv_PKG_ERRORS" >&5
+
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing iconv" >&5
+$as_echo_n "checking for library containing iconv... " >&6; }
+if ${ac_cv_search_iconv+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_func_search_save_LIBS=$LIBS
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char iconv ();
+int
+main ()
+{
+return iconv ();
   ;
   return 0;
 }
@@ -19098,31 +20156,160 @@ for ac_lib in '' iconv; do
     LIBS="-l$ac_lib  $ac_func_search_save_LIBS"
   fi
   if ac_fn_c_try_link "$LINENO"; then :
-  ac_cv_search_libiconv=$ac_res
+  ac_cv_search_iconv=$ac_res
 fi
 rm -f core conftest.err conftest.$ac_objext \
     conftest$ac_exeext
-  if ${ac_cv_search_libiconv+:} false; then :
+  if ${ac_cv_search_iconv+:} false; then :
   break
 fi
 done
-if ${ac_cv_search_libiconv+:} false; then :
+if ${ac_cv_search_iconv+:} false; then :
 
 else
-  ac_cv_search_libiconv=no
+  ac_cv_search_iconv=no
 fi
 rm conftest.$ac_ext
 LIBS=$ac_func_search_save_LIBS
 fi
-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_libiconv" >&5
-$as_echo "$ac_cv_search_libiconv" >&6; }
-ac_res=$ac_cv_search_libiconv
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_iconv" >&5
+$as_echo "$ac_cv_search_iconv" >&6; }
+ac_res=$ac_cv_search_iconv
 if test "$ac_res" != no; then :
   test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
 
 fi
 
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing gettext" >&5
+
+elif test $pkg_failed = untried; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing iconv" >&5
+$as_echo_n "checking for library containing iconv... " >&6; }
+if ${ac_cv_search_iconv+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_func_search_save_LIBS=$LIBS
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char iconv ();
+int
+main ()
+{
+return iconv ();
+  ;
+  return 0;
+}
+_ACEOF
+for ac_lib in '' iconv; do
+  if test -z "$ac_lib"; then
+    ac_res="none required"
+  else
+    ac_res=-l$ac_lib
+    LIBS="-l$ac_lib  $ac_func_search_save_LIBS"
+  fi
+  if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_search_iconv=$ac_res
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext
+  if ${ac_cv_search_iconv+:} false; then :
+  break
+fi
+done
+if ${ac_cv_search_iconv+:} false; then :
+
+else
+  ac_cv_search_iconv=no
+fi
+rm conftest.$ac_ext
+LIBS=$ac_func_search_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_iconv" >&5
+$as_echo "$ac_cv_search_iconv" >&6; }
+ac_res=$ac_cv_search_iconv
+if test "$ac_res" != no; then :
+  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
+
+fi
+
+
+else
+	iconv_CFLAGS=$pkg_cv_iconv_CFLAGS
+	iconv_LIBS=$pkg_cv_iconv_LIBS
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+	LIBS="$LIBS $iconv_LIBS"
+fi
+    # If intl is present, we should use it, because we assume exif did.
+    # However, it should not kill the build.
+
+pkg_failed=no
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for libintl" >&5
+$as_echo_n "checking for libintl... " >&6; }
+
+if test -n "$intl_CFLAGS"; then
+    pkg_cv_intl_CFLAGS="$intl_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libintl\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "libintl") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_intl_CFLAGS=`$PKG_CONFIG --cflags "libintl" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$intl_LIBS"; then
+    pkg_cv_intl_LIBS="$intl_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libintl\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "libintl") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_intl_LIBS=`$PKG_CONFIG --libs "libintl" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        intl_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "libintl" 2>&1`
+        else
+	        intl_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "libintl" 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$intl_PKG_ERRORS" >&5
+
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing gettext" >&5
 $as_echo_n "checking for library containing gettext... " >&6; }
 if ${ac_cv_search_gettext+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -19178,7 +20365,134 @@ if test "$ac_res" != no; then :
 
 fi
 
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing exif_loader_new" >&5
+
+elif test $pkg_failed = untried; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing gettext" >&5
+$as_echo_n "checking for library containing gettext... " >&6; }
+if ${ac_cv_search_gettext+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_func_search_save_LIBS=$LIBS
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char gettext ();
+int
+main ()
+{
+return gettext ();
+  ;
+  return 0;
+}
+_ACEOF
+for ac_lib in '' intl; do
+  if test -z "$ac_lib"; then
+    ac_res="none required"
+  else
+    ac_res=-l$ac_lib
+    LIBS="-l$ac_lib  $ac_func_search_save_LIBS"
+  fi
+  if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_search_gettext=$ac_res
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext
+  if ${ac_cv_search_gettext+:} false; then :
+  break
+fi
+done
+if ${ac_cv_search_gettext+:} false; then :
+
+else
+  ac_cv_search_gettext=no
+fi
+rm conftest.$ac_ext
+LIBS=$ac_func_search_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_gettext" >&5
+$as_echo "$ac_cv_search_gettext" >&6; }
+ac_res=$ac_cv_search_gettext
+if test "$ac_res" != no; then :
+  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
+
+fi
+
+
+else
+	intl_CFLAGS=$pkg_cv_intl_CFLAGS
+	intl_LIBS=$pkg_cv_intl_LIBS
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+	LIBS="$LIBS $intl_LIBS"
+fi
+
+pkg_failed=no
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for libexif" >&5
+$as_echo_n "checking for libexif... " >&6; }
+
+if test -n "$exif_CFLAGS"; then
+    pkg_cv_exif_CFLAGS="$exif_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libexif\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "libexif") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_exif_CFLAGS=`$PKG_CONFIG --cflags "libexif" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$exif_LIBS"; then
+    pkg_cv_exif_LIBS="$exif_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libexif\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "libexif") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_exif_LIBS=`$PKG_CONFIG --libs "libexif" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        exif_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "libexif" 2>&1`
+        else
+	        exif_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "libexif" 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$exif_PKG_ERRORS" >&5
+
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing exif_loader_new" >&5
 $as_echo_n "checking for library containing exif_loader_new... " >&6; }
 if ${ac_cv_search_exif_loader_new+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -19232,9 +20546,140 @@ ac_res=$ac_cv_search_exif_loader_new
 if test "$ac_res" != no; then :
   test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
 
+else
+  as_fn_error $? "unable to find libexif" "$LINENO" 5
 fi
 
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing av_freep" >&5
+
+elif test $pkg_failed = untried; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing exif_loader_new" >&5
+$as_echo_n "checking for library containing exif_loader_new... " >&6; }
+if ${ac_cv_search_exif_loader_new+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_func_search_save_LIBS=$LIBS
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char exif_loader_new ();
+int
+main ()
+{
+return exif_loader_new ();
+  ;
+  return 0;
+}
+_ACEOF
+for ac_lib in '' exif; do
+  if test -z "$ac_lib"; then
+    ac_res="none required"
+  else
+    ac_res=-l$ac_lib
+    LIBS="-l$ac_lib  $ac_func_search_save_LIBS"
+  fi
+  if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_search_exif_loader_new=$ac_res
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext
+  if ${ac_cv_search_exif_loader_new+:} false; then :
+  break
+fi
+done
+if ${ac_cv_search_exif_loader_new+:} false; then :
+
+else
+  ac_cv_search_exif_loader_new=no
+fi
+rm conftest.$ac_ext
+LIBS=$ac_func_search_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_exif_loader_new" >&5
+$as_echo "$ac_cv_search_exif_loader_new" >&6; }
+ac_res=$ac_cv_search_exif_loader_new
+if test "$ac_res" != no; then :
+  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
+
+else
+  as_fn_error $? "unable to find libexif" "$LINENO" 5
+fi
+
+
+else
+	exif_CFLAGS=$pkg_cv_exif_CFLAGS
+	exif_LIBS=$pkg_cv_exif_LIBS
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+	LIBS="$LIBS $exif_LIBS"
+fi
+
+pkg_failed=no
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for libavutil >= 56.31.100" >&5
+$as_echo_n "checking for libavutil >= 56.31.100... " >&6; }
+
+if test -n "$avutil_CFLAGS"; then
+    pkg_cv_avutil_CFLAGS="$avutil_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libavutil >= 56.31.100\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "libavutil >= 56.31.100") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_avutil_CFLAGS=`$PKG_CONFIG --cflags "libavutil >= 56.31.100" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$avutil_LIBS"; then
+    pkg_cv_avutil_LIBS="$avutil_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libavutil >= 56.31.100\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "libavutil >= 56.31.100") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_avutil_LIBS=`$PKG_CONFIG --libs "libavutil >= 56.31.100" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        avutil_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "libavutil >= 56.31.100" 2>&1`
+        else
+	        avutil_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "libavutil >= 56.31.100" 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$avutil_PKG_ERRORS" >&5
+
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing av_freep" >&5
 $as_echo_n "checking for library containing av_freep... " >&6; }
 if ${ac_cv_search_av_freep+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -19288,11 +20733,17 @@ ac_res=$ac_cv_search_av_freep
 if test "$ac_res" != no; then :
   test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
 
+else
+  as_fn_error $? "unable to find libavutil" "$LINENO" 5
 fi
 
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing sws_scale" >&5
-$as_echo_n "checking for library containing sws_scale... " >&6; }
-if ${ac_cv_search_sws_scale+:} false; then :
+
+elif test $pkg_failed = untried; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing av_freep" >&5
+$as_echo_n "checking for library containing av_freep... " >&6; }
+if ${ac_cv_search_av_freep+:} false; then :
   $as_echo_n "(cached) " >&6
 else
   ac_func_search_save_LIBS=$LIBS
@@ -19305,48 +20756,117 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 #ifdef __cplusplus
 extern "C"
 #endif
-char sws_scale ();
+char av_freep ();
 int
 main ()
 {
-return sws_scale ();
+return av_freep ();
   ;
   return 0;
 }
 _ACEOF
-for ac_lib in '' swscale; do
+for ac_lib in '' avutil; do
   if test -z "$ac_lib"; then
     ac_res="none required"
   else
     ac_res=-l$ac_lib
-    LIBS="-l$ac_lib -lavutil -lz $ac_func_search_save_LIBS"
+    LIBS="-l$ac_lib -lz $ac_func_search_save_LIBS"
   fi
   if ac_fn_c_try_link "$LINENO"; then :
-  ac_cv_search_sws_scale=$ac_res
+  ac_cv_search_av_freep=$ac_res
 fi
 rm -f core conftest.err conftest.$ac_objext \
     conftest$ac_exeext
-  if ${ac_cv_search_sws_scale+:} false; then :
+  if ${ac_cv_search_av_freep+:} false; then :
   break
 fi
 done
-if ${ac_cv_search_sws_scale+:} false; then :
+if ${ac_cv_search_av_freep+:} false; then :
 
 else
-  ac_cv_search_sws_scale=no
+  ac_cv_search_av_freep=no
 fi
 rm conftest.$ac_ext
 LIBS=$ac_func_search_save_LIBS
 fi
-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_sws_scale" >&5
-$as_echo "$ac_cv_search_sws_scale" >&6; }
-ac_res=$ac_cv_search_sws_scale
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_av_freep" >&5
+$as_echo "$ac_cv_search_av_freep" >&6; }
+ac_res=$ac_cv_search_av_freep
 if test "$ac_res" != no; then :
   test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
 
+else
+  as_fn_error $? "unable to find libavutil" "$LINENO" 5
 fi
 
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing avcodec_version" >&5
+
+else
+	avutil_CFLAGS=$pkg_cv_avutil_CFLAGS
+	avutil_LIBS=$pkg_cv_avutil_LIBS
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+	LIBS="$LIBS $avutil_LIBS"
+fi
+
+pkg_failed=no
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for libavcodec >= 58.54.100" >&5
+$as_echo_n "checking for libavcodec >= 58.54.100... " >&6; }
+
+if test -n "$avcodec_CFLAGS"; then
+    pkg_cv_avcodec_CFLAGS="$avcodec_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libavcodec >= 58.54.100\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "libavcodec >= 58.54.100") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_avcodec_CFLAGS=`$PKG_CONFIG --cflags "libavcodec >= 58.54.100" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$avcodec_LIBS"; then
+    pkg_cv_avcodec_LIBS="$avcodec_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libavcodec >= 58.54.100\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "libavcodec >= 58.54.100") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_avcodec_LIBS=`$PKG_CONFIG --libs "libavcodec >= 58.54.100" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        avcodec_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "libavcodec >= 58.54.100" 2>&1`
+        else
+	        avcodec_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "libavcodec >= 58.54.100" 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$avcodec_PKG_ERRORS" >&5
+
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing avcodec_version" >&5
 $as_echo_n "checking for library containing avcodec_version... " >&6; }
 if ${ac_cv_search_avcodec_version+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -19375,7 +20895,7 @@ for ac_lib in '' avcodec; do
     ac_res="none required"
   else
     ac_res=-l$ac_lib
-    LIBS="-l$ac_lib -lavutil -lz $ac_func_search_save_LIBS"
+    LIBS="-l$ac_lib -lavutil -lm -lz $ac_func_search_save_LIBS"
   fi
   if ac_fn_c_try_link "$LINENO"; then :
   ac_cv_search_avcodec_version=$ac_res
@@ -19400,9 +20920,140 @@ ac_res=$ac_cv_search_avcodec_version
 if test "$ac_res" != no; then :
   test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
 
+else
+  as_fn_error $? "unable to find libavcodec" "$LINENO" 5
 fi
 
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing avformat_version" >&5
+
+elif test $pkg_failed = untried; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing avcodec_version" >&5
+$as_echo_n "checking for library containing avcodec_version... " >&6; }
+if ${ac_cv_search_avcodec_version+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_func_search_save_LIBS=$LIBS
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char avcodec_version ();
+int
+main ()
+{
+return avcodec_version ();
+  ;
+  return 0;
+}
+_ACEOF
+for ac_lib in '' avcodec; do
+  if test -z "$ac_lib"; then
+    ac_res="none required"
+  else
+    ac_res=-l$ac_lib
+    LIBS="-l$ac_lib -lavutil -lm -lz $ac_func_search_save_LIBS"
+  fi
+  if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_search_avcodec_version=$ac_res
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext
+  if ${ac_cv_search_avcodec_version+:} false; then :
+  break
+fi
+done
+if ${ac_cv_search_avcodec_version+:} false; then :
+
+else
+  ac_cv_search_avcodec_version=no
+fi
+rm conftest.$ac_ext
+LIBS=$ac_func_search_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_avcodec_version" >&5
+$as_echo "$ac_cv_search_avcodec_version" >&6; }
+ac_res=$ac_cv_search_avcodec_version
+if test "$ac_res" != no; then :
+  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
+
+else
+  as_fn_error $? "unable to find libavcodec" "$LINENO" 5
+fi
+
+
+else
+	avcodec_CFLAGS=$pkg_cv_avcodec_CFLAGS
+	avcodec_LIBS=$pkg_cv_avcodec_LIBS
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+	LIBS="$LIBS $avcodec_LIBS"
+fi
+
+pkg_failed=no
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for libavformat >= 58.29.100" >&5
+$as_echo_n "checking for libavformat >= 58.29.100... " >&6; }
+
+if test -n "$avformat_CFLAGS"; then
+    pkg_cv_avformat_CFLAGS="$avformat_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libavformat >= 58.29.100\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "libavformat >= 58.29.100") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_avformat_CFLAGS=`$PKG_CONFIG --cflags "libavformat >= 58.29.100" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$avformat_LIBS"; then
+    pkg_cv_avformat_LIBS="$avformat_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libavformat >= 58.29.100\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "libavformat >= 58.29.100") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_avformat_LIBS=`$PKG_CONFIG --libs "libavformat >= 58.29.100" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        avformat_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "libavformat >= 58.29.100" 2>&1`
+        else
+	        avformat_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "libavformat >= 58.29.100" 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$avformat_PKG_ERRORS" >&5
+
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing avformat_version" >&5
 $as_echo_n "checking for library containing avformat_version... " >&6; }
 if ${ac_cv_search_avformat_version+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -19431,7 +21082,7 @@ for ac_lib in '' avformat; do
     ac_res="none required"
   else
     ac_res=-l$ac_lib
-    LIBS="-l$ac_lib -lavcodec -lavutil -lz -lbz2 $ac_func_search_save_LIBS"
+    LIBS="-l$ac_lib -lm -lavcodec -lavutil -lz -lbz2 $ac_func_search_save_LIBS"
   fi
   if ac_fn_c_try_link "$LINENO"; then :
   ac_cv_search_avformat_version=$ac_res
@@ -19456,15 +21107,332 @@ ac_res=$ac_cv_search_avformat_version
 if test "$ac_res" != no; then :
   test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
 
+else
+  as_fn_error $? "unable to find libavformat" "$LINENO" 5
 fi
 
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for db_create in -ldb" >&5
-$as_echo_n "checking for db_create in -ldb... " >&6; }
-if ${ac_cv_lib_db_db_create+:} false; then :
+
+elif test $pkg_failed = untried; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing avformat_version" >&5
+$as_echo_n "checking for library containing avformat_version... " >&6; }
+if ${ac_cv_search_avformat_version+:} false; then :
   $as_echo_n "(cached) " >&6
 else
-  ac_check_lib_save_LIBS=$LIBS
-LIBS="-ldb  $LIBS"
+  ac_func_search_save_LIBS=$LIBS
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char avformat_version ();
+int
+main ()
+{
+return avformat_version ();
+  ;
+  return 0;
+}
+_ACEOF
+for ac_lib in '' avformat; do
+  if test -z "$ac_lib"; then
+    ac_res="none required"
+  else
+    ac_res=-l$ac_lib
+    LIBS="-l$ac_lib -lm -lavcodec -lavutil -lz -lbz2 $ac_func_search_save_LIBS"
+  fi
+  if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_search_avformat_version=$ac_res
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext
+  if ${ac_cv_search_avformat_version+:} false; then :
+  break
+fi
+done
+if ${ac_cv_search_avformat_version+:} false; then :
+
+else
+  ac_cv_search_avformat_version=no
+fi
+rm conftest.$ac_ext
+LIBS=$ac_func_search_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_avformat_version" >&5
+$as_echo "$ac_cv_search_avformat_version" >&6; }
+ac_res=$ac_cv_search_avformat_version
+if test "$ac_res" != no; then :
+  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
+
+else
+  as_fn_error $? "unable to find libavformat" "$LINENO" 5
+fi
+
+
+else
+	avformat_CFLAGS=$pkg_cv_avformat_CFLAGS
+	avformat_LIBS=$pkg_cv_avformat_LIBS
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+	LIBS="$LIBS $avformat_LIBS"
+fi
+
+pkg_failed=no
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for libswscale >= 5.5.100" >&5
+$as_echo_n "checking for libswscale >= 5.5.100... " >&6; }
+
+if test -n "$swscale_CFLAGS"; then
+    pkg_cv_swscale_CFLAGS="$swscale_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libswscale >= 5.5.100\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "libswscale >= 5.5.100") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_swscale_CFLAGS=`$PKG_CONFIG --cflags "libswscale >= 5.5.100" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$swscale_LIBS"; then
+    pkg_cv_swscale_LIBS="$swscale_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libswscale >= 5.5.100\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "libswscale >= 5.5.100") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_swscale_LIBS=`$PKG_CONFIG --libs "libswscale >= 5.5.100" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        swscale_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "libswscale >= 5.5.100" 2>&1`
+        else
+	        swscale_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "libswscale >= 5.5.100" 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$swscale_PKG_ERRORS" >&5
+
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing sws_scale" >&5
+$as_echo_n "checking for library containing sws_scale... " >&6; }
+if ${ac_cv_search_sws_scale+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_func_search_save_LIBS=$LIBS
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char sws_scale ();
+int
+main ()
+{
+return sws_scale ();
+  ;
+  return 0;
+}
+_ACEOF
+for ac_lib in '' swscale; do
+  if test -z "$ac_lib"; then
+    ac_res="none required"
+  else
+    ac_res=-l$ac_lib
+    LIBS="-l$ac_lib -lavutil -lm $ac_func_search_save_LIBS"
+  fi
+  if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_search_sws_scale=$ac_res
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext
+  if ${ac_cv_search_sws_scale+:} false; then :
+  break
+fi
+done
+if ${ac_cv_search_sws_scale+:} false; then :
+
+else
+  ac_cv_search_sws_scale=no
+fi
+rm conftest.$ac_ext
+LIBS=$ac_func_search_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_sws_scale" >&5
+$as_echo "$ac_cv_search_sws_scale" >&6; }
+ac_res=$ac_cv_search_sws_scale
+if test "$ac_res" != no; then :
+  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
+
+else
+  as_fn_error $? "unable to find libswscale" "$LINENO" 5
+fi
+
+
+elif test $pkg_failed = untried; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing sws_scale" >&5
+$as_echo_n "checking for library containing sws_scale... " >&6; }
+if ${ac_cv_search_sws_scale+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_func_search_save_LIBS=$LIBS
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char sws_scale ();
+int
+main ()
+{
+return sws_scale ();
+  ;
+  return 0;
+}
+_ACEOF
+for ac_lib in '' swscale; do
+  if test -z "$ac_lib"; then
+    ac_res="none required"
+  else
+    ac_res=-l$ac_lib
+    LIBS="-l$ac_lib -lavutil -lm $ac_func_search_save_LIBS"
+  fi
+  if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_search_sws_scale=$ac_res
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext
+  if ${ac_cv_search_sws_scale+:} false; then :
+  break
+fi
+done
+if ${ac_cv_search_sws_scale+:} false; then :
+
+else
+  ac_cv_search_sws_scale=no
+fi
+rm conftest.$ac_ext
+LIBS=$ac_func_search_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_sws_scale" >&5
+$as_echo "$ac_cv_search_sws_scale" >&6; }
+ac_res=$ac_cv_search_sws_scale
+if test "$ac_res" != no; then :
+  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
+
+else
+  as_fn_error $? "unable to find libswscale" "$LINENO" 5
+fi
+
+
+else
+	swscale_CFLAGS=$pkg_cv_swscale_CFLAGS
+	swscale_LIBS=$pkg_cv_swscale_LIBS
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+	LIBS="$LIBS $swscale_LIBS"
+fi
+
+pkg_failed=no
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for libdb" >&5
+$as_echo_n "checking for libdb... " >&6; }
+
+if test -n "$db_CFLAGS"; then
+    pkg_cv_db_CFLAGS="$db_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libdb\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "libdb") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_db_CFLAGS=`$PKG_CONFIG --cflags "libdb" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$db_LIBS"; then
+    pkg_cv_db_LIBS="$db_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libdb\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "libdb") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_db_LIBS=`$PKG_CONFIG --libs "libdb" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        db_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "libdb" 2>&1`
+        else
+	        db_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "libdb" 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$db_PKG_ERRORS" >&5
+
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing db_create" >&5
+$as_echo_n "checking for library containing db_create... " >&6; }
+if ${ac_cv_search_db_create+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_func_search_save_LIBS=$LIBS
 cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
@@ -19483,28 +21451,985 @@ return db_create ();
   return 0;
 }
 _ACEOF
-if ac_fn_c_try_link "$LINENO"; then :
-  ac_cv_lib_db_db_create=yes
-else
-  ac_cv_lib_db_db_create=no
+for ac_lib in '' db; do
+  if test -z "$ac_lib"; then
+    ac_res="none required"
+  else
+    ac_res=-l$ac_lib
+    LIBS="-l$ac_lib  $ac_func_search_save_LIBS"
+  fi
+  if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_search_db_create=$ac_res
 fi
 rm -f core conftest.err conftest.$ac_objext \
-    conftest$ac_exeext conftest.$ac_ext
-LIBS=$ac_check_lib_save_LIBS
+    conftest$ac_exeext
+  if ${ac_cv_search_db_create+:} false; then :
+  break
 fi
-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_db_db_create" >&5
-$as_echo "$ac_cv_lib_db_db_create" >&6; }
-if test "x$ac_cv_lib_db_db_create" = xyes; then :
-  cat >>confdefs.h <<_ACEOF
-#define HAVE_LIBDB 1
-_ACEOF
+done
+if ${ac_cv_search_db_create+:} false; then :
 
-  LIBS="-ldb $LIBS"
+else
+  ac_cv_search_db_create=no
+fi
+rm conftest.$ac_ext
+LIBS=$ac_func_search_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_db_create" >&5
+$as_echo "$ac_cv_search_db_create" >&6; }
+ac_res=$ac_cv_search_db_create
+if test "$ac_res" != no; then :
+  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
 
 else
   as_fn_error $? "cannot find libdb in $bdbdir/lib" "$LINENO" 5
 fi
 
+
+elif test $pkg_failed = untried; then
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing db_create" >&5
+$as_echo_n "checking for library containing db_create... " >&6; }
+if ${ac_cv_search_db_create+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_func_search_save_LIBS=$LIBS
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char db_create ();
+int
+main ()
+{
+return db_create ();
+  ;
+  return 0;
+}
+_ACEOF
+for ac_lib in '' db; do
+  if test -z "$ac_lib"; then
+    ac_res="none required"
+  else
+    ac_res=-l$ac_lib
+    LIBS="-l$ac_lib  $ac_func_search_save_LIBS"
+  fi
+  if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_search_db_create=$ac_res
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext
+  if ${ac_cv_search_db_create+:} false; then :
+  break
+fi
+done
+if ${ac_cv_search_db_create+:} false; then :
+
+else
+  ac_cv_search_db_create=no
+fi
+rm conftest.$ac_ext
+LIBS=$ac_func_search_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_db_create" >&5
+$as_echo "$ac_cv_search_db_create" >&6; }
+ac_res=$ac_cv_search_db_create
+if test "$ac_res" != no; then :
+  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
+
+else
+  as_fn_error $? "cannot find libdb in $bdbdir/lib" "$LINENO" 5
+fi
+
+
+else
+	db_CFLAGS=$pkg_cv_db_CFLAGS
+	db_LIBS=$pkg_cv_db_LIBS
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+
+fi
+else
+    # Olden ways
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing pthread_create" >&5
+$as_echo_n "checking for library containing pthread_create... " >&6; }
+if ${ac_cv_search_pthread_create+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_func_search_save_LIBS=$LIBS
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char pthread_create ();
+int
+main ()
+{
+return pthread_create ();
+  ;
+  return 0;
+}
+_ACEOF
+for ac_lib in '' pthread; do
+  if test -z "$ac_lib"; then
+    ac_res="none required"
+  else
+    ac_res=-l$ac_lib
+    LIBS="-l$ac_lib  $ac_func_search_save_LIBS"
+  fi
+  if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_search_pthread_create=$ac_res
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext
+  if ${ac_cv_search_pthread_create+:} false; then :
+  break
+fi
+done
+if ${ac_cv_search_pthread_create+:} false; then :
+
+else
+  ac_cv_search_pthread_create=no
+fi
+rm conftest.$ac_ext
+LIBS=$ac_func_search_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_pthread_create" >&5
+$as_echo "$ac_cv_search_pthread_create" >&6; }
+ac_res=$ac_cv_search_pthread_create
+if test "$ac_res" != no; then :
+  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
+
+fi
+
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing zlibVersion" >&5
+$as_echo_n "checking for library containing zlibVersion... " >&6; }
+if ${ac_cv_search_zlibVersion+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_func_search_save_LIBS=$LIBS
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char zlibVersion ();
+int
+main ()
+{
+return zlibVersion ();
+  ;
+  return 0;
+}
+_ACEOF
+for ac_lib in '' z; do
+  if test -z "$ac_lib"; then
+    ac_res="none required"
+  else
+    ac_res=-l$ac_lib
+    LIBS="-l$ac_lib  $ac_func_search_save_LIBS"
+  fi
+  if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_search_zlibVersion=$ac_res
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext
+  if ${ac_cv_search_zlibVersion+:} false; then :
+  break
+fi
+done
+if ${ac_cv_search_zlibVersion+:} false; then :
+
+else
+  ac_cv_search_zlibVersion=no
+fi
+rm conftest.$ac_ext
+LIBS=$ac_func_search_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_zlibVersion" >&5
+$as_echo "$ac_cv_search_zlibVersion" >&6; }
+ac_res=$ac_cv_search_zlibVersion
+if test "$ac_res" != no; then :
+  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
+
+else
+  as_fn_error $? "unable to find libz" "$LINENO" 5
+
+fi
+
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing BZ2_bzlibVersion" >&5
+$as_echo_n "checking for library containing BZ2_bzlibVersion... " >&6; }
+if ${ac_cv_search_BZ2_bzlibVersion+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_func_search_save_LIBS=$LIBS
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char BZ2_bzlibVersion ();
+int
+main ()
+{
+return BZ2_bzlibVersion ();
+  ;
+  return 0;
+}
+_ACEOF
+for ac_lib in '' bz2; do
+  if test -z "$ac_lib"; then
+    ac_res="none required"
+  else
+    ac_res=-l$ac_lib
+    LIBS="-l$ac_lib  $ac_func_search_save_LIBS"
+  fi
+  if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_search_BZ2_bzlibVersion=$ac_res
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext
+  if ${ac_cv_search_BZ2_bzlibVersion+:} false; then :
+  break
+fi
+done
+if ${ac_cv_search_BZ2_bzlibVersion+:} false; then :
+
+else
+  ac_cv_search_BZ2_bzlibVersion=no
+fi
+rm conftest.$ac_ext
+LIBS=$ac_func_search_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_BZ2_bzlibVersion" >&5
+$as_echo "$ac_cv_search_BZ2_bzlibVersion" >&6; }
+ac_res=$ac_cv_search_BZ2_bzlibVersion
+if test "$ac_res" != no; then :
+  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
+
+fi
+
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing jpeg_read_header" >&5
+$as_echo_n "checking for library containing jpeg_read_header... " >&6; }
+if ${ac_cv_search_jpeg_read_header+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_func_search_save_LIBS=$LIBS
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char jpeg_read_header ();
+int
+main ()
+{
+return jpeg_read_header ();
+  ;
+  return 0;
+}
+_ACEOF
+for ac_lib in '' jpeg; do
+  if test -z "$ac_lib"; then
+    ac_res="none required"
+  else
+    ac_res=-l$ac_lib
+    LIBS="-l$ac_lib  $ac_func_search_save_LIBS"
+  fi
+  if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_search_jpeg_read_header=$ac_res
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext
+  if ${ac_cv_search_jpeg_read_header+:} false; then :
+  break
+fi
+done
+if ${ac_cv_search_jpeg_read_header+:} false; then :
+
+else
+  ac_cv_search_jpeg_read_header=no
+fi
+rm conftest.$ac_ext
+LIBS=$ac_func_search_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_jpeg_read_header" >&5
+$as_echo "$ac_cv_search_jpeg_read_header" >&6; }
+ac_res=$ac_cv_search_jpeg_read_header
+if test "$ac_res" != no; then :
+  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
+
+else
+  as_fn_error $? "unable to find libjpeg" "$LINENO" 5
+
+fi
+
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing png_create_read_struct" >&5
+$as_echo_n "checking for library containing png_create_read_struct... " >&6; }
+if ${ac_cv_search_png_create_read_struct+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_func_search_save_LIBS=$LIBS
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char png_create_read_struct ();
+int
+main ()
+{
+return png_create_read_struct ();
+  ;
+  return 0;
+}
+_ACEOF
+for ac_lib in '' png; do
+  if test -z "$ac_lib"; then
+    ac_res="none required"
+  else
+    ac_res=-l$ac_lib
+    LIBS="-l$ac_lib  $ac_func_search_save_LIBS"
+  fi
+  if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_search_png_create_read_struct=$ac_res
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext
+  if ${ac_cv_search_png_create_read_struct+:} false; then :
+  break
+fi
+done
+if ${ac_cv_search_png_create_read_struct+:} false; then :
+
+else
+  ac_cv_search_png_create_read_struct=no
+fi
+rm conftest.$ac_ext
+LIBS=$ac_func_search_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_png_create_read_struct" >&5
+$as_echo "$ac_cv_search_png_create_read_struct" >&6; }
+ac_res=$ac_cv_search_png_create_read_struct
+if test "$ac_res" != no; then :
+  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
+
+else
+  as_fn_error $? "unable to find libpng" "$LINENO" 5
+
+fi
+
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing DGifOpen" >&5
+$as_echo_n "checking for library containing DGifOpen... " >&6; }
+if ${ac_cv_search_DGifOpen+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_func_search_save_LIBS=$LIBS
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char DGifOpen ();
+int
+main ()
+{
+return DGifOpen ();
+  ;
+  return 0;
+}
+_ACEOF
+for ac_lib in '' gif; do
+  if test -z "$ac_lib"; then
+    ac_res="none required"
+  else
+    ac_res=-l$ac_lib
+    LIBS="-l$ac_lib  $ac_func_search_save_LIBS"
+  fi
+  if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_search_DGifOpen=$ac_res
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext
+  if ${ac_cv_search_DGifOpen+:} false; then :
+  break
+fi
+done
+if ${ac_cv_search_DGifOpen+:} false; then :
+
+else
+  ac_cv_search_DGifOpen=no
+fi
+rm conftest.$ac_ext
+LIBS=$ac_func_search_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_DGifOpen" >&5
+$as_echo "$ac_cv_search_DGifOpen" >&6; }
+ac_res=$ac_cv_search_DGifOpen
+if test "$ac_res" != no; then :
+  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
+
+else
+  as_fn_error $? "unable to find libgif" "$LINENO" 5
+
+fi
+
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing iconv" >&5
+$as_echo_n "checking for library containing iconv... " >&6; }
+if ${ac_cv_search_iconv+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_func_search_save_LIBS=$LIBS
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char iconv ();
+int
+main ()
+{
+return iconv ();
+  ;
+  return 0;
+}
+_ACEOF
+for ac_lib in '' iconv; do
+  if test -z "$ac_lib"; then
+    ac_res="none required"
+  else
+    ac_res=-l$ac_lib
+    LIBS="-l$ac_lib  $ac_func_search_save_LIBS"
+  fi
+  if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_search_iconv=$ac_res
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext
+  if ${ac_cv_search_iconv+:} false; then :
+  break
+fi
+done
+if ${ac_cv_search_iconv+:} false; then :
+
+else
+  ac_cv_search_iconv=no
+fi
+rm conftest.$ac_ext
+LIBS=$ac_func_search_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_iconv" >&5
+$as_echo "$ac_cv_search_iconv" >&6; }
+ac_res=$ac_cv_search_iconv
+if test "$ac_res" != no; then :
+  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
+
+fi
+ # Sometimes libintl is built with iconv
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing gettext" >&5
+$as_echo_n "checking for library containing gettext... " >&6; }
+if ${ac_cv_search_gettext+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_func_search_save_LIBS=$LIBS
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char gettext ();
+int
+main ()
+{
+return gettext ();
+  ;
+  return 0;
+}
+_ACEOF
+for ac_lib in '' intl; do
+  if test -z "$ac_lib"; then
+    ac_res="none required"
+  else
+    ac_res=-l$ac_lib
+    LIBS="-l$ac_lib  $ac_func_search_save_LIBS"
+  fi
+  if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_search_gettext=$ac_res
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext
+  if ${ac_cv_search_gettext+:} false; then :
+  break
+fi
+done
+if ${ac_cv_search_gettext+:} false; then :
+
+else
+  ac_cv_search_gettext=no
+fi
+rm conftest.$ac_ext
+LIBS=$ac_func_search_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_gettext" >&5
+$as_echo "$ac_cv_search_gettext" >&6; }
+ac_res=$ac_cv_search_gettext
+if test "$ac_res" != no; then :
+  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
+
+fi
+ # Sometimes exif is built with libintl
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing exif_loader_new" >&5
+$as_echo_n "checking for library containing exif_loader_new... " >&6; }
+if ${ac_cv_search_exif_loader_new+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_func_search_save_LIBS=$LIBS
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char exif_loader_new ();
+int
+main ()
+{
+return exif_loader_new ();
+  ;
+  return 0;
+}
+_ACEOF
+for ac_lib in '' exif; do
+  if test -z "$ac_lib"; then
+    ac_res="none required"
+  else
+    ac_res=-l$ac_lib
+    LIBS="-l$ac_lib  $ac_func_search_save_LIBS"
+  fi
+  if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_search_exif_loader_new=$ac_res
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext
+  if ${ac_cv_search_exif_loader_new+:} false; then :
+  break
+fi
+done
+if ${ac_cv_search_exif_loader_new+:} false; then :
+
+else
+  ac_cv_search_exif_loader_new=no
+fi
+rm conftest.$ac_ext
+LIBS=$ac_func_search_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_exif_loader_new" >&5
+$as_echo "$ac_cv_search_exif_loader_new" >&6; }
+ac_res=$ac_cv_search_exif_loader_new
+if test "$ac_res" != no; then :
+  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
+
+else
+  as_fn_error $? "unable to find libexif" "$LINENO" 5
+
+fi
+
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing av_freep" >&5
+$as_echo_n "checking for library containing av_freep... " >&6; }
+if ${ac_cv_search_av_freep+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_func_search_save_LIBS=$LIBS
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char av_freep ();
+int
+main ()
+{
+return av_freep ();
+  ;
+  return 0;
+}
+_ACEOF
+for ac_lib in '' avutil; do
+  if test -z "$ac_lib"; then
+    ac_res="none required"
+  else
+    ac_res=-l$ac_lib
+    LIBS="-l$ac_lib -lz
+     $ac_func_search_save_LIBS"
+  fi
+  if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_search_av_freep=$ac_res
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext
+  if ${ac_cv_search_av_freep+:} false; then :
+  break
+fi
+done
+if ${ac_cv_search_av_freep+:} false; then :
+
+else
+  ac_cv_search_av_freep=no
+fi
+rm conftest.$ac_ext
+LIBS=$ac_func_search_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_av_freep" >&5
+$as_echo "$ac_cv_search_av_freep" >&6; }
+ac_res=$ac_cv_search_av_freep
+if test "$ac_res" != no; then :
+  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
+
+else
+  as_fn_error $? "unable to find libavutil" "$LINENO" 5
+fi
+
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing avcodec_version" >&5
+$as_echo_n "checking for library containing avcodec_version... " >&6; }
+if ${ac_cv_search_avcodec_version+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_func_search_save_LIBS=$LIBS
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char avcodec_version ();
+int
+main ()
+{
+return avcodec_version ();
+  ;
+  return 0;
+}
+_ACEOF
+for ac_lib in '' avcodec; do
+  if test -z "$ac_lib"; then
+    ac_res="none required"
+  else
+    ac_res=-l$ac_lib
+    LIBS="-l$ac_lib -lavutil -lz
+     $ac_func_search_save_LIBS"
+  fi
+  if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_search_avcodec_version=$ac_res
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext
+  if ${ac_cv_search_avcodec_version+:} false; then :
+  break
+fi
+done
+if ${ac_cv_search_avcodec_version+:} false; then :
+
+else
+  ac_cv_search_avcodec_version=no
+fi
+rm conftest.$ac_ext
+LIBS=$ac_func_search_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_avcodec_version" >&5
+$as_echo "$ac_cv_search_avcodec_version" >&6; }
+ac_res=$ac_cv_search_avcodec_version
+if test "$ac_res" != no; then :
+  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
+
+else
+  as_fn_error $? "unable to find libavcodec" "$LINENO" 5
+fi
+
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing avformat_version" >&5
+$as_echo_n "checking for library containing avformat_version... " >&6; }
+if ${ac_cv_search_avformat_version+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_func_search_save_LIBS=$LIBS
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char avformat_version ();
+int
+main ()
+{
+return avformat_version ();
+  ;
+  return 0;
+}
+_ACEOF
+for ac_lib in '' avformat; do
+  if test -z "$ac_lib"; then
+    ac_res="none required"
+  else
+    ac_res=-l$ac_lib
+    LIBS="-l$ac_lib -lavcodec -lavutil -lz -lbz2
+     $ac_func_search_save_LIBS"
+  fi
+  if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_search_avformat_version=$ac_res
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext
+  if ${ac_cv_search_avformat_version+:} false; then :
+  break
+fi
+done
+if ${ac_cv_search_avformat_version+:} false; then :
+
+else
+  ac_cv_search_avformat_version=no
+fi
+rm conftest.$ac_ext
+LIBS=$ac_func_search_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_avformat_version" >&5
+$as_echo "$ac_cv_search_avformat_version" >&6; }
+ac_res=$ac_cv_search_avformat_version
+if test "$ac_res" != no; then :
+  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
+
+else
+  as_fn_error $? "unable to find libavformat" "$LINENO" 5
+fi
+
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing sws_scale" >&5
+$as_echo_n "checking for library containing sws_scale... " >&6; }
+if ${ac_cv_search_sws_scale+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_func_search_save_LIBS=$LIBS
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char sws_scale ();
+int
+main ()
+{
+return sws_scale ();
+  ;
+  return 0;
+}
+_ACEOF
+for ac_lib in '' swscale; do
+  if test -z "$ac_lib"; then
+    ac_res="none required"
+  else
+    ac_res=-l$ac_lib
+    LIBS="-l$ac_lib -lavutil
+     $ac_func_search_save_LIBS"
+  fi
+  if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_search_sws_scale=$ac_res
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext
+  if ${ac_cv_search_sws_scale+:} false; then :
+  break
+fi
+done
+if ${ac_cv_search_sws_scale+:} false; then :
+
+else
+  ac_cv_search_sws_scale=no
+fi
+rm conftest.$ac_ext
+LIBS=$ac_func_search_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_sws_scale" >&5
+$as_echo "$ac_cv_search_sws_scale" >&6; }
+ac_res=$ac_cv_search_sws_scale
+if test "$ac_res" != no; then :
+  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
+
+else
+  as_fn_error $? "unable to find libswscale" "$LINENO" 5
+fi
+
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing db_create" >&5
+$as_echo_n "checking for library containing db_create... " >&6; }
+if ${ac_cv_search_db_create+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_func_search_save_LIBS=$LIBS
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char db_create ();
+int
+main ()
+{
+return db_create ();
+  ;
+  return 0;
+}
+_ACEOF
+for ac_lib in '' db; do
+  if test -z "$ac_lib"; then
+    ac_res="none required"
+  else
+    ac_res=-l$ac_lib
+    LIBS="-l$ac_lib  $ac_func_search_save_LIBS"
+  fi
+  if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_search_db_create=$ac_res
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext
+  if ${ac_cv_search_db_create+:} false; then :
+  break
+fi
+done
+if ${ac_cv_search_db_create+:} false; then :
+
+else
+  ac_cv_search_db_create=no
+fi
+rm conftest.$ac_ext
+LIBS=$ac_func_search_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_db_create" >&5
+$as_echo "$ac_cv_search_db_create" >&6; }
+ac_res=$ac_cv_search_db_create
+if test "$ac_res" != no; then :
+  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
+
+else
+  as_fn_error $? "cannot find libdb in $bdbdir/lib" "$LINENO" 5
+fi
+
+fi
+
+# Modern giflib doesn't usually use pkg-config, so we should check the lib version manually.
+# This is done by checking the version values within the header
+have_new_giflib=no
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+#include <gif_lib.h>
+
+int
+main ()
+{
+
+#if GIFLIB_MAJOR < 5 || GIFLIB_MINOR < 1
+#error Incompatible giflib version
+#endif
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_compile "$LINENO"; then :
+  have_new_giflib=yes
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
+
+if test "x${have_new_giflib}" = "xno"; then
+    as_fn_error $? "Builds require giflib API 5.1+. Please see the documentation." "$LINENO" 5
+fi
+
+# If the build (or FFmpeg detection) doesn't use pkg-config, we have to check the version manually.
+# This is done by checking the libavutil version values within the version header.
+# The other components of FFmpeg are assumed to be of the same vintage.
+have_new_ffmpeg=no
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+#include <libavutil/version.h>
+
+int
+main ()
+{
+
+#if LIBAVUTIL_VERSION_MAJOR < 56 || LIBAVUTIL_VERSION_MINOR < 31
+#error Incompatible ffmpeg version
+#endif
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_compile "$LINENO"; then :
+  have_new_ffmpeg=yes
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
+
+if test "x${have_new_ffmpeg}" = "xno"; then
+    as_fn_error $? "Builds require ffmpeg API 4.2.1+. Please see the documentation." "$LINENO" 5
+fi
 
 # Debugging
 # Check whether --enable-debug was given.
