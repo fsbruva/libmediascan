@@ -4,6 +4,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <TargetExt>.dll</TargetExt>
+    <IntDir>
+    </IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>

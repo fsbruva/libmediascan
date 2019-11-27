@@ -2,26 +2,25 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup>
+    <IntDir>$(SolutionDir)$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\home\Raena\build\include;$(SolutionDIR)..;$(SolutionDIR)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\src;$(SolutionDIR)..;$(SolutionDIR)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Lib>
       <AdditionalDependencies>libpng.a;libjpeg.a;libgif.a;libavcodec.a;libavformat.a;libavutil.a;libswscale.a;libexif.a;libintl.a;libbz2.a;libz.a;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
-      <AdditionalLibraryDirectories>C:\msys64\usr\lib;C:\home\raena\build\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\msys64\usr\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
     <PostBuildEvent />
     <PostBuildEvent>
-      <Command>mkdir $(ProjectDir)..\bindings\perl\win32\include
-mkdir $(ProjectDir)..\bindings\perl\win32\lib
-copy $(TargetPath) $(ProjectDir)..\bindings\perl\win32\lib
-copy $(ProjectDir)..\include\libmediascan.h $(ProjectDir)..\bindings\perl\win32\include
-copy $(ProjectDir)include\getopt.h $(ProjectDir)..\bindings\perl\win32\include
-copy $(ProjectDir)include\unistd.h $(ProjectDir)..\bindings\perl\win32\include</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup />

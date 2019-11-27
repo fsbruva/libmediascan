@@ -2,14 +2,18 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup>
+    <OutDir>
+    </OutDir>
+    <IntDir />
+  </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\msys64\mingw32\include;C:\msys64\mingw32\lib;C:\msys64\usr\local\src\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\build\i686-w64-mingw32\include;C:\msys64\mingw32\include;C:\msys64\mingw32\lib;C:\msys64\usr\local\src\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Lib>
-      <AdditionalLibraryDirectories>C:\msys64\mingw32\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\build\i686-w64-mingw32\lib;C:\msys64\mingw32\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <TargetMachine />
     </Lib>
     <PostBuildEvent />

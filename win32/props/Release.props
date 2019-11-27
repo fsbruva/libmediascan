@@ -2,13 +2,25 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup>
+    <IntDir>
+    </IntDir>
+    <OutDir />
+  </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile />
     <ClCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
+    <PostBuildEvent>
+      <Command>mkdir $(ProjectDir)..\bindings\perl\win32\include
+mkdir $(ProjectDir)..\bindings\perl\win32\lib
+copy $(TargetPath) $(ProjectDir)..\bindings\perl\win32\lib
+copy $(ProjectDir)..\include\libmediascan.h $(ProjectDir)..\bindings\perl\win32\include
+copy $(ProjectDir)..\src\getopt.h $(ProjectDir)..\bindings\perl\win32\include
+copy $(ProjectDir)..\src\unistd.h $(ProjectDir)..\bindings\perl\win32\include</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup />
 </Project>

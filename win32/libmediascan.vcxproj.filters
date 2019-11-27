@@ -172,13 +172,7 @@
     <ClInclude Include="..\src\audio.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\win32config.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\common.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\thread.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\database.h">
@@ -188,6 +182,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\tag_item.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\win32config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\getopt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\unistd.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
