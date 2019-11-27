@@ -5,7 +5,7 @@
 ///-------------------------------------------------------------------------------------------------
 
 #ifdef WIN32
-#include "win32/include/win32config.h"
+#include "win32config.h"
 #else
 #include <sys/time.h>
 #include <unistd.h>

@@ -5,7 +5,7 @@
 ///-------------------------------------------------------------------------------------------------
 
 #ifdef WIN32
-#include "win32/include/win32config.h"
+#include "win32config.h"
 #else
 
 // This is needed to enable stat64(), which we use because some systems don't properly support 64-bit stat()

@@ -15,7 +15,7 @@
  */
 
 #ifdef WIN32
-#include "win32/include/win32config.h"
+#include "win32config.h"
 #endif
 
 #include <ctype.h>
