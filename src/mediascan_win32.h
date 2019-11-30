@@ -4,9 +4,7 @@
 ///  Win32 specific file system functionality
 ///-------------------------------------------------------------------------------------------------
 
-#ifdef _MSC_VER
-#define inline __inline
-#endif
+#include "win32config.h"
 
 ///-------------------------------------------------------------------------------------------------
 ///  Win32 specific MediaScan initalization.
