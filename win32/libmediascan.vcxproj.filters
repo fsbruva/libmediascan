@@ -140,9 +140,6 @@
     <ClCompile Include="..\src\tag_item.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\folder_mon_win32.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\libmediascan.h">
@@ -194,6 +191,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\win32config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\thread.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

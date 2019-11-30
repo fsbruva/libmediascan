@@ -61,6 +61,7 @@ win32/Test/Win32/*
 test/video_dlna_testDebug/*
 win32/pthreads_proj/Win32/*
 win32/pthreads_proj/x64/*
+win32/pthreads_proj/pthread.nativecodeanalysis*
 .vs/*
 win32/.vs/*
 

@@ -469,7 +469,6 @@
     <ClCompile Include="..\src\buffer.c" />
     <ClCompile Include="..\src\database.c" />
     <ClCompile Include="..\src\error.c" />
-    <ClCompile Include="..\src\folder_mon_win32.c" />
     <ClCompile Include="..\src\image.c" />
     <ClCompile Include="..\src\image_bmp.c" />
     <ClCompile Include="..\src\image_gif.c" />
@@ -526,6 +525,7 @@
     <ClInclude Include="..\src\result.h" />
     <ClInclude Include="..\src\tag.h" />
     <ClInclude Include="..\src\tag_item.h" />
+    <ClInclude Include="..\src\thread.h" />
     <ClInclude Include="..\src\unistd.h" />
     <ClInclude Include="..\src\util.h" />
     <ClInclude Include="..\src\video.h" />

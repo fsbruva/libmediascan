@@ -624,67 +624,6 @@ void ms_async_process(MediaScan *s) {
   }
 }
 
-///-------------------------------------------------------------------------------------------------
-///  Watch a directory in the background.
-///
-/// @author Henry Bennett
-/// @date 03/22/2011
-///
-/// @param path Path name of the folder to watch
-/// @param callback Callback with the changes
-///-------------------------------------------------------------------------------------------------
-void ms_watch_directory(MediaScan *s, const char *path) {
-
-#ifdef WIN32
-
-  thread_data_type *thread_data;
-  DWORD dwAttrs;
-
-  // First check if this is a standard server share which we can't monitor
-  if (PathIsUNCServerShare(path)) {
-    ms_errno = MSENO_ILLEGALPARAMETER;
-    LOG_ERROR("Can not monitor a network directory\n");
-    return;
-  }
-
-  // Now check if the user is being tricky and trying to send us a mapped drive
-  // See http://msdn.microsoft.com/en-us/library/aa363940%28v=VS.85%29.aspx
-  // and http://msdn.microsoft.com/en-us/library/aa365511%28v=VS.85%29.aspx
-  dwAttrs = GetFileAttributes(path);
-  if (dwAttrs & FILE_ATTRIBUTE_REPARSE_POINT) {
-    char temp_path[MAX_PATH_STR_LEN];
-    WIN32_FIND_DATA FindFileData;
-    HANDLE hFind;
-
-    strcpy(temp_path, path);
-    strcat(temp_path, "*");
-
-    hFind = FindFirstFile(temp_path, &FindFileData);
-    if (hFind == INVALID_HANDLE_VALUE) {
-      ms_errno = MSENO_ILLEGALPARAMETER;
-      LOG_ERROR("Directory doesn't exsist\n");
-      return;
-    }
-
-    if ((FindFileData.dwReserved0 & 0xFFFF) == IO_REPARSE_TAG_MOUNT_POINT) {
-      ms_errno = MSENO_ILLEGALPARAMETER;
-      LOG_ERROR("Can not monitor a mounted network share\n");
-      return;
-    }
-  }
-
-  thread_data = (thread_data_type *)calloc(sizeof(thread_data_type), 1);
-  thread_data->s = s;
-  thread_data->lpDir = path;
-
-  s->thread = thread_create(WatchDirectory, thread_data, s->async_fds);
-  if (!s->thread) {
-    LOG_ERROR("Unable to start async thread\n");
-    return;
-  }
-#endif
-
-}                               /* ms_watch_directory() */
 
 ///-------------------------------------------------------------------------------------------------
 ///  Clear watch list

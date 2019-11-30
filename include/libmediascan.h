@@ -521,19 +521,6 @@ int ms_result_get_tag_count(MediaScanResult *r);
  */
 void ms_result_get_tag(MediaScanResult *r, int index, const char **key, const char **value);
 
-///-------------------------------------------------------------------------------------------------
-///  Watch a directory in the background.
-///
-/// @author Henry Bennett
-/// @date 03/22/2011
-///
-/// @param path Path name of the folder to watch
-/// @param callback Callback with the changes
-///-------------------------------------------------------------------------------------------------
-
-// XXX replaced by MS_WATCH_CHANGES
-void ms_watch_directory(MediaScan *s, const char *path);
-
 /**
  * If ms_scan was run with the flag MS_WATCH_CHANGES, this call will stop watching for changes.
  * To begin watching again, you must call ms_scan() again.
