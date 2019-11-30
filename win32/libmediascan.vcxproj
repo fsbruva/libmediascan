@@ -520,6 +520,7 @@
     <ClInclude Include="..\src\database.h" />
     <ClInclude Include="..\src\getopt.h" />
     <ClInclude Include="..\src\mediascan.h" />
+    <ClInclude Include="..\src\mediascan_win32.h" />
     <ClInclude Include="..\src\progress.h" />
     <ClInclude Include="..\src\queue.h" />
     <ClInclude Include="..\src\result.h" />

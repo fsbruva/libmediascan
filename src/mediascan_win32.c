@@ -38,6 +38,8 @@
 #pragma comment(lib, "Msi.lib")
 #endif
 
+#include "mediascan_win32.h"
+
 // This is necessary because the _s versions are recommended by the Visual Studio compiler,
 // but not necessary when building with MinGW. Stolen from:
 // https://github.com/opencv/opencv/pull/13032/files

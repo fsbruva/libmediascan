@@ -95,9 +95,6 @@
     <ClCompile Include="..\src\libdlna\containers.c">
       <Filter>libdlna</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\folder_mon_win32.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\audio.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -143,6 +140,9 @@
     <ClCompile Include="..\src\tag_item.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\folder_mon_win32.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\libmediascan.h">
@@ -184,13 +184,16 @@
     <ClInclude Include="..\src\tag_item.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\win32config.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\getopt.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\unistd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mediascan_win32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\win32config.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

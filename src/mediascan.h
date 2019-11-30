@@ -140,34 +140,6 @@ void send_result(MediaScan *s, MediaScanResult *r);
 
 void send_finish(MediaScan *s);
 
-#ifdef WIN32
-
-///-------------------------------------------------------------------------------------------------
-///  Watch directory.
-///
-/// @author Henry Bennett
-/// @date 03/22/2011
-///
-/// @param lpDir String describing the path to be watched
-///-------------------------------------------------------------------------------------------------
-
-void WatchDirectory(LPVOID inData);
-
-///-------------------------------------------------------------------------------------------------
-///  Code to refresh the directory listing, but not the subtree because it would not be necessary.
-///
-/// @author Henry Bennett
-/// @date 03/22/2011
-///
-/// @param lpDir The pointer to a dir.
-///-------------------------------------------------------------------------------------------------
-
-void RefreshDirectory(MediaScan *s, LPTSTR lpDir);
-
-int parse_lnk(LPCTSTR szShortcutFile, LPTSTR szTarget, SIZE_T cchTarget);
-
-#endif // WIN32
-
 // This declaration conflicts with one that returns a boolean in shlwapi.h
 #ifndef WIN32
 int PathIsDirectory(const char *dir);
