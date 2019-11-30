@@ -196,5 +196,8 @@
     <ClInclude Include="..\src\thread.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\win32_port.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

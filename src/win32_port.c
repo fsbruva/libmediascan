@@ -4,21 +4,7 @@
 // summary: window 32 port class
 ///-------------------------------------------------------------------------------------------------
 
-#include <stdarg.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <time.h>
-#include <Windows.h>
-
-#include "win32config.h"
-
-int strcasecmp(const char *string1, const char *string2) {
-  return _stricmp(string1, string2);
-}
-
-int strncasecmp(const char *s1, const char *s2, size_t n) {
-  return _strnicmp(s1, s2, n);
-}
+#include "win32_port.h"
 
 ///-------------------------------------------------------------------------------------------------
 ///  Gets a file size.
@@ -91,6 +77,17 @@ int _GetFileTime(const char *fileName, char *lpszString, long dwSize) {
   else
     return FALSE;
 }                               /* _GetFileTime() */
+
+ ///-------------------------------------------------------------------------------------------------
+ ///  Touches a file, forcibly setting the last modified time to current system time.
+ ///
+ /// @author Henry Bennett
+ /// @date 04/13/2011
+ ///
+ /// @param fileName            Filename of the file.
+ ///
+ /// @return integer return value from SetFileTime() function.
+ ///---------------------------------------------------------------------------------------------
 
 int TouchFile(const char *fileName) {
   HANDLE hFile;

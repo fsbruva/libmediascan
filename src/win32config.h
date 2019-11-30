@@ -6,6 +6,4 @@
 #define inline __inline
 #endif
 
-void croak(char *fmt, ...);
-
 #endif

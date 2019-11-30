@@ -531,6 +531,7 @@
     <ClInclude Include="..\src\video.h" />
     <ClInclude Include="..\src\wav.h" />
     <ClInclude Include="..\src\win32config.h" />
+    <ClInclude Include="..\src\win32_port.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
