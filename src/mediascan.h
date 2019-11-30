@@ -90,6 +90,8 @@ bool is_absolute_path(const char *path);
 ///
 /// @param [in,out] s Scan instance.
 /// @param path Full pathname of the directory.
+///
+/// ### Function defined in mediascan_unix.c or mediascan_win32.c, as appropriate.
 ///-------------------------------------------------------------------------------------------------
 
 void recurse_dir(MediaScan *s, const char *path, int recurse_count);
