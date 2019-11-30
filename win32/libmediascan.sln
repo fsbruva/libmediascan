@@ -25,12 +25,20 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug_dll|Win32 = Debug_dll|Win32
 		Debug_dll|x64 = Debug_dll|x64
+		Debug_msys64|Win32 = Debug_msys64|Win32
+		Debug_msys64|x64 = Debug_msys64|x64
 		Debug|Win32 = Debug|Win32
 		Debug|x64 = Debug|x64
 		Release_dll|Win32 = Release_dll|Win32
 		Release_dll|x64 = Release_dll|x64
+		Release_msys64_dll|Win32 = Release_msys64_dll|Win32
+		Release_msys64_dll|x64 = Release_msys64_dll|x64
+		Release_msys64|Win32 = Release_msys64|Win32
+		Release_msys64|x64 = Release_msys64|x64
 		Release|Win32 = Release|Win32
 		Release|x64 = Release|x64
+		Test_msys64|Win32 = Test_msys64|Win32
+		Test_msys64|x64 = Test_msys64|x64
 		Test|Win32 = Test|Win32
 		Test|x64 = Test|x64
 	EndGlobalSection
@@ -92,6 +100,10 @@ Global
 		{DCF0D519-FE19-722B-8EBC-409BA6E7B6D5}.Debug_dll|Win32.Build.0 = Debug|Win32
 		{DCF0D519-FE19-722B-8EBC-409BA6E7B6D5}.Debug_dll|x64.ActiveCfg = Debug|x64
 		{DCF0D519-FE19-722B-8EBC-409BA6E7B6D5}.Debug_dll|x64.Build.0 = Debug|x64
+		{DCF0D519-FE19-722B-8EBC-409BA6E7B6D5}.Debug_msys64|Win32.ActiveCfg = Debug|Win32
+		{DCF0D519-FE19-722B-8EBC-409BA6E7B6D5}.Debug_msys64|Win32.Build.0 = Debug|Win32
+		{DCF0D519-FE19-722B-8EBC-409BA6E7B6D5}.Debug_msys64|x64.ActiveCfg = Debug|x64
+		{DCF0D519-FE19-722B-8EBC-409BA6E7B6D5}.Debug_msys64|x64.Build.0 = Debug|x64
 		{DCF0D519-FE19-722B-8EBC-409BA6E7B6D5}.Debug|Win32.ActiveCfg = Debug|Win32
 		{DCF0D519-FE19-722B-8EBC-409BA6E7B6D5}.Debug|Win32.Build.0 = Debug|Win32
 		{DCF0D519-FE19-722B-8EBC-409BA6E7B6D5}.Debug|x64.ActiveCfg = Debug|x64
@@ -100,6 +112,14 @@ Global
 		{DCF0D519-FE19-722B-8EBC-409BA6E7B6D5}.Release_dll|Win32.Build.0 = Release|Win32
 		{DCF0D519-FE19-722B-8EBC-409BA6E7B6D5}.Release_dll|x64.ActiveCfg = Release|x64
 		{DCF0D519-FE19-722B-8EBC-409BA6E7B6D5}.Release_dll|x64.Build.0 = Release|x64
+		{DCF0D519-FE19-722B-8EBC-409BA6E7B6D5}.Release_msys64_dll|Win32.ActiveCfg = Release|Win32
+		{DCF0D519-FE19-722B-8EBC-409BA6E7B6D5}.Release_msys64_dll|Win32.Build.0 = Release|Win32
+		{DCF0D519-FE19-722B-8EBC-409BA6E7B6D5}.Release_msys64_dll|x64.ActiveCfg = Release|x64
+		{DCF0D519-FE19-722B-8EBC-409BA6E7B6D5}.Release_msys64_dll|x64.Build.0 = Release|x64
+		{DCF0D519-FE19-722B-8EBC-409BA6E7B6D5}.Release_msys64|Win32.ActiveCfg = Release|Win32
+		{DCF0D519-FE19-722B-8EBC-409BA6E7B6D5}.Release_msys64|Win32.Build.0 = Release|Win32
+		{DCF0D519-FE19-722B-8EBC-409BA6E7B6D5}.Release_msys64|x64.ActiveCfg = Release|x64
+		{DCF0D519-FE19-722B-8EBC-409BA6E7B6D5}.Release_msys64|x64.Build.0 = Release|x64
 		{DCF0D519-FE19-722B-8EBC-409BA6E7B6D5}.Release|Win32.ActiveCfg = Release|Win32
 		{DCF0D519-FE19-722B-8EBC-409BA6E7B6D5}.Release|Win32.Build.0 = Release|Win32
 		{DCF0D519-FE19-722B-8EBC-409BA6E7B6D5}.Release|x64.ActiveCfg = Release|x64
