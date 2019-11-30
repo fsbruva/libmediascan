@@ -95,8 +95,8 @@ target_triplet = @target@
 @DARWIN_TRUE@am__append_3 = mediascan_unix.c mediascan_macos.m NSString+SymlinksAndAliases.m
 
 #libmediascan_la_SOURCES += mediascan_win32.c win_iconv.c win32_port.c
-@MINGW_TRUE@am__append_4 = mediascan_win32.c win32_port.c folder_mon_win32.c
-@MINGW_TRUE@am__append_5 = win32config.h unistd.h mediascan_win32.h
+@MINGW_TRUE@am__append_4 = mediascan_win32.c win32_port.c
+@MINGW_TRUE@am__append_5 = win32config.h unistd.h mediascan_win32.h win32_port.h
 @MINGW_TRUE@am__append_6 = -no-undefined
 subdir = src
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -154,8 +154,7 @@ am__libmediascan_la_SOURCES_DIST = audio.c buffer.c database.c error.c \
 	libdlna/av_wmv9.c libdlna/containers.c libdlna/profiles.c \
 	jenkins/lookup3.c mediascan_unix.c mediascan_linux.c \
 	mediascan_sun.c mediascan_macos.m \
-	NSString+SymlinksAndAliases.m mediascan_win32.c win32_port.c \
-	folder_mon_win32.c
+	NSString+SymlinksAndAliases.m mediascan_win32.c win32_port.c
 am__dirstamp = $(am__leading_dot)dirstamp
 @LINUXBSD_TRUE@am__objects_1 = libmediascan_la-mediascan_unix.lo \
 @LINUXBSD_TRUE@	libmediascan_la-mediascan_linux.lo
@@ -165,8 +164,7 @@ am__dirstamp = $(am__leading_dot)dirstamp
 @DARWIN_TRUE@	libmediascan_la-mediascan_macos.lo \
 @DARWIN_TRUE@	libmediascan_la-NSString+SymlinksAndAliases.lo
 @MINGW_TRUE@am__objects_4 = libmediascan_la-mediascan_win32.lo \
-@MINGW_TRUE@	libmediascan_la-win32_port.lo \
-@MINGW_TRUE@	libmediascan_la-folder_mon_win32.lo
+@MINGW_TRUE@	libmediascan_la-win32_port.lo
 am_libmediascan_la_OBJECTS = libmediascan_la-audio.lo \
 	libmediascan_la-buffer.lo libmediascan_la-database.lo \
 	libmediascan_la-error.lo libmediascan_la-image.lo \
@@ -269,7 +267,7 @@ am__include_HEADERS_DIST = audio.h buffer.h common.h error.h \
 	util.h video.h database.h tag.h tag_item.h \
 	libdlna/containers.h libdlna/dlna.h libdlna/dlna_internals.h \
 	libdlna/profiles.h NSString+SymlinksAndAliases.h win32config.h \
-	unistd.h mediascan_win32.h
+	unistd.h mediascan_win32.h win32_port.h
 HEADERS = $(include_HEADERS)
 am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) $(LISP)
 # Read a list of newline-separated strings from the standard input,
@@ -611,7 +609,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libmediascan_la-buffer.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libmediascan_la-database.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libmediascan_la-error.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libmediascan_la-folder_mon_win32.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libmediascan_la-image.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libmediascan_la-image_bmp.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libmediascan_la-image_gif.Plo@am__quote@
@@ -961,13 +958,6 @@ libmediascan_la-win32_port.lo: win32_port.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='win32_port.c' object='libmediascan_la-win32_port.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libmediascan_la_CFLAGS) $(CFLAGS) -c -o libmediascan_la-win32_port.lo `test -f 'win32_port.c' || echo '$(srcdir)/'`win32_port.c
-
-libmediascan_la-folder_mon_win32.lo: folder_mon_win32.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libmediascan_la_CFLAGS) $(CFLAGS) -MT libmediascan_la-folder_mon_win32.lo -MD -MP -MF $(DEPDIR)/libmediascan_la-folder_mon_win32.Tpo -c -o libmediascan_la-folder_mon_win32.lo `test -f 'folder_mon_win32.c' || echo '$(srcdir)/'`folder_mon_win32.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libmediascan_la-folder_mon_win32.Tpo $(DEPDIR)/libmediascan_la-folder_mon_win32.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='folder_mon_win32.c' object='libmediascan_la-folder_mon_win32.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libmediascan_la_CFLAGS) $(CFLAGS) -c -o libmediascan_la-folder_mon_win32.lo `test -f 'folder_mon_win32.c' || echo '$(srcdir)/'`folder_mon_win32.c
 
 .m.o:
 @am__fastdepOBJC_TRUE@	$(AM_V_OBJC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
