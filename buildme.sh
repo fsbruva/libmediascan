@@ -99,15 +99,15 @@ fi
 # Set default values prior to potential overwrite
 # Check to see if CC and CXX are already defined
 if [[ ! -z "$CC" ]]; then
-   GCC="$CC"
+    GCC="$CC"
 else
-   # Take a guess
-   GCC=gcc
+    # Take a guess
+    GCC=gcc
 fi
 if [[ ! -z "$CXX" ]]; then
-   GXX="$CXX"
+    GXX="$CXX"
 else
-   GXX=g++
+    GXX=g++
 fi
 
 # Set default values prior to potential overwrite
@@ -759,16 +759,26 @@ function build_giflib {
     tar_wrapper zxf $GIFLIB_PREFIX.tar.gz
     cd $GIFLIB_PREFIX
     . ../update-config.sh
+
+    # GIFLIB maintainer abandoned automake tools, and hardcoded the prefix /usr/local
+    sed -i.old "s#^PREFIX.*#PREFIX\ =\ $BUILD#g" Makefile
+
+    CC=$GCC \
     CFLAGS="$CFLAGS_COMMON -O3" \
     LDFLAGS="$LDFLAGS_COMMON -O3" \
-        ./configure -q --prefix=$BUILD \
-        --disable-dependency-tracking
-    $MAKE -j $NUM_MAKE_JOBS
+    $MAKE -j $NUM_MAKE_JOBS libgif.a
+
+    CC=$GCC \
+    CFLAGS="$CFLAGS_COMMON -O3" \
+    LDFLAGS="$LDFLAGS_COMMON -O3" \
+    $MAKE -j $NUM_MAKE_JOBS libgif.so
     if [ $? != 0 ]; then
         echo "make failed"
         exit $?
     fi
-    $MAKE install
+    # Known bug - the shared library isn't built, but the make install job tried to move it anyways
+    $MAKE install-lib
+    $MAKE install-include
     cd ..
 
     rm -rf $GIFLIB_PREFIX
