@@ -538,6 +538,7 @@ program_transform_name = @program_transform_name@
 psdir = @psdir@
 pthread_CFLAGS = @pthread_CFLAGS@
 pthread_LIBS = @pthread_LIBS@
+runstatedir = @runstatedir@
 sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 srcdir = @srcdir@
