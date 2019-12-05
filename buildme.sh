@@ -774,10 +774,6 @@ function build_giflib {
     LDFLAGS="$LDFLAGS_COMMON -O3" \
     $MAKE -j $NUM_MAKE_JOBS libgif.a
 
-    CC=$GCC \
-    CFLAGS="$CFLAGS_COMMON -O3" \
-    LDFLAGS="$LDFLAGS_COMMON -O3" \
-    $MAKE -j $NUM_MAKE_JOBS libgif.so
     if [ $? != 0 ]; then
         echo "make failed"
         exit $?
