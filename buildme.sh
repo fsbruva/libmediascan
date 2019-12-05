@@ -760,6 +760,12 @@ function build_giflib {
     cd $GIFLIB_PREFIX
     . ../update-config.sh
 
+    # Upstream has stripped out the previous autotools-based build system and their
+    # Makefile doesn't work on macOS. See https://sourceforge.net/p/giflib/bugs/133/
+    if [[ "$OS" = "Darwin" ]]; then
+        patch -p0 < ../giflib-Makefile.patch
+    fi
+
     # GIFLIB maintainer abandoned automake tools, and hardcoded the prefix /usr/local
     sed -i.old "s#^PREFIX.*#PREFIX\ =\ $BUILD#g" Makefile
 
