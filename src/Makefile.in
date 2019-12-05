@@ -96,7 +96,7 @@ target_triplet = @target@
 
 #libmediascan_la_SOURCES += mediascan_win32.c win_iconv.c win32_port.c
 @MINGW_TRUE@am__append_4 = mediascan_win32.c win32_port.c
-@MINGW_TRUE@am__append_5 = win32config.h unistd.h mediascan_win32.h win32_port.h
+@MINGW_TRUE@am__append_5 = win32config.h $(top_srcdir)/win32/include/unistd.h mediascan_win32.h win32_port.h
 @MINGW_TRUE@am__append_6 = -no-undefined
 subdir = src
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -267,7 +267,8 @@ am__include_HEADERS_DIST = audio.h buffer.h common.h error.h \
 	util.h video.h database.h tag.h tag_item.h \
 	libdlna/containers.h libdlna/dlna.h libdlna/dlna_internals.h \
 	libdlna/profiles.h NSString+SymlinksAndAliases.h win32config.h \
-	unistd.h mediascan_win32.h win32_port.h
+	$(top_srcdir)/win32/include/unistd.h mediascan_win32.h \
+	win32_port.h
 HEADERS = $(include_HEADERS)
 am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) $(LISP)
 # Read a list of newline-separated strings from the standard input,
@@ -434,7 +435,6 @@ program_transform_name = @program_transform_name@
 psdir = @psdir@
 pthread_CFLAGS = @pthread_CFLAGS@
 pthread_LIBS = @pthread_LIBS@
-runstatedir = @runstatedir@
 sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 srcdir = @srcdir@

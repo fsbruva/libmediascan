@@ -36,7 +36,7 @@ endif
 if MINGW
 #libmediascan_la_SOURCES += mediascan_win32.c win_iconv.c win32_port.c
 libmediascan_la_SOURCES += mediascan_win32.c win32_port.c
-include_HEADERS += win32config.h unistd.h mediascan_win32.h win32_port.h
+include_HEADERS += win32config.h $(top_srcdir)/win32/include/unistd.h mediascan_win32.h win32_port.h
 libmediascan_la_LDFLAGS += -no-undefined
 endif
 
