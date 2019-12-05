@@ -4,12 +4,12 @@
 #
 # Filename: buildme.sh
 # Description:
-# 	This script builds all dependency libraries for libmediascan, the library
+#   This script builds all dependency libraries for libmediascan, the library
 #   itself, and then the binary Perl module. It builds a statically linked version.
 #       It first parses the input values for any custom parameters. Then it checks
 #       to ensure all necessary prerequites are present on the the system. 
 #
-#	See the README.md for supported OSes and build notes/preparations.
+#   See the README.md for supported OSes and build notes/preparations.
 #
 # Parameters:
 #    lmsbase    Optional string containing the path to the desired installation
@@ -24,7 +24,7 @@
 #               This overrides default behavior of searching the PATH for Perl.
 #
 #    alldeps    Flag indicating that the build should build all dependencies,
-#				rather than use any from host (only applies to MinGW). 
+#               rather than use any from host (only applies to MinGW).
 #
 ################################################################################
 # Initial values prior to argument parsing
@@ -205,21 +205,21 @@ case "$OS" in
             exit
         fi
         MAKE_BIN=/usr/local/bin/gmake
-		PERL_MAKE=$MAKE_BIN
+        PERL_MAKE=$MAKE_BIN
 
-	for i in libz ; do
+    for i in libz ; do
             #On FreeBSD flag -r should be used, there is no -p
             if ! ( /sbin/ldconfig -r | grep -q "${i}.so" ) ; then
                 echo "$i not found - please install it"
-	        exit 1
-	    fi
-	done
-	for hdr in "zlib.h"; do
-	    if [ -z "$(find /usr/include/ -name ${hdr} -print)" ]; then
-	        echo "$hdr not found - please install appropriate development package"
-	        exit 1
-	    fi
-	done
+            exit 1
+        fi
+    done
+    for hdr in "zlib.h"; do
+        if [ -z "$(find /usr/include/ -name ${hdr} -print)" ]; then
+            echo "$hdr not found - please install appropriate development package"
+            exit 1
+        fi
+    done
     ;;
     SunOS)
         if [ ! -x /usr/bin/gmake ]; then
@@ -227,7 +227,7 @@ case "$OS" in
             exit
         fi
         MAKE_BIN=/usr/bin/gmake
-		PERL_MAKE=$MAKE_BIN
+        PERL_MAKE=$MAKE_BIN
         # On Solaris, both i386 and x64 version of Perl exist.
         # If it is i386, and Perl uses 64 bit integers, then an additional flag is needed.
         if [[ "$ARCH" =~ ^.*-64int$ ]]; then
@@ -244,15 +244,15 @@ case "$OS" in
         for i in libz ; do
             if ! /sbin/ldconfig -p | grep -q "${i}.so" ; then
                 echo "$i not found - please install it"
-	        exit 1
-	    fi
-	done
-	for hdr in "zlib.h"; do
-	    if [ -z "$(find /usr/include/ -name ${hdr} -print)" ]; then
-	        echo "$hdr not found - please install appropriate development package"
-	        exit 1
-	    fi
-	done
+            exit 1
+        fi
+    done
+    for hdr in "zlib.h"; do
+        if [ -z "$(find /usr/include/ -name ${hdr} -print)" ]; then
+            echo "$hdr not found - please install appropriate development package"
+            exit 1
+        fi
+    done
     ;;
     Darwin)
         # figure out macOS version and customize SDK options (do not care about patch ver)
@@ -285,69 +285,69 @@ case "$OS" in
         CXXFLAGS_COMMON="$CXXFLAGS_COMMON $MACOS_ARCH $MACOS_FLAGS"
         LDFLAGS_COMMON="$LDFLAGS_COMMON $MACOS_ARCH $MACOS_FLAGS"
     ;;
-	MINGW*)
-		# Since we might build the i686 version using msys64, we might 
-		BUILD=$BUILD/$MINGW_CHOST
-		
-		# Only keep the part we care about, to avoid using globs for OS matches
-		OS=MINGW
-		# Figure out if we're using ActiveState Perl (which requires dmake)
-		
-		if ( $PERL_BIN -v | grep -q "ActiveState" ) ; then
-			# We'll need to make sure we have dmake, since ActiveState requires it
-			if [ -z "$(pacman -Qi $MINGW_PACKAGE_PREFIX-dmake )" ] ; then
-				echo "ActiveState Perl requires ${MINGW_PACKAGE_PREFIX}-dmake - please install it"
-				exit 1
-			fi
-			USE_DMAKE=1
-		fi
-		
-		# Check to see we have all our generic pre-requisites installed
+    MINGW*)
+        # Since we might build the i686 version using msys64, we might 
+        BUILD=$BUILD/$MINGW_CHOST
+
+        # Only keep the part we care about, to avoid using globs for OS matches
+        OS=MINGW
+        # Figure out if we're using ActiveState Perl (which requires dmake)
+
+        if ( $PERL_BIN -v | grep -q "ActiveState" ) ; then
+            # We'll need to make sure we have dmake, since ActiveState requires it
+            if [ -z "$(pacman -Qi $MINGW_PACKAGE_PREFIX-dmake )" ] ; then
+                echo "ActiveState Perl requires ${MINGW_PACKAGE_PREFIX}-dmake - please install it"
+                exit 1
+            fi
+            USE_DMAKE=1
+        fi
+
+        # Check to see we have all our generic pre-requisites installed
         for i in gettext-devel patch pkg-config rsync ; do
-			if [ -z "$(pacman -Qi ${i} )" ]; then
+            if [ -z "$(pacman -Qi ${i} )" ]; then
                 echo "$i not found - please install it"
-				exit 1
-			fi
-		done
-		# Check to see we have all our arch specific build pre-requisites installed
+                exit 1
+            fi
+        done
+        # Check to see we have all our arch specific build pre-requisites installed
         for i in make gcc SDL2 nasm gettext libtool dlfcn ; do
-			PAC_NAME="${MINGW_PACKAGE_PREFIX}-${i}"
+            PAC_NAME="${MINGW_PACKAGE_PREFIX}-${i}"
             if [ -z "$( pacman -Qi ${PAC_NAME} )" ]; then
                 echo "$PAC_NAME not found - please install it"
-				exit 1
-			fi
-		done
-		MAKE_BIN=mingw32-make
-		# MinGW's gcc libs are in a directory named the gcc numeric version, which
-		# is extremely likely to change. Thus, this deep magic asks the compiler
-		# where its libgcc file is, then later passes that directory the Makefile.PL
-		# so Perl can find the necessary libs.
-		GCC_DIR=$(dirname -- `gcc --print-libgcc-file-name`)
-		
-		CFLAGS_COMMON="-DUNICODE -D_UNICODE -DWIN32 -Wall -fPIC -I${MSYSTEM_PREFIX}/include -I${MSYSTEM_PREFIX}/${MINGW_CHOST}/include -I/usr/include "
-		CXXFLAGS_COMMON="-DUNICODE -D_UNICODE -DWIN32 -Wall -fPIC -I${MSYSTEM_PREFIX}/include -I${MSYSTEM_PREFIX}/${MINGW_CHOST}/include -I/usr/include"
-		LDFLAGS_COMMON="-DWIN32 -Wall -fPIC -L${MSYSTEM_PREFIX}/lib -L${MSYSTEM_PREFIX}/${MINGW_CHOST}/lib -L/usr/lib"
-		
-	    # Figure out if we're using MinGW32 or MinGW64
-		if [[ "$MSYSTEM" == "MINGW64" ]] ; then
-			CFLAGS_COMMON="-DWIN64 ${CFLAGS_COMMON}"
-			CXXFLAGS_COMMON="-DWIN64 ${CXXFLAGS_COMMON}"
-			LDFLAGS_COMMON="-DWIN64 ${LDFLAGS_COMMON}"
-		fi
+                exit 1
+            fi
+        done
+        MAKE_BIN=mingw32-make
+        # MinGW's gcc libs are in a directory named the gcc numeric version, which
+        # is extremely likely to change. Thus, this deep magic asks the compiler
+        # where its libgcc file is, then later passes that directory the Makefile.PL
+        # so Perl can find the necessary libs.
+        GCC_DIR=$(dirname -- `gcc --print-libgcc-file-name`)
 
-		# Check if we're going to be building all the prereq's
-		if [[ $ALL_DEPS == 0 ]] ; then
-			# Check for the stock prereq's
-			for i in libexif libpng giflib libjpeg-turbo; do
-				PAC_NAME="${MINGW_PACKAGE_PREFIX}-${i}"
-				if [ -z "$( pacman -Qi ${PAC_NAME} )" ]; then
-					echo "$PAC_NAME not found - please install it"
-					exit 1
-				fi
-			done
-		fi
-		
-	;;
+        CFLAGS_COMMON="-DUNICODE -D_UNICODE -DWIN32 -Wall -fPIC -I${MSYSTEM_PREFIX}/include -I${MSYSTEM_PREFIX}/${MINGW_CHOST}/include -I/usr/include "
+        CXXFLAGS_COMMON="-DUNICODE -D_UNICODE -DWIN32 -Wall -fPIC -I${MSYSTEM_PREFIX}/include -I${MSYSTEM_PREFIX}/${MINGW_CHOST}/include -I/usr/include"
+        LDFLAGS_COMMON="-DWIN32 -Wall -fPIC -L${MSYSTEM_PREFIX}/lib -L${MSYSTEM_PREFIX}/${MINGW_CHOST}/lib -L/usr/lib"
+
+        # Figure out if we're using MinGW32 or MinGW64
+        if [[ "$MSYSTEM" == "MINGW64" ]] ; then
+            CFLAGS_COMMON="-DWIN64 ${CFLAGS_COMMON}"
+            CXXFLAGS_COMMON="-DWIN64 ${CXXFLAGS_COMMON}"
+            LDFLAGS_COMMON="-DWIN64 ${LDFLAGS_COMMON}"
+        fi
+
+        # Check if we're going to be building all the prereq's
+        if [[ $ALL_DEPS == 0 ]] ; then
+            # Check for the stock prereq's
+            for i in libexif libpng giflib libjpeg-turbo; do
+                PAC_NAME="${MINGW_PACKAGE_PREFIX}-${i}"
+                if [ -z "$( pacman -Qi ${PAC_NAME} )" ]; then
+                    echo "$PAC_NAME not found - please install it"
+                    exit 1
+                fi
+            done
+        fi
+
+    ;;
 esac
 
 # Export the OS specific values
@@ -458,14 +458,14 @@ function build_all {
 function build {
     case "$1" in
         Media::Scan)
-			cd deplibs
+            cd deplibs
             build_ffmpeg
             build_libexif
             build_libjpeg
             build_libpng
             build_giflib
             build_bdb
-			cd ..
+            cd ..
 
             # build libmediascan
             # Early macOS versions did not link library correctly libjpeg due to
@@ -474,8 +474,8 @@ function build {
             CFLAGS="-I$BUILD/include $CFLAGS_COMMON -O3" \
             LDFLAGS="-L$BUILD/lib $LDFLAGS_COMMON -O3" \
             OBJCFLAGS="-L$BUILD/lib $CFLAGS_COMMON -O3" \
-			PKG_CONFIG="pkg-config --static" \
-			PKG_CONFIG_PATH="$PKG_CONFIG_PATH:$BUILD/lib/pkgconfig:$MINGW_PREFIX/lib/pkgconfig" \
+            PKG_CONFIG="pkg-config --static" \
+            PKG_CONFIG_PATH="$PKG_CONFIG_PATH:$BUILD/lib/pkgconfig:$MINGW_PREFIX/lib/pkgconfig" \
                 ./configure --prefix=$BUILD --with-bdb=$BUILD --disable-shared --disable-dependency-tracking
             $MAKE
             if [ $? != 0 ]; then
@@ -486,24 +486,24 @@ function build {
             
             # build Media::Scan
             cd bindings/perl
-            
-			# LMS will re-use the lms-include location for all other libs/headers
+
+            # LMS will re-use the lms-include location for all other libs/headers
             MSOPTS="--with-static --with-lms-includes=$BUILD/include"
-			
-			# MinGW's libgcc and libstdc++ aren't with the other libs - need to explicitly pass it
-			if [[ "$OS" == "MINGW" ]]; then
-				MSOPTS="$MSOPTS --with-CC-lib-path=$GCC_DIR"
-			fi
-			
-			# If we're using ActiveState Perl, then we need to use dmake instead
-			if [[ "$OS" == "MINGW" && $USE_DMAKE == 1 ]]; then 
-				PERL_MAKE=dmake
-			else
-				PERL_MAKE=$MAKE
-			fi
-			
-			MSOPTS="${MSOPTS} --use-make=${PERL_MAKE}"
-			
+
+            # MinGW's libgcc and libstdc++ aren't with the other libs - need to explicitly pass it
+            if [[ "$OS" == "MINGW" ]]; then
+                MSOPTS="$MSOPTS --with-CC-lib-path=$GCC_DIR"
+            fi
+
+            # If we're using ActiveState Perl, then we need to use dmake instead
+            if [[ "$OS" == "MINGW" && $USE_DMAKE == 1 ]]; then
+                PERL_MAKE=dmake
+            else
+                PERL_MAKE=$MAKE
+            fi
+
+            MSOPTS="${MSOPTS} --use-make=${PERL_MAKE}"
+
             # FreeBSD and macOS don't have GNU gettext in the base. This only prevents exif logging.
             if [[ "$OS" == "FreeBSD" || "$OS" == "Darwin" ]]; then
                 MSOPTS="${MSOPTS} --omit-intl"
@@ -710,7 +710,7 @@ function build_libpng {
     fi
 
     # build libpng
-    LIBPNG_PREFIX="libpng-1.6.36"
+    LIBPNG_PREFIX="libpng-1.6.37"
     tar_wrapper zxf $LIBPNG_PREFIX.tar.gz
     cd $LIBPNG_PREFIX
 
@@ -735,9 +735,9 @@ function build_libpng {
 }
 
 function build_giflib {
-	if [[ "$OS" == "MINGW" && $ALL_DEPS == 0 ]]; then
-		return
-	fi
+    if [[ "$OS" == "MINGW" && $ALL_DEPS == 0 ]]; then
+        return
+    fi
 
     if [[ -f $BUILD/include/gif_lib.h ]]; then
         # Determine the version of the last-built giflib
@@ -823,7 +823,7 @@ function build_ffmpeg {
         --enable-demuxer=asf --enable-demuxer=avi --enable-demuxer=flv --enable-demuxer=h264 \
         --enable-demuxer=matroska --enable-demuxer=mov --enable-demuxer=mpegps --enable-demuxer=mpegts --enable-demuxer=mpegvideo \
         --enable-protocol=file --cc=$GCC --cxx=$GXX \
-		--enable-static --disable-shared --disable-programs --disable-doc"
+        --enable-static --disable-shared --disable-programs --disable-doc"
 
     if [ "$MACHINE" = "padre" ]; then
         FFOPTS="${FFOPTS} --arch=sparc"
@@ -848,15 +848,15 @@ function build_ffmpeg {
     if [ "$OS" = "SunOS" ]; then
         FFOPTS="${FFOPTS} --disable-asm"
     fi
-	
-	# MinGW needs some extra flags set
-	if [[ "$OS" == "MINGW" ]]; then
-		# The FFMpeg configure script redefines mingw64 as mingw32, so just make it mingw32
-		FFOPTS="${FFOPTS} --target-os=mingw32 --arch=${MSYSTEM_CARCH%%-*}"
-	fi
+
+    # MinGW needs some extra flags set
+    if [[ "$OS" == "MINGW" ]]; then
+        # The FFMpeg configure script redefines mingw64 as mingw32, so just make it mingw32
+        FFOPTS="${FFOPTS} --target-os=mingw32 --arch=${MSYSTEM_CARCH%%-*}"
+    fi
 
     if [ "$OS" = "Darwin" ]; then
-        # Build 64-bit fork	
+        # Build 64-bit fork
         if [ "$MACOS_VER" -ge 1006 ]; then
             # Build x86_64 versions of turbo - 64 bit OS was introduced in 10.6
             CFLAGS="-arch x86_64 -O3 -fPIC $MACOS_FLAGS" \
@@ -972,12 +972,12 @@ function build_bdb {
     if [ "$MACHINE" = "padre" ]; then
       MUTEX="--enable-posixmutexes"
     fi
-	
-	MINGW_FLAGS=""
-	# TARGET flags are necessary so we can manage MinGW
-	if [[ "$OS" == "MINGW" ]]; then
-		MINGW_FLAGS="--enable-mingw --build=${MINGW_CHOST} --host=${MINGW_CHOST} --target=${MINGW_CHOST}"
-	fi
+
+    MINGW_FLAGS=""
+    # TARGET flags are necessary so we can manage MinGW
+    if [[ "$OS" == "MINGW" ]]; then
+        MINGW_FLAGS="--enable-mingw --build=${MINGW_CHOST} --host=${MINGW_CHOST} --target=${MINGW_CHOST}"
+    fi
 
     # build bdb
     DB_PREFIX="db-6.2.38"
