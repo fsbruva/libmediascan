@@ -1,17 +1,16 @@
 stage: "Trusty (14.04)"
+dist: trusty
 language: perl
 perl:
-  - "5.16"
-  - "5.18"
-  - "5.18-shrplib"
-  - "5.20"
-  - "5.20-shrplib"
   - "5.22"
-  - "5.22-shrplib"
   - "5.24"
   - "5.24-shrplib"
   - "5.26"
   - "5.26-shrplib"
+  - "5.28"
+  - "5.28-shrplib"
+  - "5.30"
+  - "5.30-shrplib"
 os:
   - linux
 env:
