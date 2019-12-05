@@ -768,6 +768,8 @@ function build_giflib {
 
     # GIFLIB maintainer abandoned automake tools, and hardcoded the prefix /usr/local
     sed -i.old "s#^PREFIX.*#PREFIX\ =\ $BUILD#g" Makefile
+    # We need to omit some lines from the install-lib rule, because libgif.so isn't built
+    sed -i.old '135,137d' Makefile
 
     CC=$GCC \
     CFLAGS="$CFLAGS_COMMON -O3" \
