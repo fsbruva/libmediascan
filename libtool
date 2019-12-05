@@ -165,7 +165,7 @@ lock_old_archive_extraction=no
 LTCC="gcc"
 
 # LTCC compiler flags.
-LTCFLAGS="-I/c/home/Raena/build/x86_64-w64-mingw/include -I/c/home/Raena/build/x86_64-w64-mingw/include -DWIN32 -DWIN64 -Wall -fPIC -I/c/msys64/usr/include -I/c/msys64/mingw64/x86_64-w64-mingw32/include -O3 "
+LTCFLAGS="-I/usr/local/src/libmediascan/build/x86_64-w64-mingw32/include -I/usr/local/src/libmediascan/build/x86_64-w64-mingw32/include -DWIN64 -DUNICODE -D_UNICODE -DWIN32 -Wall -fPIC -I/mingw64/include -I/mingw64/x86_64-w64-mingw32/include -I/usr/include  -O3"
 
 # Take the output of nm and produce a listing of raw symbols and C names.
 global_symbol_pipe="sed -n -e 's/^.*[	 ]\\([ABCDGIRSTW][ABCDGIRSTW]*\\)[	 ][	 ]*\\([_A-Za-z][_A-Za-z0-9]*\\)\\{0,1\\}\$/\\1 \\2 \\2/p' | sed '/ __gnu_lto/d'"
