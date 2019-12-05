@@ -215,12 +215,12 @@ for my $incdir ( $ffmpeg_inc, @check ) {
             }
 
             push @LIBS, '-lm -lz';
-            push @LIBS, '-lbz2' if ( $BZ2 || (!$LMSLA) ) ;
+            push @LIBS, '-lbz2' if ( $BZ2 && $LMSLA ) ;
         }
         else {
             push @LIBS, '-lavformat -lavcodec -lm -lz -lswscale -lavutil';
-            # If we don't have the .la file, assume we need bz2
-            push @LIBS, '-lbz2' if ( $BZ2 || (!$LMSLA) ) ;
+            # If we don't have the .la file, assume we don't need bz2
+            push @LIBS, '-lbz2' if ( $BZ2 && $LMSLA ) ;
         }
 
         print "Using ffmpeg from $ffmpeg_inc\n";
