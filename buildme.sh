@@ -755,7 +755,7 @@ function build_giflib {
     fi
 
     # build giflib
-    GIFLIB_PREFIX="giflib-5.1.4"
+    GIFLIB_PREFIX="giflib-5.2.1"
     tar_wrapper zxf $GIFLIB_PREFIX.tar.gz
     cd $GIFLIB_PREFIX
     . ../update-config.sh
