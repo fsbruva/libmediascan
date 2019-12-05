@@ -24,6 +24,7 @@ Makefile.in
 src/jenkins/.dirstamp
 src/libdlna/.dirstamp
 build/*
+deplibs/*/
 
 # Mac files
 .DS_Store
