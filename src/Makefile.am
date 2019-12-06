@@ -19,6 +19,7 @@ libmediascan_la_SOURCES = audio.c buffer.c database.c error.c \
 libmediascan_la_CFLAGS = -Wall -I$(top_srcdir)/include $(zlib_CFLAGS) $(bzip2_CFLAGS) $(jpeg_CFLAGS) $(png_CFLAGS) $(gif_CFLAGS) $(iconv_CFLAGS) $(intl_CFLAGS) $(exif_CFLAGS) $(avutil_CFLAGS) $(swscale_CFLAGS) $(avcodec_CFLAGS) $(avformat_CFLAGS) $(db_CFLAGS)
 
 libmediascan_la_LDFLAGS = -version-info 0:0:0
+AM_LIBTOOLFLAGS	= --tag=CC
 
 if LINUXBSD
 libmediascan_la_SOURCES += mediascan_unix.c mediascan_linux.c
