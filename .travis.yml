@@ -42,6 +42,7 @@ jobs:
 # Matrix hack: Declare same stage multiple times...
     - &xenial_alias
       stage: "Xenial (16.04)"
+      arch: amd64
       dist: xenial
       language: perl
       perl: "5.22"
@@ -95,6 +96,7 @@ jobs:
     - &bionic_alias
       stage: "Bionic (18.04)"
       dist: bionic
+      arch: amd64
       language: perl
       perl: "5.22"
       env: CC=gcc && CXX=g++
@@ -148,6 +150,7 @@ jobs:
 # Matrix hack: Declare same stage multiple times...
     - &macOS_alias
       stage: macOS
+      arch: amd64
       os: osx
       osx_image: xcode6.4
       language: cpp
