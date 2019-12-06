@@ -68,6 +68,76 @@ jobs:
     - <<: *xenial_alias
       perl: "5.26-shrplib"
       env: CC=clang && CXX=clang++
+      perl: "5.28"
+    - <<: *bionic_alias
+      perl: "5.28"
+      env: CC=clang && CXX=clang++
+    - <<: *bionic_alias
+      perl: "5.28-shrplib"
+    - <<: *bionic_alias
+      perl: "5.28-shrplib"
+      env: CC=clang && CXX=clang++
+      perl: "5.30"
+    - <<: *bionic_alias
+      perl: "5.30"
+      env: CC=clang && CXX=clang++
+    - <<: *bionic_alias
+      perl: "5.30-shrplib"
+    - <<: *bionic_alias
+      perl: "5.30-shrplib"
+      env: CC=clang && CXX=clang++
+
+# Bionic may not have the same Perl versions available
+# Matrix hack: Declare same stage multiple times...
+    - &bionic_alias
+      stage: "Bionic (18.04)"
+      dist: bionic
+      language: perl
+      perl: "5.22"
+      env: CC=gcc && CXX=g++
+
+    # Subsequent instances use alias to test different versions
+    - <<: *bionic_alias
+      perl: "5.22"
+      env: CC=clang && CXX=clang++
+    - <<: *bionic_alias
+      perl: "5.24"
+    - <<: *bionic_alias
+      perl: "5.24"
+      env: CC=clang && CXX=clang++
+    - <<: *bionic_alias
+      perl: "5.24-shrplib"
+    - <<: *bionic_alias
+      perl: "5.24-shrplib"
+      env: CC=clang && CXX=clang++
+    - <<: *bionic_alias
+      perl: "5.26"
+    - <<: *bionic_alias
+      perl: "5.26"
+      env: CC=clang && CXX=clang++
+    - <<: *bionic_alias
+      perl: "5.26-shrplib"
+    - <<: *bionic_alias
+      perl: "5.26-shrplib"
+      env: CC=clang && CXX=clang++
+      perl: "5.28"
+    - <<: *bionic_alias
+      perl: "5.28"
+      env: CC=clang && CXX=clang++
+    - <<: *bionic_alias
+      perl: "5.28-shrplib"
+    - <<: *bionic_alias
+      perl: "5.28-shrplib"
+      env: CC=clang && CXX=clang++
+      perl: "5.30"
+    - <<: *bionic_alias
+      perl: "5.30"
+      env: CC=clang && CXX=clang++
+    - <<: *bionic_alias
+      perl: "5.30-shrplib"
+    - <<: *bionic_alias
+      perl: "5.30-shrplib"
+      env: CC=clang && CXX=clang++
 
 # The macOS build images do not use perlbrew, so must masquerade as C++
 # projects to enable build using stock Perl. Matrix "env:" needs to be
@@ -105,6 +175,16 @@ jobs:
       osx_image: xcode10
     - <<: *macOS_alias
       osx_image: xcode10.1
+    - <<: *macOS_alias
+      osx_image: xcode10.2
+    - <<: *macOS_alias
+      osx_image: xcode10.3
+    - <<: *macOS_alias
+      osx_image: xcode11
+    - <<: *macOS_alias
+      osx_image: xcode11.1
+    - <<: *macOS_alias
+      osx_image: xcode11.2
 
 install: true
 
