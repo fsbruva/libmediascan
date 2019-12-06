@@ -835,7 +835,7 @@ function build_ffmpeg {
         --enable-demuxer=asf --enable-demuxer=avi --enable-demuxer=flv --enable-demuxer=h264 \
         --enable-demuxer=matroska --enable-demuxer=mov --enable-demuxer=mpegps --enable-demuxer=mpegts --enable-demuxer=mpegvideo \
         --enable-protocol=file --cc=$GCC --cxx=$GXX \
-        --enable-static --disable-shared --disable-programs --disable-doc"
+        --enable-static --disable-shared --disable-programs --disable-doc --quiet"
 
     if [ "$MACHINE" = "padre" ]; then
         FFOPTS="${FFOPTS} --arch=sparc"
@@ -901,7 +901,7 @@ function build_ffmpeg {
             $MAKE clean
             CFLAGS="-arch i386 -O3 $MACOS_FLAGS" \
             LDFLAGS="-arch i386 -O3 $MACOS_FLAGS" \
-                ./configure -q $FFOPTS --arch=x86_32
+                ./configure $FFOPTS --arch=x86_32
 
             $MAKE -j $NUM_MAKE_JOBS
             if [ $? != 0 ]; then
@@ -1000,7 +1000,7 @@ function build_bdb {
 
     CFLAGS="$CFLAGS_COMMON -O3" \
     LDFLAGS="$CFLAGS_COMMON -O3 " \
-        ../dist/configure --prefix=$BUILD $MUTEX $MINGW_FLAGS \
+        ../dist/configure -q --prefix=$BUILD $MUTEX $MINGW_FLAGS \
         --with-cryptography=no -disable-hash --disable-queue --disable-replication --disable-statistics --disable-verify \
         --disable-dependency-tracking --disable-shared --enable-static --enable-smallbuild
     $MAKE -j $NUM_MAKE_JOBS
