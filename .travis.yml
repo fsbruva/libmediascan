@@ -69,21 +69,21 @@ jobs:
       perl: "5.26-shrplib"
       env: CC=clang && CXX=clang++
       perl: "5.28"
-    - <<: *bionic_alias
+    - <<: *xenial_alias
       perl: "5.28"
       env: CC=clang && CXX=clang++
-    - <<: *bionic_alias
+    - <<: *xenial_alias
       perl: "5.28-shrplib"
-    - <<: *bionic_alias
+    - <<: *xenial_alias
       perl: "5.28-shrplib"
       env: CC=clang && CXX=clang++
       perl: "5.30"
-    - <<: *bionic_alias
+    - <<: *xenial_alias
       perl: "5.30"
       env: CC=clang && CXX=clang++
-    - <<: *bionic_alias
+    - <<: *xenial_alias
       perl: "5.30-shrplib"
-    - <<: *bionic_alias
+    - <<: *xenial_alias
       perl: "5.30-shrplib"
       env: CC=clang && CXX=clang++
 
