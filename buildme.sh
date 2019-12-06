@@ -483,7 +483,7 @@ function build {
                 exit $?
             fi
             $MAKE install
-            
+
             # build Media::Scan
             cd bindings/perl
 
@@ -762,9 +762,7 @@ function build_giflib {
 
     # Upstream has stripped out the previous autotools-based build system and their
     # Makefile doesn't work on macOS. See https://sourceforge.net/p/giflib/bugs/133/
-    if [[ "$OS" = "Darwin" ]]; then
-        patch -p0 < ../giflib-Makefile.patch
-    fi
+    patch -p0 < ../giflib-Makefile.patch
 
     # GIFLIB maintainer abandoned automake tools, and hardcoded the prefix /usr/local
     sed -i.old "s#^PREFIX.*#PREFIX\ =\ $BUILD#g" Makefile
