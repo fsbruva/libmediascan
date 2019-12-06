@@ -1,6 +1,9 @@
 stage: "Trusty (14.04)"
 dist: trusty
 language: perl
+arch:
+  - amd64
+  - arm64
 perl:
   - "5.22"
   - "5.24"
