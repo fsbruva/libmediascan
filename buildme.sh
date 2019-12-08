@@ -26,6 +26,12 @@
 #    alldeps    Flag indicating that the build should build all dependencies,
 #               rather than use any from host (only applies to MinGW).
 #
+#    loud       Flag indicating that the build should not be quiet during the
+#               configure step. This allows debugging runs in Travis-ci by
+#               enabling this flag for the build step within a custom .travis.yml
+#               config on the webgui. This prevents excessive commits done just
+#               to bisect failed builds.
+#
 ################################################################################
 # Initial values prior to argument parsing
 # Require modules to pass tests
@@ -35,6 +41,7 @@ CLEAN=1
 NUM_MAKE_JOBS=1
 ALL_DEPS=0
 USE_DMAKE=0
+QUIET_FLAG="--quiet"
 
 function usage {
     cat <<EOF
@@ -46,19 +53,23 @@ $0 [args] [target]
 -p <perlbin > set custom perl binary (other than one in PATH)
 -t            do not run tests
 -a            build all dependencies, skip native (MinGW only)
+-l            conduct cacophonous configure (non-quiet build)
 
 target: make target - if not specified all will be built
 
 EOF
 }
 
-while getopts haci:j:p:t opt; do
+while getopts hacli:j:p:t opt; do
   case $opt in
+  a)
+      ALL_DEPS=1
+      ;;
   c)
       CLEAN=0
       ;;
-  a)
-      ALL_DEPS=1
+  l)
+      QUIET_FLAG=""
       ;;
   i)
       LMSBASEDIR=$OPTARG
@@ -546,7 +557,7 @@ function build_libexif {
 
     CFLAGS="$CFLAGS_COMMON -O3" \
     LDFLAGS="$LDFLAGS_COMMON -O3" \
-        ./configure -q --prefix=$BUILD \
+        ./configure $QUIET_FLAG --prefix=$BUILD \
         --disable-dependency-tracking
     $MAKE -j $NUM_MAKE_JOBS
     if [ $? != 0 ]; then
@@ -582,7 +593,7 @@ function build_libjpeg {
             CFLAGS="-O3 $MACOS_FLAGS" \
             CXXFLAGS="-O3 $MACOS_FLAGS" \
             LDFLAGS="$MACOS_FLAGS" \
-                ./configure -q --prefix=$BUILD --host x86_64-apple-darwin NASM=/usr/local/bin/nasm \
+                ./configure $QUIET_FLAG --prefix=$BUILD --host x86_64-apple-darwin NASM=/usr/local/bin/nasm \
                 --disable-dependency-tracking
             $MAKE -j $NUM_MAKE_JOBS
             if [ $? != 0 ]; then
@@ -614,7 +625,7 @@ function build_libjpeg {
             CFLAGS="-O3 -m32 $MACOS_FLAGS" \
             CXXFLAGS="-O3 -m32 $MACOS_FLAGS" \
             LDFLAGS="-m32 $MACOS_FLAGS" \
-                ./configure -q --host i686-apple-darwin --prefix=$BUILD NASM=/usr/local/bin/nasm \
+                ./configure $QUIET_FLAG --host i686-apple-darwin --prefix=$BUILD NASM=/usr/local/bin/nasm \
                 --disable-dependency-tracking
             $MAKE -j $NUM_MAKE_JOBS
             if [ $? != 0 ]; then
@@ -637,7 +648,7 @@ function build_libjpeg {
 
             CFLAGS="-arch ppc -O3 $MACOS_FLAGS" \
             LDFLAGS="-arch ppc -O3 $MACOS_FLAGS" \
-                ./configure -q --prefix=$BUILD \
+                ./configure $QUIET_FLAG --prefix=$BUILD \
                 --disable-dependency-tracking
             $MAKE -j $NUM_MAKE_JOBS
             if [ $? != 0 ]; then
@@ -668,7 +679,7 @@ function build_libjpeg {
         patch -p0 < ../libjpeg-turbo-jmorecfg.h.patch
 
         CFLAGS="$CFLAGS_COMMON" CXXFLAGS="$CXXFLAGS_COMMON" LDFLAGS="$LDFLAGS_COMMON" \
-            ./configure -q --prefix=$BUILD --disable-dependency-tracking
+            ./configure $QUIET_FLAG --prefix=$BUILD --disable-dependency-tracking
         $MAKE -j $NUM_MAKE_JOBS
         if [ $? != 0 ]; then
             echo "make failed"
@@ -688,7 +699,7 @@ function build_libjpeg {
 
         CFLAGS="$CFLAGS_COMMON -O3" \
         LDFLAGS="$LDFLAGS_COMMON -O3" \
-            ./configure -q --prefix=$BUILD \
+            ./configure $QUIET_FLAG --prefix=$BUILD \
             --disable-dependency-tracking
         $MAKE -j $NUM_MAKE_JOBS
         if [ $? != 0 ]; then
@@ -721,7 +732,7 @@ function build_libpng {
     CFLAGS="$CFLAGS_COMMON -O3" \
     CPPFLAGS="$CFLAGS_COMMON -O3 -DFA_XTRA" \
     LDFLAGS="$LDFLAGS_COMMON -O3" \
-        ./configure -q --prefix=$BUILD \
+        ./configure $QUIET_FLAG --prefix=$BUILD \
         --disable-dependency-tracking
     $MAKE -j $NUM_MAKE_JOBS && $MAKE check
     if [ $? != 0 ]; then
@@ -835,7 +846,7 @@ function build_ffmpeg {
         --enable-demuxer=asf --enable-demuxer=avi --enable-demuxer=flv --enable-demuxer=h264 \
         --enable-demuxer=matroska --enable-demuxer=mov --enable-demuxer=mpegps --enable-demuxer=mpegts --enable-demuxer=mpegvideo \
         --enable-protocol=file --cc=$GCC --cxx=$GXX \
-        --enable-static --disable-shared --disable-programs --disable-doc --quiet"
+        --enable-static --disable-shared --disable-programs --disable-doc $QUIET_FLAG"
 
     if [ "$MACHINE" = "padre" ]; then
         FFOPTS="${FFOPTS} --arch=sparc"
@@ -1000,7 +1011,7 @@ function build_bdb {
 
     CFLAGS="$CFLAGS_COMMON -O3" \
     LDFLAGS="$CFLAGS_COMMON -O3 " \
-        ../dist/configure -q --prefix=$BUILD $MUTEX $MINGW_FLAGS \
+        ../dist/configure $QUIET_FLAG --prefix=$BUILD $MUTEX $MINGW_FLAGS \
         --with-cryptography=no -disable-hash --disable-queue --disable-replication --disable-statistics --disable-verify \
         --disable-dependency-tracking --disable-shared --enable-static --enable-smallbuild
     $MAKE -j $NUM_MAKE_JOBS

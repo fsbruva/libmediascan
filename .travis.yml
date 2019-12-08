@@ -35,6 +35,13 @@ addons:
 #      - nasm
 #      - rsync
 
+install: true
+
+# If builds fail, trigger a build using the Travis webgui, and add the "-l" flag to
+# increase the loudness (un-quiet) the configure step.
+script:
+  - autoreconf -fi
+  - bash -o errexit buildme.sh -j 4
 
 jobs:
   include:
@@ -295,11 +302,3 @@ jobs:
     - <<: *bionic_alias
       perl: "5.30-shrplib"
       env: CC=clang && CXX=clang++
-
-
-install: true
-
-script:
-  - autoreconf -fiv
-  - bash -o errexit buildme.sh -j 4
-
