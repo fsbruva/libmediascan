@@ -1,5 +1,5 @@
 language: C
-stage: "Multi arch build"
+stage: "Build"
 arch:
   - amd64
   - arm64
@@ -50,7 +50,6 @@ jobs:
 
 # Matrix hack: Declare same stage multiple times...
     - &macOS_alias
-      stage: macOS
       arch: amd64
       os: osx
       osx_image: xcode7.3
@@ -115,7 +114,7 @@ jobs:
       language: perl
       compiler: gcc
       perl: "5.24"
-      env: Ubuntu_ver="Trusty (14.04) AMD64"
+      env: Ubuntu_ver="Trusty (14.04)"
 
     # Subsequent instances use alias to test different versions
     - <<: *trusty_amd64_alias
@@ -164,7 +163,7 @@ jobs:
       language: perl
       perl: "5.22"
       compiler: gcc
-      env: Ubuntu_ver="Xenial (16.04) AMD64"
+      env: Ubuntu_ver="Xenial (16.04)"
 
     # Subsequent instances use alias to test different versions
     - <<: *xenial_amd64_alias
@@ -212,7 +211,7 @@ jobs:
       language: perl
       perl: "5.22"
       compiler: gcc
-      env: Ubuntu_ver="Bionic (18.04) AMD64"
+      env: Ubuntu_ver="Bionic (18.04)"
 
     # Subsequent instances use alias to test different versions
     - <<: *bionic_amd64_alias
