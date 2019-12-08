@@ -1,24 +1,14 @@
-stage: "Trusty (14.04) AMD64"
-dist: trusty
-language: perl
-#arch:
-#  - amd64
-#  - arm64
-perl:
-  - "5.22"
-  - "5.24"
-  - "5.24-shrplib"
-  - "5.26"
-  - "5.26-shrplib"
-  - "5.28"
-  - "5.28-shrplib"
-  - "5.30"
-  - "5.30-shrplib"
-os:
-  - linux
-env:
-  - CC=gcc && CXX=g++
-  - CC=clang && CXX=clang++
+language: C
+stage: "Multi arch build"
+arch:
+  - amd64
+  - arm64
+#  - ppc64le  # ppc64le build will not boot
+  - s390x
+compiler:
+  - gcc
+  - clang
+env: Everything=awesome
 
 addons:
   apt:
@@ -45,115 +35,17 @@ script:
 
 jobs:
   include:
-# Xenial does not have all the above version of Perl already installed
-# Matrix hack: Declare same stage multiple times...
-    - &xenial_alias
-      stage: "Xenial (16.04) AMD64"
-      arch: amd64
-      dist: xenial
-      language: perl
-      perl: "5.22"
-      env: CC=gcc && CXX=g++
+  # We can't do matrix expansion across multiple OS's, because only linux has the various
+  # versions of Perl built and available. Instead, we add all the various Perl/compiler
+  # combinations as explicit include jobs.
 
-    # Subsequent instances use alias to test different versions
-    - <<: *xenial_alias
-      perl: "5.22"
-      env: CC=clang && CXX=clang++
-    - <<: *xenial_alias
-      perl: "5.24"
-    - <<: *xenial_alias
-      perl: "5.24"
-      env: CC=clang && CXX=clang++
-    - <<: *xenial_alias
-      perl: "5.24-shrplib"
-    - <<: *xenial_alias
-      perl: "5.24-shrplib"
-      env: CC=clang && CXX=clang++
-    - <<: *xenial_alias
-      perl: "5.26"
-    - <<: *xenial_alias
-      perl: "5.26"
-      env: CC=clang && CXX=clang++
-    - <<: *xenial_alias
-      perl: "5.26-shrplib"
-    - <<: *xenial_alias
-      perl: "5.26-shrplib"
-      env: CC=clang && CXX=clang++
-      perl: "5.28"
-    - <<: *xenial_alias
-      perl: "5.28"
-      env: CC=clang && CXX=clang++
-    - <<: *xenial_alias
-      perl: "5.28-shrplib"
-    - <<: *xenial_alias
-      perl: "5.28-shrplib"
-      env: CC=clang && CXX=clang++
-      perl: "5.30"
-    - <<: *xenial_alias
-      perl: "5.30"
-      env: CC=clang && CXX=clang++
-    - <<: *xenial_alias
-      perl: "5.30-shrplib"
-    - <<: *xenial_alias
-      perl: "5.30-shrplib"
-      env: CC=clang && CXX=clang++
-
-# Bionic may not have the same Perl versions available
-# Matrix hack: Declare same stage multiple times...
-    - &bionic_alias
-      stage: "Bionic (18.04) AMD64"
-      dist: bionic
-      arch: amd64
-      language: perl
-      perl: "5.22"
-      env: CC=gcc && CXX=g++
-
-    # Subsequent instances use alias to test different versions
-    - <<: *bionic_alias
-      perl: "5.22"
-      env: CC=clang && CXX=clang++
-    - <<: *bionic_alias
-      perl: "5.24"
-    - <<: *bionic_alias
-      perl: "5.24"
-      env: CC=clang && CXX=clang++
-    - <<: *bionic_alias
-      perl: "5.24-shrplib"
-    - <<: *bionic_alias
-      perl: "5.24-shrplib"
-      env: CC=clang && CXX=clang++
-    - <<: *bionic_alias
-      perl: "5.26"
-    - <<: *bionic_alias
-      perl: "5.26"
-      env: CC=clang && CXX=clang++
-    - <<: *bionic_alias
-      perl: "5.26-shrplib"
-    - <<: *bionic_alias
-      perl: "5.26-shrplib"
-      env: CC=clang && CXX=clang++
-      perl: "5.28"
-    - <<: *bionic_alias
-      perl: "5.28"
-      env: CC=clang && CXX=clang++
-    - <<: *bionic_alias
-      perl: "5.28-shrplib"
-    - <<: *bionic_alias
-      perl: "5.28-shrplib"
-      env: CC=clang && CXX=clang++
-      perl: "5.30"
-    - <<: *bionic_alias
-      perl: "5.30"
-      env: CC=clang && CXX=clang++
-    - <<: *bionic_alias
-      perl: "5.30-shrplib"
-    - <<: *bionic_alias
-      perl: "5.30-shrplib"
-      env: CC=clang && CXX=clang++
-
+  #######################################################
+  #         macOS and xcode version coverage tests      #
+  #######################################################
 # The macOS build images do not use perlbrew, so must masquerade as C++
 # projects to enable build using stock Perl. Matrix "env:" needs to be
 # overridden so that matrix expansion doesn't result in CC=gcc.
+
 # Matrix hack: Declare same stage multiple times...
     - &macOS_alias
       stage: macOS
@@ -199,106 +91,147 @@ jobs:
     - <<: *macOS_alias
       osx_image: xcode11.2
 
-    - &xenial_alias
-      stage: "Xenial (16.04) arm64"
-      arch: arm64
+  # Trusty's default Perl is 5.22 (covered earlier), so we don't need it here.
+  # Matrix hack: Declare same stage multiple times...
+    - &trusty_amd64_alias
+      arch: amd64
+      dist: trusty
+      language: perl
+      compiler: gcc
+      perl: "5.24"
+      env: Ubuntu_ver="Trusty (14.04) AMD64"
+
+    # Subsequent instances use alias to test different versions
+    - <<: *trusty_amd64_alias
+      perl: "5.24"
+      compiler: clang
+    - <<: *trusty_amd64_alias
+      perl: "5.24-shrplib"
+    - <<: *trusty_amd64_alias
+      perl: "5.24-shrplib"
+      compiler: clang
+    - <<: *trusty_amd64_alias
+      perl: "5.26"
+    - <<: *trusty_amd64_alias
+      perl: "5.26"
+      compiler: clang
+    - <<: *trusty_amd64_alias
+      perl: "5.26-shrplib"
+    - <<: *trusty_amd64_alias
+      perl: "5.26-shrplib"
+      compiler: clang
+      perl: "5.28"
+    - <<: *trusty_amd64_alias
+      perl: "5.28"
+      compiler: clang
+    - <<: *trusty_amd64_alias
+      perl: "5.28-shrplib"
+    - <<: *trusty_amd64_alias
+      perl: "5.28-shrplib"
+      compiler: clang
+      perl: "5.30"
+    - <<: *trusty_amd64_alias
+      perl: "5.30"
+      compiler: clang
+    - <<: *trusty_amd64_alias
+      perl: "5.30-shrplib"
+    - <<: *trusty_amd64_alias
+      perl: "5.30-shrplib"
+      compiler: clang
+
+
+# Xenial's default Perl is 5.24, (covered above) so does not need to be covered here
+# Matrix hack: Declare same stage multiple times...
+    - &xenial_amd64_alias
+      arch: amd64
       dist: xenial
       language: perl
       perl: "5.22"
-      env: CC=gcc && CXX=g++
+      compiler: gcc
+      env: Ubuntu_ver="Xenial (16.04) AMD64"
 
     # Subsequent instances use alias to test different versions
-    - <<: *xenial_alias
+    - <<: *xenial_amd64_alias
       perl: "5.22"
-      env: CC=clang && CXX=clang++
-    - <<: *xenial_alias
-      perl: "5.24"
-    - <<: *xenial_alias
-      perl: "5.24"
-      env: CC=clang && CXX=clang++
-    - <<: *xenial_alias
+      compiler: clang
+    - <<: *xenial_amd64_alias
       perl: "5.24-shrplib"
-    - <<: *xenial_alias
+    - <<: *xenial_amd64_alias
       perl: "5.24-shrplib"
-      env: CC=clang && CXX=clang++
-    - <<: *xenial_alias
+      compiler: clang
+    - <<: *xenial_amd64_alias
       perl: "5.26"
-    - <<: *xenial_alias
+    - <<: *xenial_amd64_alias
       perl: "5.26"
-      env: CC=clang && CXX=clang++
-    - <<: *xenial_alias
+      compiler: clang
+    - <<: *xenial_amd64_alias
       perl: "5.26-shrplib"
-    - <<: *xenial_alias
+    - <<: *xenial_amd64_alias
       perl: "5.26-shrplib"
-      env: CC=clang && CXX=clang++
+      compiler: clang
       perl: "5.28"
-    - <<: *xenial_alias
+    - <<: *xenial_amd64_alias
       perl: "5.28"
-      env: CC=clang && CXX=clang++
-    - <<: *xenial_alias
+      compiler: clang
+    - <<: *xenial_amd64_alias
       perl: "5.28-shrplib"
-    - <<: *xenial_alias
+    - <<: *xenial_amd64_alias
       perl: "5.28-shrplib"
-      env: CC=clang && CXX=clang++
+      compiler: clang
       perl: "5.30"
-    - <<: *xenial_alias
+    - <<: *xenial_amd64_alias
       perl: "5.30"
-      env: CC=clang && CXX=clang++
-    - <<: *xenial_alias
+      compiler: clang
+    - <<: *xenial_amd64_alias
       perl: "5.30-shrplib"
-    - <<: *xenial_alias
+    - <<: *xenial_amd64_alias
       perl: "5.30-shrplib"
-      env: CC=clang && CXX=clang++
+      compiler: clang
 
-# Bionic may not have the same Perl versions available
+# Bionic's default Perl is 5.26, so we don't need to cover it here.
 # Matrix hack: Declare same stage multiple times...
-    - &bionic_alias
-      stage: "Bionic (18.04) arm64"
+    - &bionic_amd64_alias
       dist: bionic
-      arch: arm64
+      arch: amd64
       language: perl
       perl: "5.22"
-      env: CC=gcc && CXX=g++
+      compiler: gcc
+      env: Ubuntu_ver="Bionic (18.04) AMD64"
 
     # Subsequent instances use alias to test different versions
-    - <<: *bionic_alias
+    - <<: *bionic_amd64_alias
       perl: "5.22"
-      env: CC=clang && CXX=clang++
-    - <<: *bionic_alias
+      compiler: clang
+    - <<: *bionic_amd64_alias
       perl: "5.24"
-    - <<: *bionic_alias
+    - <<: *bionic_amd64_alias
       perl: "5.24"
-      env: CC=clang && CXX=clang++
-    - <<: *bionic_alias
+      compiler: clang
+    - <<: *bionic_amd64_alias
       perl: "5.24-shrplib"
-    - <<: *bionic_alias
+    - <<: *bionic_amd64_alias
       perl: "5.24-shrplib"
-      env: CC=clang && CXX=clang++
-    - <<: *bionic_alias
-      perl: "5.26"
-    - <<: *bionic_alias
-      perl: "5.26"
-      env: CC=clang && CXX=clang++
-    - <<: *bionic_alias
+      compiler: clang
+    - <<: *bionic_amd64_alias
       perl: "5.26-shrplib"
-    - <<: *bionic_alias
+    - <<: *bionic_amd64_alias
       perl: "5.26-shrplib"
-      env: CC=clang && CXX=clang++
+      compiler: clang
       perl: "5.28"
-    - <<: *bionic_alias
+    - <<: *bionic_amd64_alias
       perl: "5.28"
-      env: CC=clang && CXX=clang++
-    - <<: *bionic_alias
+      compiler: clang
+    - <<: *bionic_amd64_alias
       perl: "5.28-shrplib"
-    - <<: *bionic_alias
+    - <<: *bionic_amd64_alias
       perl: "5.28-shrplib"
-      env: CC=clang && CXX=clang++
+      compiler: clang
       perl: "5.30"
-    - <<: *bionic_alias
+    - <<: *bionic_amd64_alias
       perl: "5.30"
-      env: CC=clang && CXX=clang++
-    - <<: *bionic_alias
+      compiler: clang
+    - <<: *bionic_amd64_alias
       perl: "5.30-shrplib"
-    - <<: *bionic_alias
+    - <<: *bionic_amd64_alias
       perl: "5.30-shrplib"
-      env: CC=clang && CXX=clang++
+      compiler: clang
