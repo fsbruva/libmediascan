@@ -13231,7 +13231,7 @@ ac_compile='$OBJC -c $OBJCFLAGS $CPPFLAGS conftest.$ac_ext >&5'
 ac_link='$OBJC -o conftest$ac_exeext $OBJCFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
 ac_compiler_gnu=$ac_cv_objc_compiler_gnu
 if test -n "$ac_tool_prefix"; then
-  for ac_prog in gcc objcc objc
+  for ac_prog in clang gcc objcc objc
   do
     # Extract the first word of "$ac_tool_prefix$ac_prog", so it can be a program name with args.
 set dummy $ac_tool_prefix$ac_prog; ac_word=$2
@@ -13275,7 +13275,7 @@ fi
 fi
 if test -z "$OBJC"; then
   ac_ct_OBJC=$OBJC
-  for ac_prog in gcc objcc objc
+  for ac_prog in clang gcc objcc objc
 do
   # Extract the first word of "$ac_prog", so it can be a program name with args.
 set dummy $ac_prog; ac_word=$2
@@ -13600,7 +13600,6 @@ else
   am__fastdepOBJC_TRUE='#'
   am__fastdepOBJC_FALSE=
 fi
-
 
 
 ac_ext=cpp
@@ -21114,7 +21113,7 @@ for ac_lib in '' avformat; do
     ac_res="none required"
   else
     ac_res=-l$ac_lib
-    LIBS="-l$ac_lib -lm -lavcodec -lavutil -lz -lbz2 $ac_func_search_save_LIBS"
+    LIBS="-l$ac_lib -lm -lavcodec -lavutil -lz $ac_func_search_save_LIBS"
   fi
   if ac_fn_c_try_link "$LINENO"; then :
   ac_cv_search_avformat_version=$ac_res
@@ -21176,7 +21175,7 @@ for ac_lib in '' avformat; do
     ac_res="none required"
   else
     ac_res=-l$ac_lib
-    LIBS="-l$ac_lib -lm -lavcodec -lavutil -lz -lbz2 $ac_func_search_save_LIBS"
+    LIBS="-l$ac_lib -lm -lavcodec -lavutil -lz $ac_func_search_save_LIBS"
   fi
   if ac_fn_c_try_link "$LINENO"; then :
   ac_cv_search_avformat_version=$ac_res
@@ -22255,7 +22254,7 @@ for ac_lib in '' avformat; do
     ac_res="none required"
   else
     ac_res=-l$ac_lib
-    LIBS="-l$ac_lib -lavcodec -lavutil -lz -lbz2
+    LIBS="-l$ac_lib -lavcodec -lavutil -lz
      $ac_func_search_save_LIBS"
   fi
   if ac_fn_c_try_link "$LINENO"; then :

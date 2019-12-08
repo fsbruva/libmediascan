@@ -475,7 +475,6 @@ libmediascan_la_SOURCES = audio.c buffer.c database.c error.c image.c \
 	$(am__append_3) $(am__append_4)
 libmediascan_la_CFLAGS = -Wall -I$(top_srcdir)/include $(zlib_CFLAGS) $(bzip2_CFLAGS) $(jpeg_CFLAGS) $(png_CFLAGS) $(gif_CFLAGS) $(iconv_CFLAGS) $(intl_CFLAGS) $(exif_CFLAGS) $(avutil_CFLAGS) $(swscale_CFLAGS) $(avcodec_CFLAGS) $(avformat_CFLAGS) $(db_CFLAGS)
 libmediascan_la_LDFLAGS = -version-info 0:0:0 $(am__append_6)
-AM_LIBTOOLFLAGS = --tag=CC
 @DARWIN_TRUE@libmediascan_la_OBJCFLAGS = $(CFLAGS) -Wall -I$(top_srcdir)/include
 all: all-am
 
