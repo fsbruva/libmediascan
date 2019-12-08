@@ -17,7 +17,6 @@ AC_CONFIG_HEADERS([config.h])
 # Checks for programs.
 AC_PROG_CC([clang gcc])
 AC_PROG_OBJC([gcc objcc objc])
-AM_PROG_CC_C_O
 AC_PROG_CXX
 AC_PROG_AWK
 AC_PROG_CPP
