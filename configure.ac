@@ -177,7 +177,7 @@ if test "x${have_pkgconfig}" = "xyes"; then
     ])
     PKG_CHECK_MODULES([avformat], [libavformat >= 58.29.100], LIBS="$LIBS $avformat_LIBS",
         [AC_SEARCH_LIBS([avformat_version], [avformat],,
-        [AC_MSG_ERROR(unable to find libavformat)], [-lm -lavcodec -lavutil -lz -lbz2])
+        [AC_MSG_ERROR(unable to find libavformat)], [-lm -lavcodec -lavutil -lz])
     ])
     PKG_CHECK_MODULES([swscale], [libswscale >= 5.5.100], LIBS="$LIBS $swscale_LIBS",
         [AC_SEARCH_LIBS([sws_scale], [swscale],,
@@ -214,7 +214,7 @@ else
         [AC_MSG_ERROR(unable to find libavcodec)], [-lavutil -lz]
     )
     AC_SEARCH_LIBS([avformat_version], [avformat],,
-        [AC_MSG_ERROR(unable to find libavformat)], [-lavcodec -lavutil -lz -lbz2]
+        [AC_MSG_ERROR(unable to find libavformat)], [-lavcodec -lavutil -lz]
     )
     AC_SEARCH_LIBS([sws_scale], [swscale],,
         [AC_MSG_ERROR(unable to find libswscale)], [-lavutil]
