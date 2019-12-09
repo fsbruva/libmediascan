@@ -393,9 +393,9 @@ CC_IS_GCC=false
 # Heavy wizardry begins here
 # This uses bash globbing for the If statement
 if [[ "$CC_TYPE" =~ ^.*clang.*$ ]]; then
-    CLANG_MAJOR=`echo "#include <iostream>" | "$GXX" -xc++ -dM -E - | grep '#define __clang_major' | sed 's/.*__\ //g'`
-    CLANG_MINOR=`echo "#include <iostream>" | "$GXX" -xc++ -dM -E - | grep '#define __clang_minor' | sed 's/.*__\ //g'`
-    CLANG_PATCH=`echo "#include <iostream>" | "$GXX" -xc++ -dM -E - | grep '#define __clang_patchlevel' | sed 's/.*__\ //g'`
+    CLANG_MAJOR=`echo "#include <stdio.h>" | "$GCC" -xc -dM -E - | grep '#define __clang_major' | sed 's/.*__\ //g'`
+    CLANG_MINOR=`echo "#include <stdio.h>" | "$GCC" -xc -dM -E - | grep '#define __clang_minor' | sed 's/.*__\ //g'`
+    CLANG_PATCH=`echo "#include <stdio.h>" | "$GCC" -xc -dM -E - | grep '#define __clang_patchlevel' | sed 's/.*__\ //g'`
     CC_VERSION=`echo "$CLANG_MAJOR"."$CLANG_MINOR"."$CLANG_PATCH" | sed "s#\ *)\ *##g" | sed -e 's/\.\([0-9][0-9]\)/\1/g' -e 's/\.\([0-9]\)/0\1/g' -e 's/^[0-9]\{3,4\}$/&00/'`
     CC_IS_CLANG=true
 elif [[ "$CC_TYPE" =~ ^.*gcc.*$ || "$CC_TYPE" =~ ^.*GCC.*$ ]]; then
