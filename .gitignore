@@ -15,6 +15,9 @@ config.h
 config.h.in~
 config.log
 config.status
+# These should be updated to the most recent version possible
+config.sub
+config.guess
 configure.scan
 stamp-*
 m4
