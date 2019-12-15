@@ -594,7 +594,7 @@ function build_libjpeg {
             CXXFLAGS="-O3 $MACOS_FLAGS" \
             LDFLAGS="$MACOS_FLAGS" \
                 ./configure $QUIET_FLAG --prefix=$BUILD --host x86_64-apple-darwin NASM=/usr/local/bin/nasm \
-                --disable-dependency-tracking
+                --disable-dependency-tracking --without-turbojpeg --disable-shared --enable-static
             $MAKE -j $NUM_MAKE_JOBS
             if [ $? != 0 ]; then
                 echo "64-bit macOS make failed"
@@ -626,7 +626,7 @@ function build_libjpeg {
             CXXFLAGS="-O3 -m32 $MACOS_FLAGS" \
             LDFLAGS="-m32 $MACOS_FLAGS" \
                 ./configure $QUIET_FLAG --host i686-apple-darwin --prefix=$BUILD NASM=/usr/local/bin/nasm \
-                --disable-dependency-tracking
+                --disable-dependency-tracking --without-turbojpeg --disable-shared --enable-static
             $MAKE -j $NUM_MAKE_JOBS
             if [ $? != 0 ]; then
                 echo "32-bit macOS make failed"
@@ -670,7 +670,7 @@ function build_libjpeg {
         mv -fv libjpeg.a $BUILD/lib/libjpeg.a
         rm -fv libjpeg-x86_64.a libjpeg-i386.a libjpeg-ppc.a
 
-    elif [[ "$ARCH" =~ ^(i386-linux|x86_64-linux|i86pc-solaris).*$ || "$OS" == "FreeBSD" ]]; then
+    elif [[ "$ARCH" =~ ^(i86pc-solaris).*$ || "$OS" == "Linux" || "$OS" == "FreeBSD" ]]; then
         # build libjpeg-turbo
         tar_wrapper zxf $TURBO_VER.tar.gz
         cd $TURBO_VER
@@ -679,7 +679,7 @@ function build_libjpeg {
         patch -p0 < ../libjpeg-turbo-jmorecfg.h.patch
 
         CFLAGS="$CFLAGS_COMMON" CXXFLAGS="$CXXFLAGS_COMMON" LDFLAGS="$LDFLAGS_COMMON" \
-            ./configure $QUIET_FLAG --prefix=$BUILD --disable-dependency-tracking
+            ./configure $QUIET_FLAG --prefix=$BUILD --disable-dependency-tracking --without-turbojpeg --disable-shared --enable-static
         $MAKE -j $NUM_MAKE_JOBS
         if [ $? != 0 ]; then
             echo "make failed"
