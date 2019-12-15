@@ -1,9 +1,10 @@
-language: C
+language: c
 stage: "Build"
+os: Linux
 arch:
   - amd64
   - arm64
-#  - ppc64le  # ppc64le build will not boot
+  - ppc64le  # ppc64le build will not boot
   - s390x
 compiler:
   - gcc
@@ -53,7 +54,7 @@ jobs:
       arch: amd64
       os: osx
       osx_image: xcode7.3
-      language: cpp
+      language: c
       compiler: clang
       perl: "5.18"   # This label may not reflect reality
       env: macOS_ver=10.11
