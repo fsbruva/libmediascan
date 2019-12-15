@@ -1,10 +1,10 @@
 language: c
 stage: "Build"
-os: Linux
+os: linux
 arch:
   - amd64
   - arm64
-  - ppc64le  # ppc64le build will not boot
+  - ppc64le
   - s390x
 compiler:
   - gcc
