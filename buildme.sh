@@ -321,7 +321,7 @@ case "$OS" in
             fi
         done
         # Check to see we have all our arch specific build pre-requisites installed
-        for i in make gcc SDL2 nasm gettext libtool dlfcn ; do
+        for i in make gcc SDL2 nasm gettext libtool dlfcn diffutils ; do
             PAC_NAME="${MINGW_PACKAGE_PREFIX}-${i}"
             if [ -z "$( pacman -Qi ${PAC_NAME} )" ]; then
                 echo "$PAC_NAME not found - please install it"
