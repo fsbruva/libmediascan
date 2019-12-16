@@ -912,7 +912,7 @@ function build_ffmpeg {
     # Starting with 4.1, we copy the release to ease last-built version detection
 
     cd $BUILD/..
-    rm -r /tmp/ffmpeg
+    rm -rf /tmp/ffmpeg
 }
 
 function build_bdb {
