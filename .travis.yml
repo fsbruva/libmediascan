@@ -21,8 +21,6 @@ addons:
 
 install: true
 
-# If builds fail, trigger a build using the Travis webgui, and add the "-l" flag to
-# increase the loudness (un-quiet) the configure step.
 script:
   - autoreconf -fi
 #  - bash -o errexit buildme.sh -j 4
@@ -36,7 +34,7 @@ jobs:
   # versions of Perl built and available. Instead, we add all the various Perl/compiler
   # combinations as explicit include jobs.
 
- 
+
   #######################################################
   #         Linux Perl version coverage tests           #
   #######################################################
@@ -48,12 +46,9 @@ jobs:
       dist: xenial
       language: c
       compiler: clang
-      env: Ubuntu_ver="Xenial (16.04)"
       before_install:
         - eval "${MATRIX_EVAL}"
 
-    # Subsequent instances use alias to test different versions of clang
-    - <<: *xenial_ppc64le_alias
       addons:
         apt:
           sources:
@@ -61,10 +56,10 @@ jobs:
           packages:
             - clang-3.9
       env:
-        - MATRIX_EVAL="CC=clang-3.9 && CXX=clang++-3.9"      
-
+        - MATRIX_EVAL="CC=clang-3.9 && CXX=clang++-3.9"
+    # Subsequent instances use alias to test different versions of clang
     - <<: *xenial_ppc64le_alias
-            addons:
+      addons:
         apt:
           sources:
             - llvm-toolchain-xenial-4.0
@@ -72,7 +67,6 @@ jobs:
             - clang-4.0
       env:
         - MATRIX_EVAL="CC=clang-4.0 && CXX=clang++-4.0"
-
     - <<: *xenial_ppc64le_alias
       addons:
         apt:
@@ -82,7 +76,6 @@ jobs:
             - clang-5.0
       env:
         - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
-		
     - <<: *xenial_ppc64le_alias
       addons:
         apt:
@@ -92,7 +85,6 @@ jobs:
             - clang-6.0
       env:
         - MATRIX_EVAL="CC=clang-6.0 && CXX=clang++-6.0"
-		
     - <<: *xenial_ppc64le_alias
       addons:
         apt:
@@ -102,7 +94,6 @@ jobs:
             - clang-7.0
       env:
         - MATRIX_EVAL="CC=clang-7.0 && CXX=clang++-7.0"
-
     - <<: *xenial_ppc64le_alias
       addons:
         apt:
@@ -112,9 +103,8 @@ jobs:
             - clang-8.0
       env:
         - MATRIX_EVAL="CC=clang-8.0 && CXX=clang++-8.0"
-		
     - <<: *xenial_ppc64le_alias
-	  addons:
+      addons:
         apt:
           sources:
             - ubuntu-toolchain-r-test
@@ -122,5 +112,5 @@ jobs:
           key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
           packages:
             - clang-9
-	  env:
+      env:
         - MATRIX_EVAL="CC=clang-9.0 && CXX=clang++-9.0"
