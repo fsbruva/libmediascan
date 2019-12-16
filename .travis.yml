@@ -1,14 +1,8 @@
 language: c
 stage: "Build"
 os: linux
-arch:
-  - amd64
-  - arm64
-  - ppc64le
-  - s390x
-compiler:
-  - gcc
-  - clang
+arch: ppc64le
+compiler: clang
 env: Everything=awesome
 
 addons:
@@ -23,14 +17,7 @@ addons:
 # This is added only because the latest version of libexif needs it
       - autopoint
       - gettext
-# This code will not work on the MacOS 10.10 image(s). However, since Travis has
-# deprecated those images, we are safe to use this method.
-  homebrew:
-    update: true
-    packages:
-      - nasm
-      - rsync
-      - gettext
+
 
 install: true
 
@@ -49,213 +36,91 @@ jobs:
   # versions of Perl built and available. Instead, we add all the various Perl/compiler
   # combinations as explicit include jobs.
 
-  #######################################################
-  #         macOS and xcode version coverage tests      #
-  #######################################################
-# The macOS build images do not use perlbrew, so must masquerade as C++
-# projects to enable build using stock Perl. Matrix "env:" needs to be
-# overridden so that matrix expansion doesn't result in CC=gcc.
-
-# Matrix hack: Declare same stage multiple times...
-    - &macOS_alias
-      arch: amd64
-      os: osx
-      osx_image: xcode7.3
-      language: c
-      compiler: clang
-      perl: "5.18"   # This label may not reflect reality
-      env: macOS_ver=10.11
-      before_install: ln -s `brew ls gettext | grep bin/autopoint` /usr/local/bin
-
-    # Subsequent instances use alias to test different versions
-    - <<: *macOS_alias
-      osx_image: xcode8
-      env: macOS_ver=10.11
-    - <<: *macOS_alias
-      osx_image: xcode8.3
-      env: macOS_ver=10.12
-    - <<: *macOS_alias
-      osx_image: xcode9
-      env: macOS_ver=10.12
-    - <<: *macOS_alias
-      osx_image: xcode9.1
-      env: macOS_ver=10.12
-    - <<: *macOS_alias
-      osx_image: xcode9.2
-      env: macOS_ver=10.12
-    - <<: *macOS_alias
-      osx_image: xcode9.3
-      env: macOS_ver=10.13
-    - <<: *macOS_alias
-      osx_image: xcode9.4
-      env: macOS_ver=10.13
-    - <<: *macOS_alias
-      osx_image: xcode10
-      env: macOS_ver=10.13
-    - <<: *macOS_alias
-      osx_image: xcode10.1
-      env: macOS_ver=10.13
-    - <<: *macOS_alias
-      osx_image: xcode10.2
-      env: macOS_ver=10.14
-    - <<: *macOS_alias
-      osx_image: xcode10.3
-      env: macOS_ver=10.14.4
-    - <<: *macOS_alias
-      osx_image: xcode11
-      env: macOS_ver=10.14
-    - <<: *macOS_alias
-      osx_image: xcode11.1
-      env: macOS_ver=10.14
-    - <<: *macOS_alias
-      osx_image: xcode11.2
-      env: macOS_ver=10.14
-
+ 
   #######################################################
   #         Linux Perl version coverage tests           #
   #######################################################
 
-  # Trusty's default Perl is 5.22 (covered earlier), so we don't need it here.
   # Matrix hack: Declare same stage multiple times...
-    - &trusty_amd64_alias
-      arch: amd64
-      dist: trusty
-      language: perl
-      compiler: gcc
-      perl: "5.24"
-      env: Ubuntu_ver="Trusty (14.04)"
-
-    # Subsequent instances use alias to test different versions
-    - <<: *trusty_amd64_alias
-      perl: "5.24"
-      compiler: clang
-    - <<: *trusty_amd64_alias
-      perl: "5.24-shrplib"
-    - <<: *trusty_amd64_alias
-      perl: "5.24-shrplib"
-      compiler: clang
-    - <<: *trusty_amd64_alias
-      perl: "5.26"
-    - <<: *trusty_amd64_alias
-      perl: "5.26"
-      compiler: clang
-    - <<: *trusty_amd64_alias
-      perl: "5.26-shrplib"
-    - <<: *trusty_amd64_alias
-      perl: "5.26-shrplib"
-      compiler: clang
-      perl: "5.28"
-    - <<: *trusty_amd64_alias
-      perl: "5.28"
-      compiler: clang
-    - <<: *trusty_amd64_alias
-      perl: "5.28-shrplib"
-    - <<: *trusty_amd64_alias
-      perl: "5.28-shrplib"
-      compiler: clang
-      perl: "5.30"
-    - <<: *trusty_amd64_alias
-      perl: "5.30"
-      compiler: clang
-    - <<: *trusty_amd64_alias
-      perl: "5.30-shrplib"
-    - <<: *trusty_amd64_alias
-      perl: "5.30-shrplib"
-      compiler: clang
-
-
-# Xenial's default Perl is 5.24, (covered above) so does not need to be covered here
-# Matrix hack: Declare same stage multiple times...
-    - &xenial_amd64_alias
-      arch: amd64
+    - &xenial_ppc64le_alias
+      arch: ppc64le
+      os: linux
       dist: xenial
-      language: perl
-      perl: "5.22"
-      compiler: gcc
+      language: c
+      compiler: clang
       env: Ubuntu_ver="Xenial (16.04)"
+      before_install:
+        - eval "${MATRIX_EVAL}"
 
-    # Subsequent instances use alias to test different versions
-    - <<: *xenial_amd64_alias
-      perl: "5.22"
-      compiler: clang
-    - <<: *xenial_amd64_alias
-      perl: "5.24-shrplib"
-    - <<: *xenial_amd64_alias
-      perl: "5.24-shrplib"
-      compiler: clang
-    - <<: *xenial_amd64_alias
-      perl: "5.26"
-    - <<: *xenial_amd64_alias
-      perl: "5.26"
-      compiler: clang
-    - <<: *xenial_amd64_alias
-      perl: "5.26-shrplib"
-    - <<: *xenial_amd64_alias
-      perl: "5.26-shrplib"
-      compiler: clang
-      perl: "5.28"
-    - <<: *xenial_amd64_alias
-      perl: "5.28"
-      compiler: clang
-    - <<: *xenial_amd64_alias
-      perl: "5.28-shrplib"
-    - <<: *xenial_amd64_alias
-      perl: "5.28-shrplib"
-      compiler: clang
-      perl: "5.30"
-    - <<: *xenial_amd64_alias
-      perl: "5.30"
-      compiler: clang
-    - <<: *xenial_amd64_alias
-      perl: "5.30-shrplib"
-    - <<: *xenial_amd64_alias
-      perl: "5.30-shrplib"
-      compiler: clang
+    # Subsequent instances use alias to test different versions of clang
+    - <<: *xenial_ppc64le_alias
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-xenial-3.9
+          packages:
+            - clang-3.9
+      env:
+        - MATRIX_EVAL="CC=clang-3.9 && CXX=clang++-3.9"      
 
-# Bionic's default Perl is 5.26, so we don't need to cover it here.
-# Matrix hack: Declare same stage multiple times...
-    - &bionic_amd64_alias
-      dist: bionic
-      arch: amd64
-      language: perl
-      perl: "5.22"
-      compiler: gcc
-      env: Ubuntu_ver="Bionic (18.04)"
+    - <<: *xenial_ppc64le_alias
+            addons:
+        apt:
+          sources:
+            - llvm-toolchain-xenial-4.0
+          packages:
+            - clang-4.0
+      env:
+        - MATRIX_EVAL="CC=clang-4.0 && CXX=clang++-4.0"
 
-    # Subsequent instances use alias to test different versions
-    - <<: *bionic_amd64_alias
-      perl: "5.22"
-      compiler: clang
-    - <<: *bionic_amd64_alias
-      perl: "5.24"
-    - <<: *bionic_amd64_alias
-      perl: "5.24"
-      compiler: clang
-    - <<: *bionic_amd64_alias
-      perl: "5.24-shrplib"
-    - <<: *bionic_amd64_alias
-      perl: "5.24-shrplib"
-      compiler: clang
-    - <<: *bionic_amd64_alias
-      perl: "5.26-shrplib"
-    - <<: *bionic_amd64_alias
-      perl: "5.26-shrplib"
-      compiler: clang
-      perl: "5.28"
-    - <<: *bionic_amd64_alias
-      perl: "5.28"
-      compiler: clang
-    - <<: *bionic_amd64_alias
-      perl: "5.28-shrplib"
-    - <<: *bionic_amd64_alias
-      perl: "5.28-shrplib"
-      compiler: clang
-      perl: "5.30"
-    - <<: *bionic_amd64_alias
-      perl: "5.30"
-      compiler: clang
-    - <<: *bionic_amd64_alias
-      perl: "5.30-shrplib"
-    - <<: *bionic_amd64_alias
-      perl: "5.30-shrplib"
-      compiler: clang
+    - <<: *xenial_ppc64le_alias
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-xenial-5.0
+          packages:
+            - clang-5.0
+      env:
+        - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
+		
+    - <<: *xenial_ppc64le_alias
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-xenial-6.0
+          packages:
+            - clang-6.0
+      env:
+        - MATRIX_EVAL="CC=clang-6.0 && CXX=clang++-6.0"
+		
+    - <<: *xenial_ppc64le_alias
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-xenial-7.0
+          packages:
+            - clang-7.0
+      env:
+        - MATRIX_EVAL="CC=clang-7.0 && CXX=clang++-7.0"
+
+    - <<: *xenial_ppc64le_alias
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-xenial-8.0
+          packages:
+            - clang-8.0
+      env:
+        - MATRIX_EVAL="CC=clang-8.0 && CXX=clang++-8.0"
+		
+    - <<: *xenial_ppc64le_alias
+	  addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - sourceline: 'deb https://apt.llvm.org/xenial/ llvm-toolchain-xenial-9 main'
+          key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
+          packages:
+            - clang-9
+	  env:
+        - MATRIX_EVAL="CC=clang-9.0 && CXX=clang++-9.0"
