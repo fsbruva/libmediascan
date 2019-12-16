@@ -53,14 +53,13 @@ jobs:
             - llvm-toolchain-xenial-3.9
           packages:
             - clang-3.9
-      - nasm
-      - rsync
-      - zlib1g-dev
-      - libmodule-install-perl
-      - cpanminus
-# This is added only because the latest version of libexif needs it
-      - autopoint
-      - gettext
+            - nasm
+            - rsync
+            - zlib1g-dev
+            - libmodule-install-perl
+            - cpanminus
+            - autopoint
+            - gettext
       env:
         - MATRIX_EVAL="CC=clang-3.9 && CXX=clang++-3.9"
     # Subsequent instances use alias to test different versions of clang
@@ -71,14 +70,13 @@ jobs:
             - llvm-toolchain-xenial-4.0
           packages:
             - clang-4.0
-      - nasm
-      - rsync
-      - zlib1g-dev
-      - libmodule-install-perl
-      - cpanminus
-# This is added only because the latest version of libexif needs it
-      - autopoint
-      - gettext
+            - nasm
+            - rsync
+            - zlib1g-dev
+            - libmodule-install-perl
+            - cpanminus
+            - autopoint
+            - gettext
       env:
         - MATRIX_EVAL="CC=clang-4.0 && CXX=clang++-4.0"
     - <<: *xenial_ppc64le_alias
@@ -88,14 +86,13 @@ jobs:
             - llvm-toolchain-xenial-5.0
           packages:
             - clang-5.0
-      - nasm
-      - rsync
-      - zlib1g-dev
-      - libmodule-install-perl
-      - cpanminus
-# This is added only because the latest version of libexif needs it
-      - autopoint
-      - gettext
+            - nasm
+            - rsync
+            - zlib1g-dev
+            - libmodule-install-perl
+            - cpanminus
+            - autopoint
+            - gettext
       env:
         - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
     - <<: *xenial_ppc64le_alias
@@ -105,14 +102,13 @@ jobs:
             - llvm-toolchain-xenial-6.0
           packages:
             - clang-6.0
-      - nasm
-      - rsync
-      - zlib1g-dev
-      - libmodule-install-perl
-      - cpanminus
-# This is added only because the latest version of libexif needs it
-      - autopoint
-      - gettext
+            - nasm
+            - rsync
+            - zlib1g-dev
+            - libmodule-install-perl
+            - cpanminus
+            - autopoint
+            - gettext
       env:
         - MATRIX_EVAL="CC=clang-6.0 && CXX=clang++-6.0"
     - <<: *xenial_ppc64le_alias
@@ -122,14 +118,13 @@ jobs:
             - llvm-toolchain-xenial-7.0
           packages:
             - clang-7.0
-      - nasm
-      - rsync
-      - zlib1g-dev
-      - libmodule-install-perl
-      - cpanminus
-# This is added only because the latest version of libexif needs it
-      - autopoint
-      - gettext
+            - nasm
+            - rsync
+            - zlib1g-dev
+            - libmodule-install-perl
+            - cpanminus
+            - autopoint
+            - gettext
       env:
         - MATRIX_EVAL="CC=clang-7.0 && CXX=clang++-7.0"
     - <<: *xenial_ppc64le_alias
@@ -139,14 +134,13 @@ jobs:
             - llvm-toolchain-xenial-8.0
           packages:
             - clang-8.0
-      - nasm
-      - rsync
-      - zlib1g-dev
-      - libmodule-install-perl
-      - cpanminus
-# This is added only because the latest version of libexif needs it
-      - autopoint
-      - gettext
+            - nasm
+            - rsync
+            - zlib1g-dev
+            - libmodule-install-perl
+            - cpanminus
+            - autopoint
+            - gettext
       env:
         - MATRIX_EVAL="CC=clang-8.0 && CXX=clang++-8.0"
     - <<: *xenial_ppc64le_alias
@@ -158,13 +152,12 @@ jobs:
           key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
           packages:
             - clang-9
-      - nasm
-      - rsync
-      - zlib1g-dev
-      - libmodule-install-perl
-      - cpanminus
-# This is added only because the latest version of libexif needs it
-      - autopoint
-      - gettext
+            - nasm
+            - rsync
+            - zlib1g-dev
+            - libmodule-install-perl
+            - cpanminus
+            - autopoint
+            - gettext
       env:
         - MATRIX_EVAL="CC=clang-9.0 && CXX=clang++-9.0"
