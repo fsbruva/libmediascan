@@ -20,6 +20,8 @@ addons:
       - zlib1g-dev
       - libmodule-install-perl
       - cpanminus
+# This is added only because the latest version of libexif needs it
+      - autopoint
 # This code will not work on the MacOS 10.10 image(s). However, since Travis has
 # deprecated those images, we are safe to use this method.
   homebrew:
@@ -27,6 +29,7 @@ addons:
     packages:
       - nasm
       - rsync
+      - gettext
 
 install: true
 
@@ -61,6 +64,7 @@ jobs:
       compiler: clang
       perl: "5.18"   # This label may not reflect reality
       env: macOS_ver=10.11
+      before_install: ln -s `brew ls gettext | grep bin/autopoint` /usr/local/bin
 
     # Subsequent instances use alias to test different versions
     - <<: *macOS_alias
