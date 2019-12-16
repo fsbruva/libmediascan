@@ -22,6 +22,7 @@ addons:
       - cpanminus
 # This is added only because the latest version of libexif needs it
       - autopoint
+      - gettext
 # This code will not work on the MacOS 10.10 image(s). However, since Travis has
 # deprecated those images, we are safe to use this method.
   homebrew:
