@@ -34,7 +34,10 @@ install: true
 # increase the loudness (un-quiet) the configure step.
 script:
   - autoreconf -fi
-  - bash -o errexit buildme.sh -j 4
+#  - bash -o errexit buildme.sh -j 4
+  - cd deplibs
+  - bash -o errexit buildme-latest.sh -j 4
+
 
 jobs:
   include:
