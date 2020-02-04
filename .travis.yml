@@ -1,8 +1,11 @@
 language: c
-stage: "Build"
 os: linux
 arch: ppc64le
 env: Everything=awesome
+
+compiler:
+  - clang
+  - gcc
 
 addons:
   apt:
@@ -20,9 +23,10 @@ addons:
 
 install: true
 
+stages: Legacy_Build
 script:
   - autoreconf -fi
-#  - bash -o errexit buildme.sh -j 4
+  - bash -o errexit buildme.sh -j 4
   - cd deplibs
   - bash -o errexit buildme-latest.sh -j 4
 
@@ -49,8 +53,6 @@ jobs:
 
       addons:
         apt:
-          sources:
-            - llvm-toolchain-xenial-3.9
           packages:
             - clang-3.9
             - nasm
@@ -66,8 +68,6 @@ jobs:
     - <<: *xenial_ppc64le_alias
       addons:
         apt:
-          sources:
-            - llvm-toolchain-xenial-4.0
           packages:
             - clang-4.0
             - nasm
@@ -82,8 +82,6 @@ jobs:
     - <<: *xenial_ppc64le_alias
       addons:
         apt:
-          sources:
-            - llvm-toolchain-xenial-5.0
           packages:
             - clang-5.0
             - nasm
@@ -111,35 +109,3 @@ jobs:
             - gettext
       env:
         - MATRIX_EVAL="CC=clang-6.0 && CXX=clang++-6.0"
-    - <<: *xenial_ppc64le_alias
-      addons:
-        apt:
-          sources:
-            - llvm-toolchain-xenial-7
-          packages:
-            - clang-7
-            - nasm
-            - rsync
-            - zlib1g-dev
-            - libmodule-install-perl
-            - cpanminus
-            - autopoint
-            - gettext
-      env:
-        - MATRIX_EVAL="CC=clang-7.0 && CXX=clang++-7.0"
-    - <<: *xenial_ppc64le_alias
-      addons:
-        apt:
-          sources:
-            - llvm-toolchain-xenial-8
-          packages:
-            - clang-8
-            - nasm
-            - rsync
-            - zlib1g-dev
-            - libmodule-install-perl
-            - cpanminus
-            - autopoint
-            - gettext
-      env:
-        - MATRIX_EVAL="CC=clang-8.0 && CXX=clang++-8.0"

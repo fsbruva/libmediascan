@@ -625,8 +625,15 @@ function build_libjpeg {
         mkdir _build
         cd _build
 
+        # Early clang has problems with AltiVec on powerpc when using cmake, so disable SIMD optimizations
+        JPEG_SIMD_FLAG=1
+        if [[ "$CC_IS_CLANG" == true && "$CC_VERSION" -lt 50000 && "$ARCH" =~ ^(powerpc64le-linux).*$ ]]; then
+            JPEG_SIMD_FLAG=0
+        fi
+
+
         CFLAGS="$CFLAGS_COMMON" CXXFLAGS="$CXXFLAGS_COMMON" LDFLAGS="$LDFLAGS_COMMON" \
-        cmake -G"Unix Makefiles" -DCMAKE_INSTALL_PREFIX=$BUILD -DENABLE_SHARED=0 -DWITH_TURBOJPEG=0 /tmp/libjpeg-turbo
+        cmake -G"Unix Makefiles" -DCMAKE_INSTALL_PREFIX=$BUILD -DENABLE_SHARED=0 -DWITH_TURBOJPEG=0 -DWITH_SIMD=$JPEG_SIMD_FLAG /tmp/libjpeg-turbo
         echo Makefile
         $MAKE -j $NUM_MAKE_JOBS
         if [ $? != 0 ]; then
@@ -678,10 +685,17 @@ function build_libpng {
     mkdir /tmp/libpng-code/_build
     cd /tmp/libpng-code/_build
 
+    # Early clang has problems with AltiVec on powerpc, so disable HW optimizations
+    PNG_OPTM_FLAG="ON"
+    if [[ "$CC_IS_CLANG" == true && "$CC_VERSION" -lt 50000 && "$ARCH" =~ ^(powerpc64le-linux).*$ ]]; then
+        PNG_OPTM_FLAG="OFF"
+    fi
+
+
     CFLAGS="$CFLAGS_COMMON -O3" \
     CPPFLAGS="$CFLAGS_COMMON -O3" \
     LDFLAGS="$LDFLAGS_COMMON -O3" \
-    cmake -G"Unix Makefiles" -DCMAKE_INSTALL_PREFIX=$BUILD -DPNG_SHARED=0 -DDFA_XTRA=$BUILD/../libpng-pngusr.dfa /tmp/libpng-code
+    cmake -G"Unix Makefiles" -DCMAKE_INSTALL_PREFIX=$BUILD -DPNG_SHARED=0 -DPNG_HARDWARE_OPTIMIZATIONS=$PNG_OPTM_FLAG -DDFA_XTRA=$BUILD/../libpng-pngusr.dfa /tmp/libpng-code
     $MAKE -j $NUM_MAKE_JOBS
     if [ $? != 0 ]; then
         echo "make failed"

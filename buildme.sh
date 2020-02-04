@@ -678,8 +678,13 @@ function build_libjpeg {
         # Disable features we don't need
         patch -p0 < ../libjpeg-turbo-jmorecfg.h.patch
 
+        # Early clang has problems with AltiVec on powerpc when using automake, so disable SIMD optimizations
+        if [[ "$CC_IS_CLANG" == true && "$CC_VERSION" -lt 30900 && "$OS" == "Linux" && "$ARCH" =~ ^(powerpc64le-linux).*$  ]]; then
+            SIMD_FLAG="--without-simd"
+        fi
+
         CFLAGS="$CFLAGS_COMMON" CXXFLAGS="$CXXFLAGS_COMMON" LDFLAGS="$LDFLAGS_COMMON" \
-            ./configure $QUIET_FLAG --prefix=$BUILD --disable-dependency-tracking --without-turbojpeg --disable-shared --enable-static
+            ./configure $QUIET_FLAG --prefix=$BUILD --disable-dependency-tracking --without-turbojpeg --disable-shared --enable-static $SIMD_FLAG
         $MAKE -j $NUM_MAKE_JOBS
         if [ $? != 0 ]; then
             echo "make failed"
