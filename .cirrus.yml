@@ -1,6 +1,6 @@
 freebsd_task:
         install_script: >
-                - pkg install -y
+                pkg install -y
                   bash
                   perl5
                   gmake
