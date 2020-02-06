@@ -1,16 +1,16 @@
 freebsd_task:
         install_script: >
                 pkg install -y
-                  bash
-                  perl5
-                  gmake
-                  nasm
-                  rsync
-                  automake
-                  autoconf
-                  cmake
-                  libgd
-                  gettext-runtime
+                bash
+                perl5
+                gmake
+                nasm
+                rsync
+                automake
+                autoconf
+                cmake
+                libgd
+                gettext-runtime
         script:
                 - autoreconf -fiv
                 - bash -o errexit buildme.sh -j 4
