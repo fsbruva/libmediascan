@@ -1,0 +1,16 @@
+freebsd_task:
+        install_script: pkg install -y bash perl gmake nasm rsync automake autoconf cmake libgd gettext-runtime
+        script:
+                - autoreconf -fiv
+                - bash -o errexit buildme.sh -j 4
+                - cd deplibs && bash -o errexit buildme-latest.sh -j 4
+        matrix:
+                - name: freebsd11-amd64
+                  freebsd_instance:
+                    image: freebsd-11-2-release-amd64
+                - name: freebsd12-amd64
+                  freebsd_instance:
+                     image: freebsd-12-0-release-amd64
+                - name: freebsd13-amd64
+                  freebsd_instance:
+                     image_family: freebsd-13-0-snap
