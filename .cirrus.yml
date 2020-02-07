@@ -15,6 +15,7 @@ freebsd_task:
                 nasm
                 rsync
                 gettext-runtime
+                gettext-tools
                 git
         script:
                 - autoreconf -fiv
