@@ -1,3 +1,6 @@
+env:
+  CIRRUS_CLONE_DEPTH: 1
+
 freebsd_task:
         install_script: >
                 pkg install -y
@@ -12,6 +15,7 @@ freebsd_task:
                 nasm
                 rsync
                 gettext-runtime
+                git
         script:
                 - autoreconf -fiv
                 - bash -o errexit buildme.sh -j 4
