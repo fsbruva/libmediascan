@@ -26,6 +26,12 @@ addons:
       - autopoint
       - gettext
 
+  homebrew:
+    update: true
+    packages:
+      - nasm
+      - rsync
+
 install: skip
 
 before_script: autoreconf -fi && bash -o errexit buildme.sh -j 4
