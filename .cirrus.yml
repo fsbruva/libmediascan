@@ -18,9 +18,9 @@ freebsd_task:
     gettext-tools
     git
   script:
-                - autoreconf -fiv
-                - bash -o errexit buildme.sh -j 4
-                - cd deplibs && bash -o errexit buildme-latest.sh -j 4
+    - autoreconf -fiv
+    - bash -o errexit buildme.sh -j 2
+    - cd deplibs && bash -o errexit buildme-latest.sh -j 2
   matrix:
                 - name: freebsd11-amd64
                   freebsd_instance:
