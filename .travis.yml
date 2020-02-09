@@ -31,6 +31,10 @@ addons:
     packages:
       - nasm
       - rsync
+      - gettext
+
+git:
+  depth: 1
 
 install: skip
 
