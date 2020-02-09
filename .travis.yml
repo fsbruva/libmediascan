@@ -1,13 +1,12 @@
 language: c
 os: linux
 dist: xenial
-stage: Xenial_Multi-Arch
 arch:
   - ppc64le
   - amd64
   - s390x
   - arm64
-env: Everything=awesome
+env: Ubuntu=Xenial
 
 compiler:
   - clang
@@ -241,8 +240,6 @@ jobs:
 
       addons:
         apt:
-          sources:
-            - llvm-toolchain-7
           packages:
             - clang-7
             - nasm
@@ -270,8 +267,6 @@ jobs:
 
       addons:
         apt:
-          sources:
-            - llvm-toolchain-8
           packages:
             - clang-8
             - nasm
@@ -316,6 +311,88 @@ jobs:
     - <<: *bionic_clang9_alias
       arch: arm64
     - <<: *bionic_clang9_alias
+
+  #######################################################
+  #         Bionic (18.04 LTS) gcc coverage tests     #
+  #######################################################
+
+    - &bionic_gcc49_alias
+      arch: amd64
+      os: linux
+      dist: bionic
+      language: c
+
+      addons:
+        apt:
+          packages:
+            - g++-4.9
+            - nasm
+            - rsync
+            - zlib1g-dev
+            - libmodule-install-perl
+            - cpanminus
+            - autopoint
+            - gettext
+      env: Ubuntu=Bionic && CC=gcc-4.9 && CXX=g++-4.9
+
+    - <<: *bionic_gcc49_alias
+      arch: ppc64le
+    - <<: *bionic_gcc49_alias
+      arch: arm64
+    - <<: *bionic_gcc49_alias
+      arch: s390x
+
+    - &bionic_gcc5_alias
+      arch: amd64
+      os: linux
+      dist: bionic
+      language: c
+
+      addons:
+        apt:
+          packages:
+            - g++-5
+            - nasm
+            - rsync
+            - zlib1g-dev
+            - libmodule-install-perl
+            - cpanminus
+            - autopoint
+            - gettext
+      env: Ubuntu=Bionic && CC=gcc-5 && CXX=g++-5
+
+    - <<: *bionic_gcc5_alias
+      arch: ppc64le
+    - <<: *bionic_gcc5_alias
+      arch: arm64
+    - <<: *bionic_gcc5_alias
+      arch: s390x
+
+    - &bionic_gcc6_alias
+      arch: amd64
+      os: linux
+      dist: bionic
+      language: c
+
+      addons:
+        apt:
+          packages:
+            - g++-6
+            - nasm
+            - rsync
+            - zlib1g-dev
+            - libmodule-install-perl
+            - cpanminus
+            - autopoint
+            - gettext
+      env: Ubuntu=Bionic && CC=gcc-6 && CXX=g++-6
+
+    - <<: *bionic_gcc6_alias
+      arch: ppc64le
+    - <<: *bionic_gcc6_alias
+      arch: arm64
+    - <<: *bionic_gcc6_alias
+      arch: s390x
 
 
   #######################################################
