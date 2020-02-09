@@ -310,14 +310,18 @@ jobs:
   #         Bionic (18.04 LTS) gcc coverage tests     #
   #######################################################
 
-    - &bionic_gcc49_alias
+    - &xenial_gcc49_alias
       arch: amd64
       os: linux
       dist: bionic
       language: c
+      compiler: gcc
 
       addons:
         apt:
+          update: true
+          sources:
+            - ubuntu-toolchain-r-test
           packages:
             - g++-4.9
             - nasm
@@ -329,11 +333,11 @@ jobs:
             - gettext
       env: Ubuntu=Bionic && CC=gcc-4.9 && CXX=g++-4.9
 
-    - <<: *bionic_gcc49_alias
+    - <<: *xenial_gcc49_alias
       arch: ppc64le
-    - <<: *bionic_gcc49_alias
+    - <<: *xenial_gcc49_alias
       arch: arm64
-    - <<: *bionic_gcc49_alias
+    - <<: *xenial_gcc49_alias
       arch: s390x
 
     - &bionic_gcc5_alias
@@ -341,9 +345,13 @@ jobs:
       os: linux
       dist: bionic
       language: c
+      compiler: gcc
 
       addons:
         apt:
+          update: true
+          sources:
+            - ubuntu-toolchain-r-test
           packages:
             - g++-5
             - nasm
@@ -367,9 +375,13 @@ jobs:
       os: linux
       dist: bionic
       language: c
+      compiler: gcc
 
       addons:
         apt:
+          update: true
+          sources:
+            - ubuntu-toolchain-r-test
           packages:
             - g++-6
             - nasm
@@ -387,7 +399,6 @@ jobs:
       arch: arm64
     - <<: *bionic_gcc6_alias
       arch: s390x
-
 
   #######################################################
   #         Linux Perl version coverage tests           #
