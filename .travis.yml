@@ -32,6 +32,7 @@ addons:
       - nasm
       - rsync
       - gettext
+      - intltool
 
 git:
   depth: 1
@@ -268,6 +269,10 @@ jobs:
       compiler: clang
       perl: "5.18"   # This label may not reflect reality
       env: macOS_ver=10.11
+      before_install: |
+        if [ "$TRAVIS_OS_NAME" == "osx" ]; then
+          brew link --force gettext
+        fi
 
     # Subsequent instances use alias to test different versions
     - <<: *macOS_alias
