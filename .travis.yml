@@ -401,7 +401,7 @@ jobs:
       language: perl
       compiler: gcc
       perl: "5.24"
-      env: Ubuntu_ver="Trusty (14.04)"
+      env: Ubuntu=Trusty
 
     # Subsequent instances use alias to test different versions
     - <<: *trusty_amd64_alias
@@ -450,7 +450,7 @@ jobs:
       language: perl
       perl: "5.22"
       compiler: gcc
-      env: Ubuntu_ver="Xenial (16.04)"
+      env: Ubuntu=Xenial
 
     # Subsequent instances use alias to test different versions
     - <<: *xenial_amd64_alias
@@ -498,7 +498,7 @@ jobs:
       language: perl
       perl: "5.22"
       compiler: gcc
-      env: Ubuntu_ver="Bionic (18.04)"
+      env: Ubuntu=Bionic
 
     # Subsequent instances use alias to test different versions
     - <<: *bionic_amd64_alias
