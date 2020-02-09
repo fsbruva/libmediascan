@@ -31,6 +31,7 @@ addons:
     packages:
       - nasm
       - rsync
+# This is added only because the latest version of libexif needs it
       - gettext
       - intltool
 
@@ -49,12 +50,76 @@ jobs:
   # versions of Perl built and available. Instead, we add all the various Perl/compiler
   # combinations as explicit include jobs.
 
+ #######################################################
+  #         macOS and xcode version coverage tests      #
+  #######################################################
+# The macOS build images do not use perlbrew, so must masquerade as C++
+# projects to enable build using stock Perl. Matrix "env:" needs to be
+# overridden so that matrix expansion doesn't result in CC=gcc.
+
+# Matrix hack: Declare same stage multiple times...
+    - &macOS_alias
+      arch: amd64
+      os: osx
+      osx_image: xcode7.3
+      language: cpp
+      compiler: clang
+      perl: "5.18"   # This label may not reflect reality
+      env: macOS_ver=10.11
+      before_install: |
+        if [ "$TRAVIS_OS_NAME" == "osx" ]; then
+          brew link --force gettext
+        fi
+
+    # Subsequent instances use alias to test different versions
+    - <<: *macOS_alias
+      osx_image: xcode8
+      env: macOS_ver=10.11
+    - <<: *macOS_alias
+      osx_image: xcode8.3
+      env: macOS_ver=10.12
+    - <<: *macOS_alias
+      osx_image: xcode9
+      env: macOS_ver=10.12
+    - <<: *macOS_alias
+      osx_image: xcode9.1
+      env: macOS_ver=10.12
+    - <<: *macOS_alias
+      osx_image: xcode9.2
+      env: macOS_ver=10.12
+    - <<: *macOS_alias
+      osx_image: xcode9.3
+      env: macOS_ver=10.13
+    - <<: *macOS_alias
+      osx_image: xcode9.4
+      env: macOS_ver=10.13
+    - <<: *macOS_alias
+      osx_image: xcode10
+      env: macOS_ver=10.13
+    - <<: *macOS_alias
+      osx_image: xcode10.1
+      env: macOS_ver=10.13
+    - <<: *macOS_alias
+      osx_image: xcode10.2
+      env: macOS_ver=10.14
+    - <<: *macOS_alias
+      osx_image: xcode10.3
+      env: macOS_ver=10.14.4
+    - <<: *macOS_alias
+      osx_image: xcode11
+      env: macOS_ver=10.14
+    - <<: *macOS_alias
+      osx_image: xcode11.1
+      env: macOS_ver=10.14
+    - <<: *macOS_alias
+      osx_image: xcode11.2
+      env: macOS_ver=10.14
+
   #######################################################
   #         Bionic (18.04 LTS) clang coverage tests     #
   #######################################################
 
     - &bionic_clang39_alias
-      stage: Bionic_clang_tests
       arch: amd64
       os: linux
       dist: bionic
@@ -252,71 +317,6 @@ jobs:
       arch: arm64
     - <<: *bionic_clang9_alias
 
-
- #######################################################
-  #         macOS and xcode version coverage tests      #
-  #######################################################
-# The macOS build images do not use perlbrew, so must masquerade as C++
-# projects to enable build using stock Perl. Matrix "env:" needs to be
-# overridden so that matrix expansion doesn't result in CC=gcc.
-
-# Matrix hack: Declare same stage multiple times...
-    - &macOS_alias
-      arch: amd64
-      os: osx
-      osx_image: xcode7.3
-      language: cpp
-      compiler: clang
-      perl: "5.18"   # This label may not reflect reality
-      env: macOS_ver=10.11
-      before_install: |
-        if [ "$TRAVIS_OS_NAME" == "osx" ]; then
-          brew link --force gettext
-        fi
-
-    # Subsequent instances use alias to test different versions
-    - <<: *macOS_alias
-      osx_image: xcode8
-      env: macOS_ver=10.11
-    - <<: *macOS_alias
-      osx_image: xcode8.3
-      env: macOS_ver=10.12
-    - <<: *macOS_alias
-      osx_image: xcode9
-      env: macOS_ver=10.12
-    - <<: *macOS_alias
-      osx_image: xcode9.1
-      env: macOS_ver=10.12
-    - <<: *macOS_alias
-      osx_image: xcode9.2
-      env: macOS_ver=10.12
-    - <<: *macOS_alias
-      osx_image: xcode9.3
-      env: macOS_ver=10.13
-    - <<: *macOS_alias
-      osx_image: xcode9.4
-      env: macOS_ver=10.13
-    - <<: *macOS_alias
-      osx_image: xcode10
-      env: macOS_ver=10.13
-    - <<: *macOS_alias
-      osx_image: xcode10.1
-      env: macOS_ver=10.13
-    - <<: *macOS_alias
-      osx_image: xcode10.2
-      env: macOS_ver=10.14
-    - <<: *macOS_alias
-      osx_image: xcode10.3
-      env: macOS_ver=10.14.4
-    - <<: *macOS_alias
-      osx_image: xcode11
-      env: macOS_ver=10.14
-    - <<: *macOS_alias
-      osx_image: xcode11.1
-      env: macOS_ver=10.14
-    - <<: *macOS_alias
-      osx_image: xcode11.2
-      env: macOS_ver=10.14
 
   #######################################################
   #         Linux Perl version coverage tests           #
