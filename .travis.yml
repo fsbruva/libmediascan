@@ -147,7 +147,6 @@ jobs:
 
     # Subsequent instances use alias to test different versions of clang
     - &bionic_clang40_alias
-      stage: Bionic_clang_tests
       arch: amd64
       os: linux
       dist: bionic
@@ -175,7 +174,6 @@ jobs:
       arch: s390x
 
     - &bionic_clang50_alias
-      stage: Bionic_clang_tests
       arch: amd64
       os: linux
       dist: bionic
@@ -203,7 +201,6 @@ jobs:
       arch: s390x
 
     - &bionic_clang6_alias
-      stage: Bionic_clang_tests
       arch: amd64
       os: linux
       dist: bionic
@@ -232,7 +229,6 @@ jobs:
     - <<: *bionic_clang6_alias
 
     - &bionic_clang7_alias
-      stage: Bionic_clang_tests
       arch: amd64
       os: linux
       dist: bionic
@@ -259,7 +255,6 @@ jobs:
     - <<: *bionic_clang7_alias
 
     - &bionic_clang8_alias
-      stage: Bionic_clang_tests
       arch: amd64
       os: linux
       dist: bionic
@@ -286,7 +281,6 @@ jobs:
     - <<: *bionic_clang8_alias
 
     - &bionic_clang9_alias
-      stage: Bionic_clang_tests
       arch: amd64
       os: linux
       dist: bionic
