@@ -307,13 +307,43 @@ jobs:
     - <<: *bionic_clang9_alias
 
   #######################################################
-  #         Bionic (18.04 LTS) gcc coverage tests     #
+  #         Xenial (16.04 LTS) gcc coverage tests      #
   #######################################################
+
+    - &xenial_gcc47_alias
+      arch: amd64
+      os: linux
+      dist: xenial
+      language: c
+      compiler: gcc
+
+      addons:
+        apt:
+          update: true
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-4.7
+            - nasm
+            - rsync
+            - zlib1g-dev
+            - libmodule-install-perl
+            - cpanminus
+            - autopoint
+            - gettext
+      env: Ubuntu=Xenial && CC=gcc-4.7 && CXX=g++-4.7
+
+    - <<: *xenial_gcc47_alias
+      arch: ppc64le
+    - <<: *xenial_gcc47_alias
+      arch: arm64
+    - <<: *xenial_gcc47_alias
+      arch: s390x
 
     - &xenial_gcc49_alias
       arch: amd64
       os: linux
-      dist: bionic
+      dist: xenial
       language: c
       compiler: gcc
 
@@ -331,7 +361,7 @@ jobs:
             - cpanminus
             - autopoint
             - gettext
-      env: Ubuntu=Bionic && CC=gcc-4.9 && CXX=g++-4.9
+      env: Ubuntu=Xenial && CC=gcc-4.9 && CXX=g++-4.9
 
     - <<: *xenial_gcc49_alias
       arch: ppc64le
@@ -339,6 +369,10 @@ jobs:
       arch: arm64
     - <<: *xenial_gcc49_alias
       arch: s390x
+
+  #######################################################
+  #         Bionic (18.04 LTS) gcc coverage tests     #
+  #######################################################
 
     - &bionic_gcc5_alias
       arch: amd64
