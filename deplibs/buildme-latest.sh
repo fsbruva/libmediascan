@@ -486,6 +486,9 @@ function build {
             # Early macOS versions did not link library correctly libjpeg due to
             # missing x86_64 in libjpeg.dylib, Perl linked OK because it used libjpeg.a
             # Correct linking confirmed with macOS 10.10 and up.
+            if [ $CLEAN != 0 ]; then
+                $MAKE clean
+            fi
             CFLAGS="-I$BUILD/include $CFLAGS_COMMON -O3" \
             LDFLAGS="-L$BUILD/lib $LDFLAGS_COMMON -O3" \
             OBJCFLAGS="-L$BUILD/lib $CFLAGS_COMMON -O3" \
