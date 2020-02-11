@@ -773,7 +773,7 @@ function build_ffmpeg {
     # PPC: Disable AltiVec
     FFOPTS="--prefix=$BUILD --disable-ffmpeg --disable-ffplay --disable-ffprobe \
         --disable-avdevice --enable-pic \
-        --disable-amd3dnow --disable-amd3dnowext --disable-sse --disable-ssse3 --disable-avx \
+        --disable-amd3dnow --disable-amd3dnowext --disable-avx \
         --disable-armv5te --disable-armv6 --disable-armv6t2 --disable-mmi --disable-neon \
         --disable-altivec \
         --enable-zlib --disable-bzlib \
