@@ -797,12 +797,12 @@ function build_ffmpeg {
         --enable-static --disable-shared --disable-programs --disable-doc $QUIET_FLAG"
 
     if [ "$MACHINE" = "padre" ]; then
-        FFOPTS="${FFOPTS} --arch=sparc"
+        FFOPTS="${FFOPTS} --arch=sparc --disable-sse --disable-ssse3"
     fi
 
     # ASM doesn't work right on x86_64
     # XXX test --arch options on Linux
-    if [[ "$ARCH" =~ ^(amd64-freebsd|x86_64-linux|i86pc-solaris).*$ ]]; then
+    if [[ "$ARCH" =~ ^(i86pc-solaris).*$ ]]; then
         FFOPTS="${FFOPTS} --disable-mmx"
     fi
 
@@ -860,7 +860,7 @@ function build_ffmpeg {
             $MAKE clean
             CFLAGS="-arch i386 -O3 $MACOS_FLAGS" \
             LDFLAGS="-arch i386 -O3 $MACOS_FLAGS" \
-                ./configure $FFOPTS --arch=x86_32
+                ./configure $FFOPTS --arch=x86_32 --disable-sse --disable-ssse3
 
             $MAKE -j $NUM_MAKE_JOBS
             if [ $? != 0 ]; then
@@ -879,7 +879,7 @@ function build_ffmpeg {
             $MAKE clean
             CFLAGS="-arch ppc -O3 $MACOS_FLAGS" \
             LDFLAGS="-arch ppc -O3 $MACOS_FLAGS" \
-                ./configure $FFOPTS --arch=ppc --disable-altivec
+                ./configure $FFOPTS --arch=ppc --disable-altivec --disable-sse --disable-ssse3
 
             $MAKE -j $NUM_MAKE_JOBS
             if [ $? != 0 ]; then
