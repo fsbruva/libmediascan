@@ -22,12 +22,21 @@ freebsd_task:
     - bash -o errexit buildme.sh -j 2
     - cd deplibs && bash -o errexit buildme-latest.sh -j 2
   matrix:
-    - name: freebsd11-amd64
+    - name: freebsd-11.2_REL-amd64
       freebsd_instance:
         image: freebsd-11-2-release-amd64
-    - name: freebsd12-amd64
+    - name: freebsd-11.3_SNAP-amd64
+      freebsd_instance:
+        image_family: freebsd-11-3-snap
+    - name: freebsd-12.0_REL-amd64
       freebsd_instance:
         image: freebsd-12-0-release-amd64
-    - name: freebsd13-amd64
+    - name: freebsd-12.1_REL-amd64
+      freebsd_instance:
+        image: freebsd-12-1-release-amd64
+    - name: freebsd-12.1_SNAP-amd64
+      freebsd_instance:
+        image_family: freebsd-12-1-snap
+    - name: freebsd-13.0_SNAP-amd64
       freebsd_instance:
         image_family: freebsd-13-0-snap
