@@ -36,7 +36,7 @@ git:
 install: skip
 
 before_script: autoreconf -fi
-script: cd deplibs && bash -o errexit buildme-latest.sh -j 4
+script: cd deplibs && bash -o errexit buildme-latest.sh -j 4 -c -l
 
 
 jobs:
