@@ -334,8 +334,6 @@ jobs:
       env: Ubuntu=Xenial && CC=gcc-4.7 && CXX=g++-4.7
 
     - <<: *xenial_gcc47_alias
-      arch: ppc64le
-    - <<: *xenial_gcc47_alias
       arch: arm64
     - <<: *xenial_gcc47_alias
       arch: s390x
